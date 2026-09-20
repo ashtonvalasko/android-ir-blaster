@@ -4,7 +4,7 @@ const IrProtocolDefinition protonProtocolDefinition = IrProtocolDefinition(
   id: 'proton',
   displayName: 'Proton',
   description: 'Proton: 4-hex-digit code (16 bits). Carrier 38.5kHz. '
-      'Header 8000/4000; sends last 8 bits, separator 500/4000, then first 8 bits. '
+      'Header 8000/4000; sends first 8 bits, separator 500/4000, then last 8 bits. '
       'Frame padded to 63000us.',
   implemented: true,
   defaultFrequencyHz: 38500,
@@ -71,15 +71,15 @@ class ProtonProtocolEncoder implements IrProtocolEncoder {
       }
     }
 
-    // last 8 bits first
-    appendBits(last8);
+    // Packed HEX stores the on-air address byte before the command byte.
+    appendBits(first8);
 
     // separator: mark + long space
     seq.add(bitMark);
     seq.add(sepSpace);
 
-    // first 8 bits
-    appendBits(first8);
+    // command byte
+    appendBits(last8);
 
     // final mark
     seq.add(bitMark);
