@@ -286,4 +286,24 @@ void main() {
       expect(waveforms.length, sampleCount, reason: profile.protocolId);
     }
   });
+
+  test('every declared payload bit can change its protocol waveform', () {
+    for (final profile in IrFinderSearchProfiles.all) {
+      String waveform(BigInt code) {
+        final params = IrFinderParams.buildParamsForProtocol(
+          profile.protocolId,
+          code.toRadixString(16).padLeft(profile.totalHexDigits, '0'),
+          kaseikyoVendor: '2002',
+        );
+        return IrProtocolRegistry.encoderFor(profile.protocolId)
+            .encode({...params, '_preview': true}).pattern.join(',');
+      }
+
+      final baseline = waveform(BigInt.zero);
+      for (final bit in profile.smartGroups.expand((g) => g.rawBitPositions)) {
+        expect(waveform(BigInt.one << bit), isNot(baseline),
+            reason: '${profile.protocolId} lost bit $bit');
+      }
+    }
+  });
 }
