@@ -5,7 +5,7 @@ const IrProtocolDefinition thomson7ProtocolDefinition = IrProtocolDefinition(
   displayName: 'Thomson7',
   description:
       'Thomson7: 33kHz. Input: 3 hex digits. '
-      'Mask with 0xF7F, build 12 bits as last4 + toggleBit + first7. '
+      'Packed wire frame: address(4) + toggleBit + command(7). '
       'Bit0=[460,2000], Bit1=[460,4600]. Append 460, pad to 80000us, then duplicate frame.',
   implemented: true,
   defaultFrequencyHz: 33000,
@@ -59,8 +59,8 @@ class Thomson7ProtocolEncoder implements IrProtocolEncoder {
     final bool toggle = _resolveToggle(params, masked);
 
     final String bin12 = masked.toRadixString(2).padLeft(12, '0');
-    final String last4 = bin12.substring(12 - 4); // last 4 bits
-    final String first7 = bin12.substring(0, 7); // first 7 bits
+    final String addressBits = bin12.substring(0, 4);
+    final String commandBits = bin12.substring(5);
 
     final List<int> seq = <int>[];
 
@@ -73,9 +73,8 @@ class Thomson7ProtocolEncoder implements IrProtocolEncoder {
       }
     }
 
-    // last4
-    for (int i = 0; i < last4.length; i++) {
-      appendBitChar(last4[i]);
+    for (int i = 0; i < addressBits.length; i++) {
+      appendBitChar(addressBits[i]);
     }
 
     // toggle-controlled mid-bit:
@@ -83,9 +82,8 @@ class Thomson7ProtocolEncoder implements IrProtocolEncoder {
     seq.add(mark);
     seq.add(toggle ? zeroSpace : oneSpace);
 
-    // first7
-    for (int i = 0; i < first7.length; i++) {
-      appendBitChar(first7[i]);
+    for (int i = 0; i < commandBits.length; i++) {
+      appendBitChar(commandBits[i]);
     }
 
     // tail marker: single 460

@@ -192,7 +192,7 @@ The Signal Tester is designed to help discover unknown working IR commands.
 | SONY12 | address (5-bit) + command (7-bit) | 40,000 | Header 2400/600; payload command(7) + address(5), LSB-first; 0=600/600, 1=1200/600; pad to 45,000µs | 12-bit frame sent three times; packed imports use 3 hex digits |
 | SONY15 | address (8-bit) + command (7-bit) | 40,000 | Same timings and bit order as SONY12 with a 15-bit payload; pad to 45,000µs | Frame sent three times; packed imports use 4 hex digits |
 | SONY20 | address (13-bit) + command (7-bit) | 40,000 | Same timings and bit order as SONY12 with a 20-bit payload; pad to 45,000µs | Frame sent three times; packed imports use 5 hex digits |
-| Thomson7 | 3 hex (int) | 33,000 | Mask 0xF7F; 12 bits = last4 + toggle + first7; 0=[460,2000]; 1=[460,4600]; append 460; pad to 80,000µs; duplicate frame | Toggle maintained; hex int input with min/max |
+| Thomson7 | 3 hex (packed wire frame, int) | 33,000 | Address(4) + internal toggle + command(7), preserving wire order; 0=[460,2000]; 1=[460,4600]; append 460; pad to 80,000µs; duplicate frame | Toggle maintained; hex int input with min/max |
 | XSAT (Mitsubishi) | address + command (1 byte each) | 38,000 | Header 8000/4000; address(8) then command(8), both LSB-first; each bit mark=526 + space=474 (0) or 1474 (1); inserts 4000µs separator between address and command; trailing gap sized for ~60ms repeat cadence | Packed imports are split into address and command fields |
 | Kaseikyo (Panasonic) | address (4 bytes) + command (4 bytes) | 37,000 | Header 3456/1728; 48-bit frame sent LSB-first per byte; includes vendor parity, genre, 10-bit command, ID, and XOR; bit mark=432, spaces 432/1296 | Each field accepts 8 compact hex digits or four space-separated bytes |
 
