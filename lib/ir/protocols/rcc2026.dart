@@ -5,7 +5,7 @@ const IrProtocolDefinition rcc2026ProtocolDefinition = IrProtocolDefinition(
   displayName: 'RCC2026',
   description:
       'RCC2026: 38,222 Hz. Header 8800/4400. '
-      '42 data bits from hex length=11: toBinaryString padded to 44, takeLast(42). '
+      '42 data bits from a left-aligned 11-hex-digit wire code (two trailing padding bits). '
       'Each bit: 550 mark + (550 space for 0, 1650 space for 1). '
       'Then 550 + 23100, then append tail [8800, 4400, 550, 90750].',
   implemented: true,
@@ -59,12 +59,10 @@ class Rcc2026ProtocolEncoder implements IrProtocolEncoder {
     final String hex = h.trim();
     _validateHex(hex);
 
-    // q.b():
-    // value = hex.toLong(16)
-    // bin = value.toString(2).padStart(44,'0').takeLast(42)
+    // Packed database codes place padding after the 42 wire bits.
     final int value = int.parse(hex, radix: 16);
     final String bin = value.toRadixString(2).padLeft(44, '0');
-    final String bits = bin.substring(bin.length - 42);
+    final String bits = bin.substring(0, 42);
 
     final List<int> out = <int>[];
     out.add(headerMark);
