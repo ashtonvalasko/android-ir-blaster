@@ -2,6 +2,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:irblaster_controller/ir/protocols/denon.dart';
 
 void main() {
+  test('Denon preserves the 13th wire bit, not the trailing padding', () {
+    // IRP: D:5,F:8,0:2, sent LSB-first. D=8,F=204 -> 0001000110011.
+    // Database hex is the left-aligned wire frame, not numeric D/F fields.
+    const encoder = DenonProtocolEncoder();
+    final result = encoder.encode(<String, dynamic>{'hex': '1198'});
+    expect(_decodeFrame(result.pattern, 0), '000100011001100');
+    expect(_decodeFrame(result.pattern, 1), '000101100110011');
+    expect(_decodeFrame(result.pattern, 2), '000100011001100');
+    expect(result.pattern,
+        isNot(encoder.encode(<String, dynamic>{'hex': '1190'}).pattern));
+  });
+
   test('Denon emits the required normal, inverted, normal frame sequence', () {
     const encoder = DenonProtocolEncoder();
     final result = encoder.encode(<String, dynamic>{'hex': '1190'});

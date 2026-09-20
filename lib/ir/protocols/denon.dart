@@ -5,7 +5,7 @@ const IrProtocolDefinition denonProtocolDefinition = IrProtocolDefinition(
   displayName: 'Denon',
   description:
       'Denon: 4-hex-digit code. Carrier 38kHz. '
-      'Builds 13-bit field from 4 nibbles (last bit of 4th nibble only), '
+      'Uses the first 13 bits of the left-aligned wire code, '
       'then sends normal, inverted-command, and normal frames.',
   implemented: true,
   defaultFrequencyHz: 38000,
@@ -76,8 +76,8 @@ class DenonProtocolEncoder implements IrProtocolEncoder {
     final String nib2 = n4bit(hex.substring(2, 3));
     final String nib3 = n4bit(hex.substring(3, 4));
 
-    // 13-bit field: nib0 + nib1 + nib2 + lastBit(nib3)
-    final String bits13 = nib0 + nib1 + nib2 + nib3.substring(3, 4);
+    // The last three bits hold control/padding, not command data.
+    final String bits13 = nib0 + nib1 + nib2 + nib3.substring(0, 1);
 
     final String first5 = bits13.substring(0, 5);
     final String next8 = bits13.substring(5, 13);
