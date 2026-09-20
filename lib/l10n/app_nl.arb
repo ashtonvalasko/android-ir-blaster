@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "Protocolbewust: test eerst veelvoorkomende lage waarden, spreidt daarna over opdracht- en apparaatvelden en slaat genegeerde bits over.",
   "irFinderSequentialOrderHint": "Compatibiliteitsmodus: test jokercijfers in oplopende hexadecimale volgorde.",
   "irFinderSmartMeaningfulBits": "De slimme modus varieert {bits} betekenisvolle bit(s) voor dit masker.",
-  "irFinderBruteforceMaskTip": "Tip: vervang elk onbekend cijfer door X. Bekende cijfers op elke positie kunnen de zoekruimte sterk verkleinen."
+  "irFinderBruteforceMaskTip": "Tip: vervang elk onbekend cijfer door X. Bekende cijfers op elke positie kunnen de zoekruimte sterk verkleinen.",
+  "automationBroadcastsTitle": "Automatiseringsbroadcasts toestaan",
+  "automationBroadcastsSubtitle": "Elke geïnstalleerde app kan opdrachten verzenden via de ingebouwde IR-zender, ook als deze app gesloten is. USB- en audiodongles worden niet ondersteund.",
+  "automationSettingsError": "De automatiseringsinstelling kon niet worden geladen of opgeslagen. Probeer het opnieuw."
 }

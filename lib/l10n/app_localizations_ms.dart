@@ -4910,4 +4910,15 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Petua: gantikan setiap digit yang tidak diketahui dengan X. Menetapkan digit diketahui di mana-mana kedudukan boleh mengurangkan carian dengan banyak.';
+
+  @override
+  String get automationBroadcastsTitle => 'Benarkan siaran automasi';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Mana-mana aplikasi yang dipasang boleh menghantar arahan melalui IR terbina dalam, walaupun aplikasi ini ditutup. Dongel USB dan audio tidak disokong.';
+
+  @override
+  String get automationSettingsError =>
+      'Tetapan automasi tidak dapat dimuatkan atau disimpan. Sila cuba lagi.';
 }

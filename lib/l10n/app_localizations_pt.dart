@@ -4942,6 +4942,18 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Dica: substitua cada dígito desconhecido por X. Fixar dígitos conhecidos em qualquer posição reduz bastante a pesquisa.';
+
+  @override
+  String get automationBroadcastsTitle =>
+      'Permitir transmissões de automatização';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Qualquer aplicação instalada pode enviar comandos pelo emissor IR integrado, mesmo com esta aplicação fechada. Os adaptadores USB e de áudio não são suportados.';
+
+  @override
+  String get automationSettingsError =>
+      'Não foi possível carregar ou guardar a definição de automatização. Tente novamente.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -9887,4 +9899,15 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get irFinderBruteforceMaskTip =>
       'Dica: substitua cada dígito desconhecido por X. Fixar dígitos conhecidos em qualquer posição reduz bastante a busca.';
+
+  @override
+  String get automationBroadcastsTitle => 'Permitir transmissões de automação';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Qualquer aplicativo instalado pode enviar comandos pelo emissor IR integrado, mesmo com este aplicativo fechado. Adaptadores USB e de áudio não são compatíveis.';
+
+  @override
+  String get automationSettingsError =>
+      'Não foi possível carregar ou salvar a configuração de automação. Tente novamente.';
 }

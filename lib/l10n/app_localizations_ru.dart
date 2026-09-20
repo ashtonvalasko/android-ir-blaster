@@ -4912,4 +4912,16 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Совет: замените каждую неизвестную цифру на X. Известные цифры в любой позиции значительно сокращают поиск.';
+
+  @override
+  String get automationBroadcastsTitle =>
+      'Разрешить широковещательные команды автоматизации';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Любое установленное приложение сможет отправлять команды через встроенный ИК-передатчик, даже когда это приложение закрыто. USB- и аудиоадаптеры не поддерживаются.';
+
+  @override
+  String get automationSettingsError =>
+      'Не удалось загрузить или сохранить настройку автоматизации. Повторите попытку.';
 }

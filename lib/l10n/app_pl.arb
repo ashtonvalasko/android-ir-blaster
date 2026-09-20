@@ -2319,5 +2319,8 @@
   "irFinderSmartOrderHint": "Uwzględnia protokół: najpierw sprawdza typowe małe wartości, potem rozkłada pola polecenia i urządzenia, pomijając nieużywane bity.",
   "irFinderSequentialOrderHint": "Tryb zgodności: sprawdza symbole wieloznaczne w rosnącej kolejności szesnastkowej.",
   "irFinderSmartMeaningfulBits": "Tryb inteligentny zmienia {bits} istotnych bitów dla tej maski.",
-  "irFinderBruteforceMaskTip": "Wskazówka: zastąp każdą nieznaną cyfrę przez X. Ustalenie znanych cyfr w dowolnym miejscu znacznie ogranicza wyszukiwanie."
+  "irFinderBruteforceMaskTip": "Wskazówka: zastąp każdą nieznaną cyfrę przez X. Ustalenie znanych cyfr w dowolnym miejscu znacznie ogranicza wyszukiwanie.",
+  "automationBroadcastsTitle": "Zezwalaj na transmisje automatyzacji",
+  "automationBroadcastsSubtitle": "Każda zainstalowana aplikacja może wysyłać polecenia przez wbudowany nadajnik IR, nawet gdy ta aplikacja jest zamknięta. Adaptery USB i audio nie są obsługiwane.",
+  "automationSettingsError": "Nie udało się wczytać lub zapisać ustawienia automatyzacji. Spróbuj ponownie."
 }

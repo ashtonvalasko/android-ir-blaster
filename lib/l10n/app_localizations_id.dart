@@ -4911,4 +4911,15 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Tips: ganti setiap digit yang tidak diketahui dengan X. Menetapkan digit yang diketahui di posisi mana pun dapat sangat mengurangi pencarian.';
+
+  @override
+  String get automationBroadcastsTitle => 'Izinkan siaran otomatisasi';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Aplikasi apa pun yang terpasang dapat mengirim perintah melalui IR bawaan, bahkan saat aplikasi ini ditutup. Dongle USB dan audio tidak didukung.';
+
+  @override
+  String get automationSettingsError =>
+      'Tidak dapat memuat atau menyimpan pengaturan otomatisasi. Silakan coba lagi.';
 }

@@ -54,6 +54,65 @@ IR Blaster is designed to be flexible, hardware-agnostic, and user-friendly, whi
 
 Tip: At least one transmit path must be available (Internal, USB, or Audio). A built‑in IR blaster is not required if you use a USB dongle or audio adapter.
 
+## Android Automation Broadcasts
+
+Tasker, MacroDroid, Automation, and other apps can send raw IR without a plugin
+or opening this app. This API uses **built-in IR only**, regardless of the
+transmitter selected for normal remote buttons. USB/audio adapters are not
+supported by this API.
+
+First enable **Settings > Interaction > Allow automation broadcasts** (off by
+default). Enabling this allows **any installed app** to request transmissions;
+enable it only if you need automation. Disabling it rejects subsequent requests
+but cannot stop a signal already being transmitted.
+
+Configure the automation app's **Send Intent / Broadcast** action:
+
+| Field | Value |
+| --- | --- |
+| Target | Broadcast receiver (not Activity or Service) |
+| Action | `org.irblaster.TRANSMIT` |
+| Package | `org.nslabs.ir_blaster` |
+| Receiver class, if needed | `org.nslabs.ir_blaster.IrAutomationReceiver` |
+| `frequency` extra | Integer Hz, e.g. `38000`; a decimal string is also accepted |
+| `pattern` extra | Comma- or whitespace-separated decimal durations in microseconds, starting with a mark; an Android `int[]` is also accepted |
+
+ADB example (illustrative timings only, **not a complete appliance command**):
+
+```sh
+adb shell am broadcast \
+  -n org.nslabs.ir_blaster/.IrAutomationReceiver \
+  -a org.irblaster.TRANSMIT \
+  --ei frequency 38000 \
+  --es pattern '9000,4500,560,560,560,1690,560'
+```
+
+Replace the example with the full raw pattern and carrier for your button.
+Patterns are sent once, exactly as supplied, with no bit reversal or added
+repeats. Odd-length patterns ending in a mark are accepted. Limits: 10,000 to
+100,000 Hz (also subject to hardware support), 1 to 4,096 positive durations,
+less than two seconds total, and at most 32,768 characters of pattern text.
+Malformed requests are rejected completely. Send sequentially: overlapping
+automation requests are rejected rather than queued.
+
+Ordered broadcasts, including `adb shell am broadcast`, return a result code:
+
+| Code | Result |
+| --- | --- |
+| `-1` | `SENT`: Android's transmission call completed; this does not confirm appliance reception |
+| `1` | `DISABLED`: enable the setting first |
+| `2` | `BAD_REQUEST`: invalid or missing extras |
+| `3` | `BUSY`: another automation transmission is running |
+| `4` | `NO_IR`: no built-in IR emitter |
+| `5` | `TRANSMIT_FAILED`: hardware rejected or failed the transmission |
+
+Ordinary broadcasts have no reply; results are logged under `IrAutomation`.
+Use an explicit package or receiver component: Android restricts implicit
+background broadcasts. Open the app once after installation or force-stop;
+manufacturer battery restrictions can also affect background delivery.
+See [Android broadcasts](https://developer.android.com/develop/background-work/background-tasks/broadcasts)
+and [ConsumerIrManager](https://developer.android.com/reference/android/hardware/ConsumerIrManager).
+
 ## Features
 
 - Custom Remote Commands: Create and manage remotes using protocol encoders or raw IR patterns.

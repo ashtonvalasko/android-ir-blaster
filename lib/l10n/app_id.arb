@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "Sesuai protokol: menguji nilai rendah umum lebih dulu, lalu menyebar ke bidang perintah dan perangkat sambil melewati bit yang diabaikan encoder.",
   "irFinderSequentialOrderHint": "Mode kompatibilitas: menguji digit wildcard dalam urutan heksadesimal menaik.",
   "irFinderSmartMeaningfulBits": "Mode cerdas memvariasikan {bits} bit bermakna untuk mask ini.",
-  "irFinderBruteforceMaskTip": "Tips: ganti setiap digit yang tidak diketahui dengan X. Menetapkan digit yang diketahui di posisi mana pun dapat sangat mengurangi pencarian."
+  "irFinderBruteforceMaskTip": "Tips: ganti setiap digit yang tidak diketahui dengan X. Menetapkan digit yang diketahui di posisi mana pun dapat sangat mengurangi pencarian.",
+  "automationBroadcastsTitle": "Izinkan siaran otomatisasi",
+  "automationBroadcastsSubtitle": "Aplikasi apa pun yang terpasang dapat mengirim perintah melalui IR bawaan, bahkan saat aplikasi ini ditutup. Dongle USB dan audio tidak didukung.",
+  "automationSettingsError": "Tidak dapat memuat atau menyimpan pengaturan otomatisasi. Silakan coba lagi."
 }

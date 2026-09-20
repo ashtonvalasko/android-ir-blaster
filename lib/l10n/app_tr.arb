@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "Protokole göre: önce yaygın düşük değerleri dener, ardından komut ve cihaz alanlarına yayılır ve kodlayıcının yok saydığı bitleri atlar.",
   "irFinderSequentialOrderHint": "Uyumluluk modu: joker basamakları artan onaltılık sırada dener.",
   "irFinderSmartMeaningfulBits": "Akıllı mod bu maske için {bits} anlamlı biti değiştirir.",
-  "irFinderBruteforceMaskTip": "İpucu: bilinmeyen her basamağı X ile değiştirin. Kodun herhangi bir yerindeki bilinen basamaklar aramayı önemli ölçüde azaltır."
+  "irFinderBruteforceMaskTip": "İpucu: bilinmeyen her basamağı X ile değiştirin. Kodun herhangi bir yerindeki bilinen basamaklar aramayı önemli ölçüde azaltır.",
+  "automationBroadcastsTitle": "Otomasyon yayınlarına izin ver",
+  "automationBroadcastsSubtitle": "Yüklü herhangi bir uygulama, bu uygulama kapalıyken bile dahili IR vericisi üzerinden komut gönderebilir. USB ve ses adaptörleri desteklenmez.",
+  "automationSettingsError": "Otomasyon ayarı yüklenemedi veya kaydedilemedi. Lütfen tekrar deneyin."
 }

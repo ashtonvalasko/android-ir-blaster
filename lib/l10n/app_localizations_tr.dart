@@ -4906,4 +4906,15 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'İpucu: bilinmeyen her basamağı X ile değiştirin. Kodun herhangi bir yerindeki bilinen basamaklar aramayı önemli ölçüde azaltır.';
+
+  @override
+  String get automationBroadcastsTitle => 'Otomasyon yayınlarına izin ver';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Yüklü herhangi bir uygulama, bu uygulama kapalıyken bile dahili IR vericisi üzerinden komut gönderebilir. USB ve ses adaptörleri desteklenmez.';
+
+  @override
+  String get automationSettingsError =>
+      'Otomasyon ayarı yüklenemedi veya kaydedilemedi. Lütfen tekrar deneyin.';
 }

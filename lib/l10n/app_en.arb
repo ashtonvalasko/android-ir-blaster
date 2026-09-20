@@ -2474,5 +2474,8 @@
   "irFinderSequentialOrderHint": "Compatibility mode: tests wildcard digits in ascending hexadecimal order.",
   "irFinderSmartMeaningfulBits": "Smart mode varies {bits} meaningful bit(s) for this mask.",
   "@irFinderSmartMeaningfulBits": {"placeholders":{"bits":{"type":"int"}}},
-  "irFinderBruteforceMaskTip": "Tip: replace every unknown digit with X. Fixing known digits anywhere in the code can reduce the search dramatically."
+  "irFinderBruteforceMaskTip": "Tip: replace every unknown digit with X. Fixing known digits anywhere in the code can reduce the search dramatically.",
+  "automationBroadcastsTitle": "Allow automation broadcasts",
+  "automationBroadcastsSubtitle": "Any installed app can send commands through built-in IR, even while this app is closed. USB and audio dongles are not supported.",
+  "automationSettingsError": "Could not load or save the automation setting. Please try again."
 }

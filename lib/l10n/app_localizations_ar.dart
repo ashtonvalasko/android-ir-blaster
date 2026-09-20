@@ -4878,6 +4878,17 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'نصيحة: استبدل كل خانة مجهولة بـ X. تثبيت الخانات المعروفة في أي موضع يقلل البحث بشكل كبير.';
+
+  @override
+  String get automationBroadcastsTitle => 'السماح ببث الأتمتة';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'يمكن لأي تطبيق مثبت إرسال أوامر عبر مرسل الأشعة تحت الحمراء المدمج، حتى عندما يكون هذا التطبيق مغلقًا. محولات USB والصوت غير مدعومة.';
+
+  @override
+  String get automationSettingsError =>
+      'تعذر تحميل إعداد الأتمتة أو حفظه. يرجى المحاولة مرة أخرى.';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -9754,4 +9765,15 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get irFinderBruteforceMaskTip =>
       'نصيحة: استبدل كل خانة مجهولة بـ X. تثبيت الخانات المعروفة في أي موضع يقلل البحث بشكل كبير.';
+
+  @override
+  String get automationBroadcastsTitle => 'السماح ببث الأتمتة';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'أي تطبيق متثبت يقدر يبعت أوامر عن طريق مرسل الأشعة تحت الحمراء المدمج، حتى لو التطبيق ده مقفول. محولات USB والصوت مش مدعومة.';
+
+  @override
+  String get automationSettingsError =>
+      'ماقدرناش نحمّل أو نحفظ إعداد الأتمتة. جرّب تاني.';
 }

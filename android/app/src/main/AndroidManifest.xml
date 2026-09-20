@@ -89,6 +89,15 @@
                android:resource="@xml/device_filter" />
        </activity-alias>
 
+        <!-- External automation is gated by an explicit, default-off app setting. -->
+        <receiver
+            android:name=".IrAutomationReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="org.irblaster.TRANSMIT" />
+            </intent-filter>
+        </receiver>
+
         <receiver
             android:name=".UsbPermissionReceiver"
             android:exported="false">

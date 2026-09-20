@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "Theo giao thức: thử các giá trị thấp phổ biến trước, sau đó phân bổ qua trường lệnh và thiết bị, đồng thời bỏ qua bit bộ mã hóa không dùng.",
   "irFinderSequentialOrderHint": "Chế độ tương thích: thử các chữ số đại diện theo thứ tự thập lục phân tăng dần.",
   "irFinderSmartMeaningfulBits": "Chế độ thông minh thay đổi {bits} bit có ý nghĩa cho mặt nạ này.",
-  "irFinderBruteforceMaskTip": "Mẹo: thay mọi chữ số chưa biết bằng X. Cố định chữ số đã biết ở bất kỳ vị trí nào có thể giảm đáng kể phạm vi tìm kiếm."
+  "irFinderBruteforceMaskTip": "Mẹo: thay mọi chữ số chưa biết bằng X. Cố định chữ số đã biết ở bất kỳ vị trí nào có thể giảm đáng kể phạm vi tìm kiếm.",
+  "automationBroadcastsTitle": "Cho phép phát quảng bá tự động hóa",
+  "automationBroadcastsSubtitle": "Mọi ứng dụng đã cài đặt đều có thể gửi lệnh qua bộ phát hồng ngoại tích hợp, ngay cả khi ứng dụng này đã đóng. Không hỗ trợ bộ chuyển đổi USB và âm thanh.",
+  "automationSettingsError": "Không thể tải hoặc lưu cài đặt tự động hóa. Vui lòng thử lại."
 }

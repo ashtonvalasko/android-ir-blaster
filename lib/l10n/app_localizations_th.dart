@@ -4879,4 +4879,15 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'เคล็ดลับ: แทนทุกหลักที่ไม่ทราบด้วย X การกำหนดหลักที่ทราบในตำแหน่งใดก็ได้ช่วยลดการค้นหาได้มาก';
+
+  @override
+  String get automationBroadcastsTitle => 'อนุญาตบรอดแคสต์ระบบอัตโนมัติ';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'แอปที่ติดตั้งทุกแอปจะส่งคำสั่งผ่านตัวส่งอินฟราเรดในเครื่องได้ แม้แอปนี้จะปิดอยู่ ไม่รองรับดองเกิล USB และดองเกิลเสียง';
+
+  @override
+  String get automationSettingsError =>
+      'ไม่สามารถโหลดหรือบันทึกการตั้งค่าระบบอัตโนมัติได้ โปรดลองอีกครั้ง';
 }

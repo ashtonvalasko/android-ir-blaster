@@ -5020,4 +5020,16 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Порада: замініть кожну невідому цифру на X. Відомі цифри в будь-якій позиції значно скорочують пошук.';
+
+  @override
+  String get automationBroadcastsTitle =>
+      'Дозволити широкомовні команди автоматизації';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Будь-який установлений застосунок зможе надсилати команди через вбудований ІЧ-передавач, навіть коли цей застосунок закрито. USB- та аудіоадаптери не підтримуються.';
+
+  @override
+  String get automationSettingsError =>
+      'Не вдалося завантажити або зберегти налаштування автоматизації. Спробуйте ще раз.';
 }

@@ -4797,4 +4797,14 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       '팁: 모르는 자리를 모두 X로 바꾸세요. 코드 어디서든 알려진 자리를 고정하면 검색 범위를 크게 줄일 수 있습니다.';
+
+  @override
+  String get automationBroadcastsTitle => '자동화 브로드캐스트 허용';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      '설치된 모든 앱이 이 앱이 닫혀 있어도 내장 IR 송신기로 명령을 보낼 수 있습니다. USB 및 오디오 동글은 지원하지 않습니다.';
+
+  @override
+  String get automationSettingsError => '자동화 설정을 불러오거나 저장하지 못했습니다. 다시 시도하세요.';
 }

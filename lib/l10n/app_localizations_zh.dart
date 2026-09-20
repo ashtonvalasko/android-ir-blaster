@@ -4725,4 +4725,14 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       '提示：将每个未知位替换为 X。固定代码中任意位置的已知位都能显著缩小搜索范围。';
+
+  @override
+  String get automationBroadcastsTitle => '允许自动化广播';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      '任何已安装的应用都可以通过内置红外发射器发送指令，即使本应用已关闭。不支持 USB 和音频适配器。';
+
+  @override
+  String get automationSettingsError => '无法加载或保存自动化设置。请重试。';
 }

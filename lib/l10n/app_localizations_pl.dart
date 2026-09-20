@@ -5001,4 +5001,16 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Wskazówka: zastąp każdą nieznaną cyfrę przez X. Ustalenie znanych cyfr w dowolnym miejscu znacznie ogranicza wyszukiwanie.';
+
+  @override
+  String get automationBroadcastsTitle =>
+      'Zezwalaj na transmisje automatyzacji';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Każda zainstalowana aplikacja może wysyłać polecenia przez wbudowany nadajnik IR, nawet gdy ta aplikacja jest zamknięta. Adaptery USB i audio nie są obsługiwane.';
+
+  @override
+  String get automationSettingsError =>
+      'Nie udało się wczytać lub zapisać ustawienia automatyzacji. Spróbuj ponownie.';
 }

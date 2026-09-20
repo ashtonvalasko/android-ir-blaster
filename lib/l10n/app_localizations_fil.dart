@@ -4924,4 +4924,16 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Tip: palitan ng X ang bawat hindi kilalang digit. Malaking napapaliit ng mga kilalang digit sa anumang posisyon ang paghahanap.';
+
+  @override
+  String get automationBroadcastsTitle =>
+      'Payagan ang mga broadcast ng automation';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Maaaring magpadala ng mga utos ang anumang naka-install na app gamit ang built-in na IR kahit sarado ang app na ito. Hindi suportado ang mga USB at audio dongle.';
+
+  @override
+  String get automationSettingsError =>
+      'Hindi ma-load o ma-save ang setting ng automation. Pakisubukang muli.';
 }

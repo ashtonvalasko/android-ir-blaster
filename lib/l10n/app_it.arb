@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "In base al protocollo: prova prima i valori bassi comuni, poi distribuisce i campi comando e dispositivo ignorando i bit non usati.",
   "irFinderSequentialOrderHint": "Modalità compatibile: prova le cifre jolly in ordine esadecimale crescente.",
   "irFinderSmartMeaningfulBits": "La modalità intelligente varia {bits} bit significativi per questa maschera.",
-  "irFinderBruteforceMaskTip": "Suggerimento: sostituisci ogni cifra sconosciuta con X. Fissare cifre note in qualsiasi posizione riduce molto la ricerca."
+  "irFinderBruteforceMaskTip": "Suggerimento: sostituisci ogni cifra sconosciuta con X. Fissare cifre note in qualsiasi posizione riduce molto la ricerca.",
+  "automationBroadcastsTitle": "Consenti broadcast di automazione",
+  "automationBroadcastsSubtitle": "Qualsiasi app installata può inviare comandi tramite l’IR integrato, anche quando questa app è chiusa. Gli adattatori USB e audio non sono supportati.",
+  "automationSettingsError": "Impossibile caricare o salvare l’impostazione di automazione. Riprova."
 }

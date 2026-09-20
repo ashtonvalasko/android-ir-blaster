@@ -2303,5 +2303,8 @@
   "irFinderSmartOrderHint": "Protokollbewusst: prüft zuerst häufige kleine Werte, verteilt danach Befehls- und Gerätefelder und überspringt ignorierte Bits.",
   "irFinderSequentialOrderHint": "Kompatibilitätsmodus: prüft Platzhalter in aufsteigender hexadezimaler Reihenfolge.",
   "irFinderSmartMeaningfulBits": "Der intelligente Modus variiert für diese Maske {bits} relevante Bit(s).",
-  "irFinderBruteforceMaskTip": "Tipp: Unbekannte Stellen durch X ersetzen. Bekannte Stellen an jeder Position verkleinern den Suchraum deutlich."
+  "irFinderBruteforceMaskTip": "Tipp: Unbekannte Stellen durch X ersetzen. Bekannte Stellen an jeder Position verkleinern den Suchraum deutlich.",
+  "automationBroadcastsTitle": "Automatisierungs-Broadcasts erlauben",
+  "automationBroadcastsSubtitle": "Jede installierte App kann Befehle über den integrierten IR-Sender senden, auch wenn diese App geschlossen ist. USB- und Audio-Adapter werden nicht unterstützt.",
+  "automationSettingsError": "Die Automatisierungseinstellung konnte nicht geladen oder gespeichert werden. Bitte erneut versuchen."
 }

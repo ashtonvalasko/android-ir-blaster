@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "Adapté au protocole : teste d’abord les petites valeurs courantes, puis répartit les champs de commande et d’appareil en ignorant les bits inutilisés.",
   "irFinderSequentialOrderHint": "Mode compatible : teste les jokers dans l’ordre hexadécimal croissant.",
   "irFinderSmartMeaningfulBits": "Le mode intelligent fait varier {bits} bit(s) significatif(s) pour ce masque.",
-  "irFinderBruteforceMaskTip": "Astuce : remplacez chaque chiffre inconnu par X. Fixer des chiffres connus à toute position réduit fortement la recherche."
+  "irFinderBruteforceMaskTip": "Astuce : remplacez chaque chiffre inconnu par X. Fixer des chiffres connus à toute position réduit fortement la recherche.",
+  "automationBroadcastsTitle": "Autoriser les diffusions d’automatisation",
+  "automationBroadcastsSubtitle": "Toute application installée peut envoyer des commandes via l’infrarouge intégré, même lorsque cette application est fermée. Les adaptateurs USB et audio ne sont pas pris en charge.",
+  "automationSettingsError": "Impossible de charger ou d’enregistrer le réglage d’automatisation. Réessayez."
 }

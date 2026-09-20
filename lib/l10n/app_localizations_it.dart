@@ -4941,4 +4941,15 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Suggerimento: sostituisci ogni cifra sconosciuta con X. Fissare cifre note in qualsiasi posizione riduce molto la ricerca.';
+
+  @override
+  String get automationBroadcastsTitle => 'Consenti broadcast di automazione';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Qualsiasi app installata può inviare comandi tramite l’IR integrato, anche quando questa app è chiusa. Gli adattatori USB e audio non sono supportati.';
+
+  @override
+  String get automationSettingsError =>
+      'Impossibile caricare o salvare l’impostazione di automazione. Riprova.';
 }

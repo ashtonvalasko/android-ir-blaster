@@ -4782,4 +4782,14 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'ヒント: 不明な桁は X に置き換えてください。コード内の既知の桁を固定すると、検索範囲を大幅に減らせます。';
+
+  @override
+  String get automationBroadcastsTitle => '自動化ブロードキャストを許可';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'インストール済みのすべてのアプリが、このアプリを閉じている間も内蔵赤外線送信機でコマンドを送信できます。USB・オーディオドングルには対応していません。';
+
+  @override
+  String get automationSettingsError => '自動化設定を読み込み、または保存できませんでした。もう一度お試しください。';
 }

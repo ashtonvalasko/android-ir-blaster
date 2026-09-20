@@ -4940,4 +4940,16 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Consejo: sustituye cada dígito desconocido por X. Fijar dígitos conocidos en cualquier posición reduce mucho la búsqueda.';
+
+  @override
+  String get automationBroadcastsTitle =>
+      'Permitir emisiones de automatización';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Cualquier aplicación instalada puede enviar comandos mediante el emisor IR integrado, incluso con esta aplicación cerrada. No se admiten adaptadores USB ni de audio.';
+
+  @override
+  String get automationSettingsError =>
+      'No se pudo cargar o guardar el ajuste de automatización. Inténtalo de nuevo.';
 }

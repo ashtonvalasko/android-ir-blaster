@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "Conforme o protocolo: testa primeiro valores baixos comuns, depois distribui pelos campos de comando e dispositivo e ignora bits não usados.",
   "irFinderSequentialOrderHint": "Modo de compatibilidade: testa os curingas por ordem hexadecimal crescente.",
   "irFinderSmartMeaningfulBits": "O modo inteligente varia {bits} bit(s) significativos para esta máscara.",
-  "irFinderBruteforceMaskTip": "Dica: substitua cada dígito desconhecido por X. Fixar dígitos conhecidos em qualquer posição reduz bastante a pesquisa."
+  "irFinderBruteforceMaskTip": "Dica: substitua cada dígito desconhecido por X. Fixar dígitos conhecidos em qualquer posição reduz bastante a pesquisa.",
+  "automationBroadcastsTitle": "Permitir transmissões de automatização",
+  "automationBroadcastsSubtitle": "Qualquer aplicação instalada pode enviar comandos pelo emissor IR integrado, mesmo com esta aplicação fechada. Os adaptadores USB e de áudio não são suportados.",
+  "automationSettingsError": "Não foi possível carregar ou guardar a definição de automatização. Tente novamente."
 }

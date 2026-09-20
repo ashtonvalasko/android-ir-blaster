@@ -4954,4 +4954,16 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Astuce : remplacez chaque chiffre inconnu par X. Fixer des chiffres connus à toute position réduit fortement la recherche.';
+
+  @override
+  String get automationBroadcastsTitle =>
+      'Autoriser les diffusions d’automatisation';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Toute application installée peut envoyer des commandes via l’infrarouge intégré, même lorsque cette application est fermée. Les adaptateurs USB et audio ne sont pas pris en charge.';
+
+  @override
+  String get automationSettingsError =>
+      'Impossible de charger ou d’enregistrer le réglage d’automatisation. Réessayez.';
 }

@@ -8905,6 +8905,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tip: replace every unknown digit with X. Fixing known digits anywhere in the code can reduce the search dramatically.'**
   String get irFinderBruteforceMaskTip;
+
+  /// No description provided for @automationBroadcastsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow automation broadcasts'**
+  String get automationBroadcastsTitle;
+
+  /// No description provided for @automationBroadcastsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Any installed app can send commands through built-in IR, even while this app is closed. USB and audio dongles are not supported.'**
+  String get automationBroadcastsSubtitle;
+
+  /// No description provided for @automationSettingsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load or save the automation setting. Please try again.'**
+  String get automationSettingsError;
 }
 
 class _AppLocalizationsDelegate

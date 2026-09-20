@@ -4946,4 +4946,15 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Tip: vervang elk onbekend cijfer door X. Bekende cijfers op elke positie kunnen de zoekruimte sterk verkleinen.';
+
+  @override
+  String get automationBroadcastsTitle => 'Automatiseringsbroadcasts toestaan';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Elke geïnstalleerde app kan opdrachten verzenden via de ingebouwde IR-zender, ook als deze app gesloten is. USB- en audiodongles worden niet ondersteund.';
+
+  @override
+  String get automationSettingsError =>
+      'De automatiseringsinstelling kon niet worden geladen of opgeslagen. Probeer het opnieuw.';
 }

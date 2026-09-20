@@ -4904,4 +4904,15 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'सुझाव: हर अज्ञात अंक को X से बदलें। कोड में कहीं भी ज्ञात अंक तय करने से खोज बहुत घट सकती है।';
+
+  @override
+  String get automationBroadcastsTitle => 'ऑटोमेशन ब्रॉडकास्ट की अनुमति दें';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'कोई भी इंस्टॉल किया गया ऐप इस ऐप के बंद होने पर भी बिल्ट-इन IR से कमांड भेज सकता है। USB और ऑडियो डोंगल समर्थित नहीं हैं।';
+
+  @override
+  String get automationSettingsError =>
+      'ऑटोमेशन सेटिंग लोड या सेव नहीं हो सकी। कृपया फिर से कोशिश करें।';
 }

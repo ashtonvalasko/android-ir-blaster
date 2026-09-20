@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "Ayon sa protocol: inuuna ang karaniwang mababang value, saka ikinakalat ang command at device field at nilalaktawan ang hindi ginagamit na bit.",
   "irFinderSequentialOrderHint": "Compatibility mode: sinusubok ang wildcard digit sa pataas na hexadecimal na ayos.",
   "irFinderSmartMeaningfulBits": "Binabago ng matalinong mode ang {bits} makabuluhang bit para sa mask na ito.",
-  "irFinderBruteforceMaskTip": "Tip: palitan ng X ang bawat hindi kilalang digit. Malaking napapaliit ng mga kilalang digit sa anumang posisyon ang paghahanap."
+  "irFinderBruteforceMaskTip": "Tip: palitan ng X ang bawat hindi kilalang digit. Malaking napapaliit ng mga kilalang digit sa anumang posisyon ang paghahanap.",
+  "automationBroadcastsTitle": "Payagan ang mga broadcast ng automation",
+  "automationBroadcastsSubtitle": "Maaaring magpadala ng mga utos ang anumang naka-install na app gamit ang built-in na IR kahit sarado ang app na ito. Hindi suportado ang mga USB at audio dongle.",
+  "automationSettingsError": "Hindi ma-load o ma-save ang setting ng automation. Pakisubukang muli."
 }

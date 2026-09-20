@@ -21,6 +21,7 @@ import 'package:irblaster_controller/utils/remotes_io.dart';
 import 'package:irblaster_controller/widgets/about_screen.dart';
 import 'package:irblaster_controller/widgets/settings/widgets/donation_sheet.dart';
 import 'package:irblaster_controller/widgets/settings/widgets/section_card.dart';
+import 'package:irblaster_controller/widgets/settings/widgets/automation_settings_tile.dart';
 import 'package:irblaster_controller/widgets/settings/widgets/support_pill.dart';
 import 'package:irblaster_controller/widgets/universal_power_screen.dart';
 import 'package:irblaster_controller/widgets/device_controls_screen.dart';
@@ -1039,6 +1040,8 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
             ),
+            const Divider(height: 1),
+            const AutomationSettingsTile(),
             const Divider(height: 1),
             AnimatedBuilder(
               animation: HapticsController.instance,

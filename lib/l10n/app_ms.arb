@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "Mengikut protokol: menguji nilai rendah lazim dahulu, kemudian menyebar ke medan arahan dan peranti sambil melangkau bit yang diabaikan pengekod.",
   "irFinderSequentialOrderHint": "Mod keserasian: menguji digit kad bebas dalam urutan heksadesimal menaik.",
   "irFinderSmartMeaningfulBits": "Mod pintar mengubah {bits} bit bermakna untuk topeng ini.",
-  "irFinderBruteforceMaskTip": "Petua: gantikan setiap digit yang tidak diketahui dengan X. Menetapkan digit diketahui di mana-mana kedudukan boleh mengurangkan carian dengan banyak."
+  "irFinderBruteforceMaskTip": "Petua: gantikan setiap digit yang tidak diketahui dengan X. Menetapkan digit diketahui di mana-mana kedudukan boleh mengurangkan carian dengan banyak.",
+  "automationBroadcastsTitle": "Benarkan siaran automasi",
+  "automationBroadcastsSubtitle": "Mana-mana aplikasi yang dipasang boleh menghantar arahan melalui IR terbina dalam, walaupun aplikasi ini ditutup. Dongel USB dan audio tidak disokong.",
+  "automationSettingsError": "Tetapan automasi tidak dapat dimuatkan atau disimpan. Sila cuba lagi."
 }

@@ -4896,4 +4896,15 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Mẹo: thay mọi chữ số chưa biết bằng X. Cố định chữ số đã biết ở bất kỳ vị trí nào có thể giảm đáng kể phạm vi tìm kiếm.';
+
+  @override
+  String get automationBroadcastsTitle => 'Cho phép phát quảng bá tự động hóa';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Mọi ứng dụng đã cài đặt đều có thể gửi lệnh qua bộ phát hồng ngoại tích hợp, ngay cả khi ứng dụng này đã đóng. Không hỗ trợ bộ chuyển đổi USB và âm thanh.';
+
+  @override
+  String get automationSettingsError =>
+      'Không thể tải hoặc lưu cài đặt tự động hóa. Vui lòng thử lại.';
 }

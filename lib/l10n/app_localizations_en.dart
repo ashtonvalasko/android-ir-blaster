@@ -4952,4 +4952,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Tip: replace every unknown digit with X. Fixing known digits anywhere in the code can reduce the search dramatically.';
+
+  @override
+  String get automationBroadcastsTitle => 'Allow automation broadcasts';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Any installed app can send commands through built-in IR, even while this app is closed. USB and audio dongles are not supported.';
+
+  @override
+  String get automationSettingsError =>
+      'Could not load or save the automation setting. Please try again.';
 }

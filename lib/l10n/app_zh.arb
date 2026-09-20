@@ -2317,5 +2317,8 @@
   "irFinderSmartOrderHint": "按协议搜索：先测试常见低值，再分散到命令和设备字段，并跳过编码器忽略的位。",
   "irFinderSequentialOrderHint": "兼容模式：按十六进制升序测试通配位。",
   "irFinderSmartMeaningfulBits": "智能模式会改变此掩码中的 {bits} 个有效位。",
-  "irFinderBruteforceMaskTip": "提示：将每个未知位替换为 X。固定代码中任意位置的已知位都能显著缩小搜索范围。"
+  "irFinderBruteforceMaskTip": "提示：将每个未知位替换为 X。固定代码中任意位置的已知位都能显著缩小搜索范围。",
+  "automationBroadcastsTitle": "允许自动化广播",
+  "automationBroadcastsSubtitle": "任何已安装的应用都可以通过内置红外发射器发送指令，即使本应用已关闭。不支持 USB 和音频适配器。",
+  "automationSettingsError": "无法加载或保存自动化设置。请重试。"
 }

@@ -4953,4 +4953,16 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get irFinderBruteforceMaskTip =>
       'Tipp: Unbekannte Stellen durch X ersetzen. Bekannte Stellen an jeder Position verkleinern den Suchraum deutlich.';
+
+  @override
+  String get automationBroadcastsTitle =>
+      'Automatisierungs-Broadcasts erlauben';
+
+  @override
+  String get automationBroadcastsSubtitle =>
+      'Jede installierte App kann Befehle über den integrierten IR-Sender senden, auch wenn diese App geschlossen ist. USB- und Audio-Adapter werden nicht unterstützt.';
+
+  @override
+  String get automationSettingsError =>
+      'Die Automatisierungseinstellung konnte nicht geladen oder gespeichert werden. Bitte erneut versuchen.';
 }
