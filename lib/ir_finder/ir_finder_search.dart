@@ -183,7 +183,7 @@ class IrFinderSearchProfiles {
       protocolId: 'denon',
       totalHexDigits: 4,
       smartGroups: <IrFinderSearchBitGroup>[
-        _group(<int>[0, ..._bits(4, 7)]),
+        _group(_bits(3, 8)),
         _group(_bits(11, 5)),
       ],
     ),
@@ -247,7 +247,7 @@ class IrFinderSearchProfiles {
       protocolId: 'rcc2026',
       totalHexDigits: 11,
       smartGroups: <IrFinderSearchBitGroup>[
-        _group(_bits(0, 42)),
+        _group(_bits(2, 42)),
       ],
     ),
     'rec80': IrFinderProtocolSearchProfile(
@@ -275,8 +275,8 @@ class IrFinderSearchProfiles {
       protocolId: 'sharp',
       totalHexDigits: 4,
       smartGroups: <IrFinderSearchBitGroup>[
-        _group(_bits(0, 8)),
-        _group(_bits(8, 5)),
+        _group(_bits(3, 8)),
+        _group(_bits(11, 5)),
       ],
     ),
     'sony12': _sonyProfile('sony12', addressBits: 5),
@@ -286,7 +286,8 @@ class IrFinderSearchProfiles {
       protocolId: 'thomson7',
       totalHexDigits: 3,
       smartGroups: <IrFinderSearchBitGroup>[
-        _group(<int>[0, 1, 2, 3, 5, 6, 8, 9, 10, 11]),
+        _group(_bits(0, 7)),
+        _group(_bits(8, 4)),
       ],
     ),
     'xsat': _twoByteProfile('xsat'),

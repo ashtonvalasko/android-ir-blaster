@@ -122,7 +122,7 @@ void main() {
       'recs80_l': 9,
       'sharp': 13,
       'sony15': 15,
-      'thomson7': 10,
+      'thomson7': 11,
     };
 
     for (final MapEntry<String, int> entry in meaningfulBits.entries) {
@@ -240,6 +240,20 @@ void main() {
         expect(result.pattern.every((int duration) => duration > 0), isTrue,
             reason: '${profile.protocolId}:$code');
       }
+    }
+  });
+
+  test('smart profiles cover corrected wire bits and exclude padding/toggle', () {
+    final expected = <String, List<int>>{
+      'denon': List.generate(13, (i) => i + 3),
+      'sharp': List.generate(13, (i) => i + 3),
+      'rcc2026': List.generate(42, (i) => i + 2),
+      'thomson7': [0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11],
+    };
+    for (final entry in expected.entries) {
+      final profile = IrFinderSearchProfiles.forProtocol(entry.key)!;
+      expect(profile.smartGroups.expand((group) => group.rawBitPositions),
+          entry.value, reason: entry.key);
     }
   });
 
