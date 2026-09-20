@@ -170,7 +170,7 @@ The Signal Tester is designed to help discover unknown working IR commands.
 | Raw Signal | pattern (µs), optional frequencyHz | 10,000–100,000 (default 38,000) | Alternating mark/space durations starting with mark; tokens can be decimal/hex; comments supported; auto-append 45ms trailing space if odd length | Max 4096 entries, positive durations only; strict parsing and bounds |
 | Denon | 4 hex > 13-bit frame | 38,000 | Send the normal 13-bit frame, an inverted-command frame, then the normal frame again; mark=280, spaces 860/1720, gap=43,560µs | Strict 4 hex digits; canonical Denon repeat sequence |
 | F12_relaxed | up to 3 hex > 12 bits | 38,000 | Map 0 > [422,1266], 1 > [1266,422]; adjust the final slot to make the frame total 54,000µs | Values are left-padded to 12 bits |
-| JVC | 4 hex (16 bits LSB-first) | 38,000 | Preamble 8400/4200; each bit mark=525, space=525 (0) or 1575 (1); trailing 525 + 21000 gap | Strict 4 hex digits |
+| JVC | 4 hex (16 packed wire-order bits) | 38,000 | Preamble 8400/4200; each bit mark=525, space=525 (0) or 1575 (1); trailing 525 + 21000 gap | Strict 4 hex digits; packed codes already contain LSB-first address/command bits |
 | NEC | up to 8 hex (left-padded) > 32 bits | 38,222 | Preamble 9000/4500; bit mark=562 + space 562 (0) or 1687 (1); trailing mark 562; pad final gap to 108,800µs | Preserves legacy MSB and byte-swap modes; True LSB sends each byte LSB-first |
 | NEC2 | up to 8 hex (left-padded) > 32 bits | 38,222 | Same construction as NEC in this implementation | Accepts 1–8 hex; normalized to 8 |
 | NECx1 | up to 8 hex (left-padded) > 32 bits | 38,400 | Preamble 4500/4500; bit mark=562 + space 562/1687; trailing 562; pad to 108,800µs | Optional helper for toggle frame |

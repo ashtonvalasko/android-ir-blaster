@@ -5,7 +5,7 @@ const IrProtocolDefinition jvcProtocolDefinition = IrProtocolDefinition(
   displayName: 'JVC',
   description:
       'JVC: 4-hex-digit code. Carrier 38kHz. '
-      'Preamble 8400/4200, then 16 bits LSB-first encoded with mark=525 and space=525/1575. '
+      'Preamble 8400/4200, then 16 wire-order bits encoded with mark=525 and space=525/1575. '
       'Appends trailing 525 + gap 21000.',
   implemented: true,
   defaultFrequencyHz: 38000,
@@ -50,20 +50,9 @@ class JvcProtocolEncoder implements IrProtocolEncoder {
 
     _validateHexExact(hex, 4, protocolName: 'JVC');
 
-    String byteBitsLsbFirst(String twoHex) {
-      final int v = int.parse(twoHex, radix: 16) & 0xFF;
-      return v
-          .toRadixString(2)
-          .padLeft(8, '0')
-          .split('')
-          .reversed
-          .join();
-    }
-
     final List<int> total = <int>[];
-    final String hi = hex.substring(0, 2);
-    final String lo = hex.substring(2, 4);
-    final String bits = byteBitsLsbFirst(hi) + byteBitsLsbFirst(lo); // 16 bits LSB-first
+    // Packed database/LIRC codes already contain the LSB-first wire sequence.
+    final String bits = int.parse(hex, radix: 16).toRadixString(2).padLeft(16, '0');
 
     total.addAll(preamble);
     for (int i = 0; i < bits.length; i++) {
