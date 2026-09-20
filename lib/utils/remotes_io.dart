@@ -343,17 +343,19 @@ Future<ImportResult?> importRemotesFromPicker(
 }) async {
   final l10n = context.l10n;
   final PlatformFile? pf = await FilePicker.pickFile(
-    type: FileType.custom,
-    allowedExtensions: const <String>[
-      'json',
-      'ir',
-      'xml',
-      'irplus',
-      'conf',
-      'cfg',
-      'lirc',
-      'lrc',
-    ],
+    type: Platform.isAndroid ? FileType.any : FileType.custom,
+    allowedExtensions: Platform.isAndroid
+        ? null
+        : const <String>[
+            'json',
+            'ir',
+            'xml',
+            'irplus',
+            'conf',
+            'cfg',
+            'lirc',
+            'lrc',
+          ],
   );
   if (pf == null) return null;
   final String? contents = await _readPlatformFileText(pf);
@@ -577,17 +579,7 @@ Future<ImportResult?> importRemotesFromFolderPicker(
   final l10n = context.l10n;
   if (Platform.isAndroid) {
     final List<PlatformFile> files = await FilePicker.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: const <String>[
-        'json',
-        'ir',
-        'xml',
-        'irplus',
-        'conf',
-        'cfg',
-        'lirc',
-        'lrc',
-      ],
+      type: FileType.any,
     );
 
     if (files.isEmpty) return null;

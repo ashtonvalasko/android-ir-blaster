@@ -93,6 +93,29 @@ end remote
     }
   }
 
+  test('import filename guard accepts every supported file type', () {
+    for (final filename in <String>[
+      'backup.json',
+      'remote.ir',
+      'remote.xml',
+      'remote.irplus',
+      'remote.conf',
+      'remote.cfg',
+      'remote.lirc',
+      'remote.lrc',
+      'remote.lirc.conf',
+      'remote.lircd.conf',
+    ]) {
+      expect(isSupportedImportFilename(filename), isTrue, reason: filename);
+    }
+  });
+
+  test('import filename guard rejects unsupported files', () {
+    for (final filename in <String>['remote.txt', 'remote.pdf', '']) {
+      expect(isSupportedImportFilename(filename), isFalse, reason: filename);
+    }
+  });
+
   test('preview parser accepts Flipper IR files and builds a usable remote', () {
     final preview = analyzeImportedText(
       flipperIr,
