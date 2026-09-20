@@ -4,8 +4,8 @@ const IrProtocolDefinition sharpProtocolDefinition = IrProtocolDefinition(
   id: 'sharp',
   displayName: 'Sharp',
   description:
-      'Sharp: 38 kHz. Input hex length=4 packed as address(5 bits) + command(8 bits). '
-      'Address and command are sent LSB-first in normal, inverted-command, and normal '
+      'Sharp: 38 kHz. Input hex length=4, a left-aligned wire frame. '
+      'The first 13 bits hold address and command, already LSB-first, in normal, inverted-command, and normal '
       'frames. Tail blocks encode the documented expansion/check bits and frame gap.',
   implemented: true,
   defaultFrequencyHz: 38000,
@@ -62,12 +62,11 @@ class SharpProtocolEncoder implements IrProtocolEncoder {
     final String hex = h.trim();
     _validateHexN(hex, 4);
 
-    final int packed = int.parse(hex, radix: 16) & 0x1FFF;
-    final int address = (packed >> 8) & 0x1F;
-    final int command = packed & 0xFF;
-
-    final String first13 = _bitsLsbFirst(address, 5) + _bitsLsbFirst(command, 8);
-    final String second13 = _bitsLsbFirst(address, 5) + _bitsLsbFirst((~command) & 0xFF, 8);
+    // Database codes contain 13 wire bits followed by control/padding bits.
+    final String first13 = int.parse(hex, radix: 16)
+        .toRadixString(2).padLeft(16, '0').substring(0, 13);
+    final String second13 = first13.substring(0, 5) + first13.substring(5)
+        .split('').map((bit) => bit == '0' ? '1' : '0').join();
 
     final List<int> out = <int>[];
 
@@ -85,14 +84,6 @@ class SharpProtocolEncoder implements IrProtocolEncoder {
     for (int i = 0; i < bits.length; i++) {
       out.addAll(bits[i] == '0' ? b : c);
     }
-  }
-
-  String _bitsLsbFirst(int value, int width) {
-    final StringBuffer out = StringBuffer();
-    for (int i = 0; i < width; i++) {
-      out.write(((value >> i) & 1) == 0 ? '0' : '1');
-    }
-    return out.toString();
   }
 
   void _validateHexN(String hex, int n) {
