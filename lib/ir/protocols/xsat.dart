@@ -62,15 +62,13 @@ class XsatProtocolEncoder implements IrProtocolEncoder {
     final List<int> out = <int>[headerMark, headerSpace];
     _appendByteLsbFirst(out, address);
 
-    if (out.isEmpty) {
-      throw StateError('XSAT encoder generated an empty pattern');
-    }
-    out[out.length - 1] = out.last + fieldSeparatorGap;
+    out.addAll(<int>[bitMark, fieldSeparatorGap]);
 
     _appendByteLsbFirst(out, command);
+    out.add(bitMark);
     final int used = out.fold<int>(0, (sum, v) => sum + v);
     final int trailingGap = used >= framePeriodUs ? 0 : (framePeriodUs - used);
-    out[out.length - 1] = out.last + trailingGap;
+    out.add(trailingGap);
 
     return IrEncodeResult(
       frequencyHz: defaultFrequencyHz,
