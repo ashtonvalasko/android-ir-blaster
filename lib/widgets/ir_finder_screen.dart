@@ -9,6 +9,7 @@ import 'package:irblaster_controller/ir_finder/ir_finder_prefs.dart';
 import 'package:irblaster_controller/ir_finder/ir_finder_run_controller.dart';
 import 'package:irblaster_controller/ir_finder/ir_finder_search.dart';
 import 'package:irblaster_controller/ir_finder/ir_prefix.dart';
+import 'package:irblaster_controller/widgets/ir_finder_cooldown_control.dart';
 import 'package:irblaster_controller/ir_finder/irblaster_db.dart';
 import 'package:irblaster_controller/l10n/l10n.dart';
 import 'package:irblaster_controller/state/continue_context_prefs.dart';
@@ -451,6 +452,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.inactive) {
+      _run.pause();
       unawaited(_run.persistNow());
     }
   }
@@ -716,6 +718,11 @@ class _IrFinderScreenState extends State<IrFinderScreen>
       brand: _brand,
       model: _model,
     );
+  }
+
+  void _setCooldown(int value) {
+    setState(() => _delayMs = value);
+    _syncRunConfigToController();
   }
 
   Future<IrFinderCandidate?> _fetchCandidateForRun(
@@ -991,7 +998,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
   }
 
   Future<void> _saveHitFromLast() async {
-    final c = _run.lastCandidate;
+    final c = _run.pauseForHit();
     if (c == null) return;
 
     final hit = IrFinderHit(
@@ -1023,6 +1030,8 @@ class _IrFinderScreenState extends State<IrFinderScreen>
   }
 
   Future<void> _testHit(IrFinderHit h) async {
+    if (_run.busy) return;
+    _run.pause();
     Map<String, dynamic> params;
     try {
       params = IrFinderParams.paramsForHit(
@@ -1369,6 +1378,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
         bottomNavigationBar: NavigationBar(
           selectedIndex: _pageIndex,
           onDestinationSelected: (i) {
+            if (i == 2) _run.pause();
             setState(() => _pageIndex = i);
           },
           destinations: <NavigationDestination>[
@@ -1540,12 +1550,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
                     setState(() => _bruteStrategy = strategy);
                     _syncRunConfigToController();
                   },
-            onDelayChanged: _run.running
-                ? null
-                : (v) {
-                    setState(() => _delayMs = v);
-                    _syncRunConfigToController();
-                  },
+            onDelayChanged: _setCooldown,
             onMaxAttemptsChanged:
                 _run.running ? null : (v) => _setMaxAttempts(v),
           )
@@ -1673,6 +1678,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
           attempted: _run.attempted,
           maxAttempts: maxAttemptsUi,
           delayMs: _delayMs,
+          onDelayChanged: _setCooldown,
           startedAt: _run.startedAt,
           lastCandidate: _run.lastCandidate,
           lastError: _run.lastError,
@@ -1680,25 +1686,25 @@ class _IrFinderScreenState extends State<IrFinderScreen>
           onStop: _run.running
               ? () => unawaited(_run.stop(clearPersistedSession: false))
               : null,
-          onStep: (_run.running && _run.paused)
+          onStep: (_run.running && _run.paused && !_run.busy)
               ? () async {
                   await _run.step();
                   await Haptics.selectionClick();
                 }
               : null,
-          onTrigger: (_run.running)
+          onTrigger: (_run.running && !_run.busy)
               ? () async {
                   await _run.trigger();
                   await Haptics.lightImpact();
                 }
               : null,
-          onSkip: (_run.running)
+          onSkip: (_run.running && !_run.busy)
               ? () {
                   _run.skip();
                   unawaited(Haptics.selectionClick());
                 }
               : null,
-          onSaveHit: (_run.lastCandidate != null)
+          onSaveHit: (_run.lastCandidate != null && !_run.busy && _run.lastError == null)
               ? () => unawaited(_saveHitFromLast())
               : null,
           onJump: _run.running ? () => _showJumpDialog(context) : null,
@@ -1760,7 +1766,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
                   if (i != 0) const Divider(height: 0),
                   _HitTile(
                     hit: _hits[i],
-                    onTest: () => unawaited(_testHit(_hits[i])),
+                    onTest: _run.busy ? null : () => unawaited(_testHit(_hits[i])),
                     onCopy: () => unawaited(_copyHit(_hits[i])),
                     onDelete: () => setState(() => _hits.removeAt(i)),
                     onAddToRemote: () =>
@@ -2364,22 +2370,7 @@ class _BruteForceSetupCard extends StatelessWidget {
               ),
             ],
             const SizedBox(height: 16),
-            Text(
-              context.l10n.irFinderCooldownMs,
-              style: theme.textTheme.labelLarge
-                  ?.copyWith(fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 6),
-            Slider(
-              value: delayMs.toDouble().clamp(250, 2000),
-              min: 250,
-              max: 2000,
-              divisions: 35,
-              label: '$delayMs ms',
-              onChanged: onDelayChanged == null
-                  ? null
-                  : (v) => onDelayChanged!(v.round()),
-            ),
+            IrFinderCooldownControl(delayMs: delayMs, onChanged: onDelayChanged),
             const SizedBox(height: 10),
             Text(
               context.l10n.irFinderMaxAttemptsPerRun,
@@ -2631,6 +2622,7 @@ class _RunStatusCard extends StatelessWidget {
   final int attempted;
   final int maxAttempts;
   final int delayMs;
+  final ValueChanged<int> onDelayChanged;
   final DateTime? startedAt;
   final IrFinderCandidate? lastCandidate;
   final Object? lastError;
@@ -2652,6 +2644,7 @@ class _RunStatusCard extends StatelessWidget {
     required this.attempted,
     required this.maxAttempts,
     required this.delayMs,
+    required this.onDelayChanged,
     required this.startedAt,
     required this.lastCandidate,
     required this.lastError,
@@ -2734,6 +2727,7 @@ class _RunStatusCard extends StatelessWidget {
             const SizedBox(height: 10),
             LinearProgressIndicator(value: progress),
             const SizedBox(height: 10),
+            IrFinderCooldownControl(delayMs: delayMs, onChanged: onDelayChanged),
             Wrap(
               spacing: 10,
               runSpacing: 8,
@@ -2945,7 +2939,7 @@ class _LastAttemptBox extends StatelessWidget {
 
 class _HitTile extends StatelessWidget {
   final IrFinderHit hit;
-  final VoidCallback onTest;
+  final VoidCallback? onTest;
   final VoidCallback onCopy;
   final VoidCallback onDelete;
   final VoidCallback onAddToRemote;

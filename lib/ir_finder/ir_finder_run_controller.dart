@@ -49,6 +49,10 @@ class IrFinderRunController extends ChangeNotifier {
 
   Timer? _timer;
   bool _tickBusy = false;
+  bool _disposed = false;
+  int _generation = 0;
+  int _pauseRevision = 0;
+  bool get busy => _tickBusy;
   int _nullCandidateSkips = 0;
 
   DateTime _lastPersistAt = DateTime.fromMillisecondsSinceEpoch(0);
@@ -74,6 +78,7 @@ class IrFinderRunController extends ChangeNotifier {
     required String? brand,
     required String? model,
   }) {
+    final previousDelay = this.delayMs;
     this.mode = mode;
     this.protocolId = protocolId.trim().toLowerCase();
     this.delayMs = delayMs.clamp(250, 20000);
@@ -87,6 +92,7 @@ class IrFinderRunController extends ChangeNotifier {
     this.quickWinsFirst = quickWinsFirst;
     this.brand = brand;
     this.model = model;
+    if (previousDelay != this.delayMs && !_tickBusy) _scheduleTimer();
     _schedulePersist();
     notifyListeners();
   }
@@ -113,6 +119,7 @@ class IrFinderRunController extends ChangeNotifier {
     if (running && !paused) return;
 
     _cancelTimer();
+    _generation++;
 
     running = true;
     paused = false;
@@ -134,6 +141,7 @@ class IrFinderRunController extends ChangeNotifier {
     if (!running) return;
     if (paused) return;
     paused = true;
+    _pauseRevision++;
     _cancelTimer();
     notifyListeners();
     _schedulePersist();
@@ -166,7 +174,7 @@ class IrFinderRunController extends ChangeNotifier {
   }
 
   void skip() {
-    if (!running) return;
+    if (!running || _tickBusy) return;
     _advanceWithoutSend();
     notifyListeners();
     _schedulePersist();
@@ -180,6 +188,7 @@ class IrFinderRunController extends ChangeNotifier {
       return;
     }
     _cancelTimer();
+    _generation++;
     running = false;
     paused = false;
     notifyListeners();
@@ -221,11 +230,19 @@ class IrFinderRunController extends ChangeNotifier {
 
   void _scheduleTimer() {
     _cancelTimer();
-    if (!running || paused) return;
+    if (_disposed || !running || paused || _tickBusy) return;
     final int ms = delayMs.clamp(250, 20000);
-    _timer = Timer.periodic(Duration(milliseconds: ms), (_) {
-      unawaited(_tick(send: true, advance: true));
+    _timer = Timer(Duration(milliseconds: ms), () {
+      _timer = null;
+      unawaited(_tick(send: true, advance: true, automatic: true));
     });
+  }
+
+  /// Freeze the displayed, completed attempt before opening saved results.
+  IrFinderCandidate? pauseForHit() {
+    if (_tickBusy || lastError != null || lastCandidate == null) return null;
+    pause();
+    return lastCandidate;
   }
 
   void _cancelTimer() {
@@ -244,23 +261,30 @@ class IrFinderRunController extends ChangeNotifier {
     });
   }
 
-  Future<void> _tick({required bool send, required bool advance}) async {
-    if (!running) return;
+  Future<void> _tick(
+      {required bool send,
+      required bool advance,
+      bool automatic = false}) async {
+    if (_disposed || !running || (automatic && paused)) return;
     if (_tickBusy) return;
 
-    if (mode == IrFinderMode.database) {
+    if (advance && mode == IrFinderMode.database) {
       if (attempted >= maxKeysToTest) {
         await stop(clearPersistedSession: false);
         return;
       }
-    } else {
+    } else if (advance) {
       if (!bruteAllCombinations && attempted >= bruteMaxAttempts) {
         await stop(clearPersistedSession: false);
         return;
       }
     }
 
+    _cancelTimer();
+    final generation = _generation;
+    final pauseRevision = _pauseRevision;
     _tickBusy = true;
+    notifyListeners();
     try {
       if (!send) return;
 
@@ -271,6 +295,9 @@ class IrFinderRunController extends ChangeNotifier {
       } else {
         c = await fetchCandidate(this);
       }
+
+      if (_disposed || generation != _generation || !running) return;
+      if (automatic && (paused || pauseRevision != _pauseRevision)) return;
 
       if (c == null) {
         _nullCandidateSkips += 1;
@@ -301,6 +328,10 @@ class IrFinderRunController extends ChangeNotifier {
         err = e;
       }
 
+      // A send already handed to hardware cannot be cancelled, but it must not
+      // overwrite a newer run or a position explicitly chosen with Jump.
+      if (_disposed || generation != _generation || !running) return;
+
       lastCandidate = c;
       lastError = err;
       _nullCandidateSkips = 0;
@@ -311,8 +342,18 @@ class IrFinderRunController extends ChangeNotifier {
 
       notifyListeners();
       _schedulePersist();
+    } catch (e) {
+      if (!_disposed && generation == _generation && running) {
+        lastError = e;
+        pause();
+      }
     } finally {
       _tickBusy = false;
+      if (!_disposed) {
+        notifyListeners();
+        // Cooldown starts after the asynchronous lookup/send completes.
+        _scheduleTimer();
+      }
     }
   }
 
@@ -334,6 +375,7 @@ class IrFinderRunController extends ChangeNotifier {
 
   // Jump methods to reposition safely without breaking DB ordering
   void jumpToOffset(int value) {
+    _generation++;
     final int v = value.clamp(0, 2147483647);
     currentOffset = v;
     // Pause to avoid racing the timer while relocating
@@ -344,6 +386,7 @@ class IrFinderRunController extends ChangeNotifier {
   }
 
   void jumpToBrute(BigInt value) {
+    _generation++;
     final BigInt v = (value < BigInt.zero) ? BigInt.zero : value;
     bruteCursor = v;
     paused = true;
@@ -354,6 +397,8 @@ class IrFinderRunController extends ChangeNotifier {
 
   @override
   void dispose() {
+    _disposed = true;
+    _generation++;
     _cancelTimer();
     _persistDebounce?.cancel();
     _persistDebounce = null;
