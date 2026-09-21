@@ -87,7 +87,7 @@ class _MacroEditorScreenState extends State<MacroEditorScreen> {
 
   Future<void> _addSendStep() async {
     final button = await _pickButton();
-    if (button == null) return;
+    if (!mounted || button == null) return;
     setState(() {
       _steps.add(
         MacroStep(
@@ -103,7 +103,7 @@ class _MacroEditorScreenState extends State<MacroEditorScreen> {
 
   Future<void> _addDelayStep() async {
     final ms = await _pickDelay();
-    if (ms == null) return;
+    if (!mounted || ms == null) return;
     setState(() {
       _steps.add(
         MacroStep(
@@ -132,7 +132,7 @@ class _MacroEditorScreenState extends State<MacroEditorScreen> {
     final step = _steps[index];
     if (step.type == MacroStepType.send) {
       final button = await _pickButton();
-      if (button == null) return;
+      if (!mounted || button == null) return;
       setState(() {
         _steps[index] = step.copyWith(buttonId: button.id, buttonRef: button.image);
       });
@@ -141,7 +141,7 @@ class _MacroEditorScreenState extends State<MacroEditorScreen> {
     }
     if (step.type == MacroStepType.delay) {
       final ms = await _pickDelay(initial: step.delayMs);
-      if (ms == null) return;
+      if (!mounted || ms == null) return;
       setState(() {
         _steps[index] = step.copyWith(delayMs: ms);
       });
@@ -602,7 +602,7 @@ class _MacroEditorScreenState extends State<MacroEditorScreen> {
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => Navigator.of(context).maybePop(),
                     icon: const Icon(Icons.close_rounded),
                     label: Text(context.l10n.cancel),
                   ),
