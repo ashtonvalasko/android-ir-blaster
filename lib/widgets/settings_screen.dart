@@ -471,40 +471,125 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.settingsTitle)),
-      body: ListView(
-        children: [
-          const SizedBox(height: 10),
-          if (BuildFlags.showDonations) ...[
-            _buildSupportSection(context),
-            const SizedBox(height: 10),
-          ],
-          _buildAppearanceSection(context),
-          const SizedBox(height: 10),
-          _buildLocalizationSection(context),
-          const SizedBox(height: 10),
-          _buildInteractionSection(context),
-          const SizedBox(height: 10),
-          _buildIrTransmitterSection(context, cs),
-          const SizedBox(height: 10),
-          _buildLearningSection(context, cs),
-          const SizedBox(height: 10),
-          _buildGitHubStoreSection(context, cs),
-          const SizedBox(height: 10),
-          _buildRemotesSection(context),
-          const SizedBox(height: 10),
-          _buildDeviceControlsSection(context),
-          const SizedBox(height: 10),
-          _buildQuickSettingsSection(context),
-          const SizedBox(height: 10),
-          _buildTvKillSection(context),
-          const SizedBox(height: 10),
-          _buildAboutSection(context),
-          const SizedBox(height: 18),
-        ],
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 760),
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              children: [
+                _categoryTile(
+                  context,
+                  icon: Icons.settings_input_antenna_rounded,
+                  title: (l10n) => l10n.settingsHardwareTitle,
+                  subtitle: context.l10n.settingsHardwareSubtitle,
+                  sections: (ctx) => [
+                    _buildIrTransmitterSection(ctx, Theme.of(ctx).colorScheme),
+                    _buildLearningSection(ctx, Theme.of(ctx).colorScheme),
+                  ],
+                ),
+                _categoryTile(
+                  context,
+                  icon: Icons.palette_outlined,
+                  title: (l10n) => l10n.appearanceTitle,
+                  subtitle: context.l10n.settingsAppearanceSubtitle,
+                  sections: (ctx) => [
+                    _buildAppearanceSection(ctx),
+                    _buildLocalizationSection(ctx),
+                  ],
+                ),
+                _categoryTile(
+                  context,
+                  icon: Icons.touch_app_outlined,
+                  title: (l10n) => l10n.interactionTitle,
+                  subtitle: context.l10n.settingsInteractionSubtitle,
+                  sections: (ctx) => [_buildInteractionSection(ctx)],
+                ),
+                _categoryTile(
+                  context,
+                  icon: Icons.dashboard_customize_outlined,
+                  title: (l10n) => l10n.settingsToolsTitle,
+                  subtitle: context.l10n.settingsToolsSubtitle,
+                  sections: (ctx) => [
+                    _buildDeviceControlsSection(ctx),
+                    _buildQuickSettingsSection(ctx),
+                    _buildGitHubStoreSection(ctx, Theme.of(ctx).colorScheme),
+                    _buildTvKillSection(ctx),
+                  ],
+                ),
+                _categoryTile(
+                  context,
+                  icon: Icons.backup_outlined,
+                  title: (l10n) => l10n.backupTitle,
+                  subtitle: context.l10n.backupSubtitle,
+                  sections: (ctx) => [_buildRemotesSection(ctx)],
+                ),
+                _categoryTile(
+                  context,
+                  icon: Icons.info_outline_rounded,
+                  title: (l10n) => l10n.aboutTitle,
+                  subtitle: context.l10n.aboutSubtitle,
+                  sections: (ctx) => [
+                    _buildAboutSection(ctx),
+                    if (BuildFlags.showDonations) _buildSupportSection(ctx),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _categoryTile(
+    BuildContext context, {
+    required IconData icon,
+    required String Function(AppLocalizations) title,
+    required String subtitle,
+    required List<Widget> Function(BuildContext) sections,
+  }) {
+    final cs = Theme.of(context).colorScheme;
+    return Card(
+      elevation: 0,
+      margin: const EdgeInsets.only(bottom: 10),
+      color: cs.surfaceContainerHighest.withValues(alpha: 0.5),
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: cs.outlineVariant.withValues(alpha: 0.3)),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        leading: Icon(icon, color: cs.primary),
+        title: Text(title(context.l10n)),
+        subtitle: Text(subtitle),
+        trailing: const Icon(Icons.chevron_right_rounded),
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (ctx) => Scaffold(
+              appBar: AppBar(title: Text(title(ctx.l10n))),
+              body: SafeArea(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 760),
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      children: [
+                        for (final section in sections(ctx)) ...[
+                          section,
+                          const SizedBox(height: 10),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

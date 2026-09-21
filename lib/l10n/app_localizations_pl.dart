@@ -5013,4 +5013,25 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Nie udało się wczytać lub zapisać ustawienia automatyzacji. Spróbuj ponownie.';
+
+  @override
+  String get settingsHardwareTitle => 'Sprzęt IR i uczenie';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Wybierz nadajnik, zarządzaj USB i ucz się sygnałów';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Motyw, kolory i język aplikacji';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Uruchamianie, wibracje, widok pilota i automatyzacja';
+
+  @override
+  String get settingsToolsTitle => 'Narzędzia i skróty';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Sterowanie urządzeniami, szybkie ustawienia, sklep GitHub i uniwersalne zasilanie';
 }

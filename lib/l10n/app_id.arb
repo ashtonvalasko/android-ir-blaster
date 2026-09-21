@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "Tips: ganti setiap digit yang tidak diketahui dengan X. Menetapkan digit yang diketahui di posisi mana pun dapat sangat mengurangi pencarian.",
   "automationBroadcastsTitle": "Izinkan siaran otomatisasi",
   "automationBroadcastsSubtitle": "Aplikasi apa pun yang terpasang dapat mengirim perintah IR melalui IR bawaan, USB, atau audio, bahkan saat aplikasi ini ditutup. USB memerlukan izin terlebih dahulu. Audio memerlukan adaptor IR dan volume media yang dinaikkan.",
-  "automationSettingsError": "Tidak dapat memuat atau menyimpan pengaturan otomatisasi. Silakan coba lagi."
+  "automationSettingsError": "Tidak dapat memuat atau menyimpan pengaturan otomatisasi. Silakan coba lagi.",
+  "settingsHardwareTitle": "Perangkat IR dan pembelajaran",
+  "settingsHardwareSubtitle": "Pilih pemancar, kelola USB, dan pelajari sinyal",
+  "settingsAppearanceSubtitle": "Tema, warna, dan bahasa aplikasi",
+  "settingsInteractionSubtitle": "Saat memulai, getaran, tampilan remote, dan otomatisasi",
+  "settingsToolsTitle": "Alat dan pintasan",
+  "settingsToolsSubtitle": "Kontrol perangkat, setelan cepat, GitHub Store, dan daya universal"
 }

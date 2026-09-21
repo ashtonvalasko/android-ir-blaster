@@ -4954,6 +4954,27 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Não foi possível carregar ou guardar a definição de automatização. Tente novamente.';
+
+  @override
+  String get settingsHardwareTitle => 'Hardware IR e aprendizagem';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Escolher um emissor, gerir USB e aprender sinais';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Tema, cores e idioma da aplicação';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Arranque, vibração, visualização do comando e automatização';
+
+  @override
+  String get settingsToolsTitle => 'Ferramentas e atalhos';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Controlos de dispositivos, definições rápidas, loja GitHub e ligar/desligar universal';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -9910,4 +9931,25 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get automationSettingsError =>
       'Não foi possível carregar ou salvar a configuração de automação. Tente novamente.';
+
+  @override
+  String get settingsHardwareTitle => 'Hardware IR e aprendizado';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Escolha um emissor, gerencie USB e aprenda sinais';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Tema, cores e idioma do aplicativo';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Inicialização, vibração, exibição do controle e automação';
+
+  @override
+  String get settingsToolsTitle => 'Ferramentas e atalhos';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Controles de dispositivos, configurações rápidas, loja GitHub e ligar/desligar universal';
 }

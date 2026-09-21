@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "Tip: vervang elk onbekend cijfer door X. Bekende cijfers op elke positie kunnen de zoekruimte sterk verkleinen.",
   "automationBroadcastsTitle": "Automatiseringsbroadcasts toestaan",
   "automationBroadcastsSubtitle": "Elke geïnstalleerde app kan IR-opdrachten verzenden via de ingebouwde zender, USB of audio, ook als deze app gesloten is. USB vereist vooraf toestemming. Audio vereist een IR-adapter en een hoger mediavolume.",
-  "automationSettingsError": "De automatiseringsinstelling kon niet worden geladen of opgeslagen. Probeer het opnieuw."
+  "automationSettingsError": "De automatiseringsinstelling kon niet worden geladen of opgeslagen. Probeer het opnieuw.",
+  "settingsHardwareTitle": "IR-hardware en leren",
+  "settingsHardwareSubtitle": "Kies een zender, beheer USB en leer signalen",
+  "settingsAppearanceSubtitle": "Thema, kleuren en app-taal",
+  "settingsInteractionSubtitle": "Opstarten, trillen, afstandsbedieningsweergave en automatisering",
+  "settingsToolsTitle": "Hulpmiddelen en snelkoppelingen",
+  "settingsToolsSubtitle": "Apparaatbediening, snelle instellingen, GitHub Store en universele aan/uit-knop"
 }

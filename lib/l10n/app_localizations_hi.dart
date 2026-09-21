@@ -4915,4 +4915,25 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'ऑटोमेशन सेटिंग लोड या सेव नहीं हो सकी। कृपया फिर से कोशिश करें।';
+
+  @override
+  String get settingsHardwareTitle => 'IR हार्डवेयर और सीखना';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'एमिटर चुनें, USB प्रबंधित करें और सिग्नल सीखें';
+
+  @override
+  String get settingsAppearanceSubtitle => 'थीम, रंग और ऐप की भाषा';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'स्टार्टअप, कंपन, रिमोट डिस्प्ले और ऑटोमेशन';
+
+  @override
+  String get settingsToolsTitle => 'टूल और शॉर्टकट';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'डिवाइस नियंत्रण, क्विक सेटिंग्स, GitHub स्टोर और सार्वभौमिक पावर';
 }

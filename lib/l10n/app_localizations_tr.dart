@@ -4917,4 +4917,25 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Otomasyon ayarı yüklenemedi veya kaydedilemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get settingsHardwareTitle => 'IR donanımı ve öğrenme';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Verici seçin, USB’yi yönetin ve sinyalleri öğrenin';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Tema, renkler ve uygulama dili';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Başlangıç, titreşim, kumanda görünümü ve otomasyon';
+
+  @override
+  String get settingsToolsTitle => 'Araçlar ve kısayollar';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Cihaz kontrolleri, hızlı ayarlar, GitHub Mağazası ve evrensel güç';
 }

@@ -4807,4 +4807,22 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get automationSettingsError => '자동화 설정을 불러오거나 저장하지 못했습니다. 다시 시도하세요.';
+
+  @override
+  String get settingsHardwareTitle => 'IR 하드웨어 및 학습';
+
+  @override
+  String get settingsHardwareSubtitle => '송신기 선택, USB 관리 및 신호 학습';
+
+  @override
+  String get settingsAppearanceSubtitle => '테마, 색상 및 앱 언어';
+
+  @override
+  String get settingsInteractionSubtitle => '시작 동작, 진동, 리모컨 표시 및 자동화';
+
+  @override
+  String get settingsToolsTitle => '도구 및 바로가기';
+
+  @override
+  String get settingsToolsSubtitle => '기기 제어, 빠른 설정, GitHub 스토어 및 범용 전원';
 }

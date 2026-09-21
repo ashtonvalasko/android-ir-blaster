@@ -4792,4 +4792,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get automationSettingsError => '自動化設定を読み込み、または保存できませんでした。もう一度お試しください。';
+
+  @override
+  String get settingsHardwareTitle => 'IR機器と学習';
+
+  @override
+  String get settingsHardwareSubtitle => '送信機の選択、USBの管理、信号の学習';
+
+  @override
+  String get settingsAppearanceSubtitle => 'テーマ、色、アプリの言語';
+
+  @override
+  String get settingsInteractionSubtitle => '起動、振動、リモコン表示、自動化';
+
+  @override
+  String get settingsToolsTitle => 'ツールとショートカット';
+
+  @override
+  String get settingsToolsSubtitle => 'デバイスコントロール、クイック設定、GitHubストア、一括電源操作';
 }

@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "Tip: palitan ng X ang bawat hindi kilalang digit. Malaking napapaliit ng mga kilalang digit sa anumang posisyon ang paghahanap.",
   "automationBroadcastsTitle": "Payagan ang mga broadcast ng automation",
   "automationBroadcastsSubtitle": "Maaaring magpadala ng mga IR command ang anumang naka-install na app gamit ang built-in IR, USB, o audio, kahit sarado ang app na ito. Kailangan ng USB ng paunang pahintulot. Kailangan ng audio ng IR adapter at nakataas na volume ng media.",
-  "automationSettingsError": "Hindi ma-load o ma-save ang setting ng automation. Pakisubukang muli."
+  "automationSettingsError": "Hindi ma-load o ma-save ang setting ng automation. Pakisubukang muli.",
+  "settingsHardwareTitle": "IR hardware at pag-aaral",
+  "settingsHardwareSubtitle": "Pumili ng transmitter, pamahalaan ang USB at matuto ng mga signal",
+  "settingsAppearanceSubtitle": "Tema, mga kulay at wika ng app",
+  "settingsInteractionSubtitle": "Pagsisimula, pag-vibrate, pagpapakita ng remote at automation",
+  "settingsToolsTitle": "Mga tool at shortcut",
+  "settingsToolsSubtitle": "Mga kontrol ng device, mabilisang setting, GitHub Store at unibersal na power"
 }

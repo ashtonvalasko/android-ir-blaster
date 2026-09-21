@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "نصيحة: استبدل كل خانة مجهولة بـ X. تثبيت الخانات المعروفة في أي موضع يقلل البحث بشكل كبير.",
   "automationBroadcastsTitle": "السماح ببث الأتمتة",
   "automationBroadcastsSubtitle": "يمكن لأي تطبيق مثبّت إرسال أوامر الأشعة تحت الحمراء عبر المرسل المدمج أو USB أو مخرج الصوت، حتى عندما يكون هذا التطبيق مغلقًا. يتطلب USB إذنًا مسبقًا. ويتطلب الصوت محوّل أشعة تحت الحمراء ورفع مستوى صوت الوسائط.",
-  "automationSettingsError": "تعذر تحميل إعداد الأتمتة أو حفظه. يرجى المحاولة مرة أخرى."
+  "automationSettingsError": "تعذر تحميل إعداد الأتمتة أو حفظه. يرجى المحاولة مرة أخرى.",
+  "settingsHardwareTitle": "أجهزة الأشعة تحت الحمراء والتعلّم",
+  "settingsHardwareSubtitle": "اختيار باعث وإدارة USB وتعلّم الإشارات",
+  "settingsAppearanceSubtitle": "المظهر والألوان ولغة التطبيق",
+  "settingsInteractionSubtitle": "بدء التشغيل والاهتزاز وعرض جهاز التحكم والأتمتة",
+  "settingsToolsTitle": "الأدوات والاختصارات",
+  "settingsToolsSubtitle": "التحكم بالأجهزة والإعدادات السريعة ومتجر GitHub والطاقة العامة"
 }

@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "सुझाव: हर अज्ञात अंक को X से बदलें। कोड में कहीं भी ज्ञात अंक तय करने से खोज बहुत घट सकती है।",
   "automationBroadcastsTitle": "ऑटोमेशन ब्रॉडकास्ट की अनुमति दें",
   "automationBroadcastsSubtitle": "कोई भी इंस्टॉल किया गया ऐप बिल्ट-इन IR, USB या ऑडियो से IR कमांड भेज सकता है, भले ही यह ऐप बंद हो। USB के लिए पहले से अनुमति चाहिए। ऑडियो के लिए IR अडैप्टर चाहिए और मीडिया की आवाज़ बढ़ानी होगी।",
-  "automationSettingsError": "ऑटोमेशन सेटिंग लोड या सेव नहीं हो सकी। कृपया फिर से कोशिश करें।"
+  "automationSettingsError": "ऑटोमेशन सेटिंग लोड या सेव नहीं हो सकी। कृपया फिर से कोशिश करें।",
+  "settingsHardwareTitle": "IR हार्डवेयर और सीखना",
+  "settingsHardwareSubtitle": "एमिटर चुनें, USB प्रबंधित करें और सिग्नल सीखें",
+  "settingsAppearanceSubtitle": "थीम, रंग और ऐप की भाषा",
+  "settingsInteractionSubtitle": "स्टार्टअप, कंपन, रिमोट डिस्प्ले और ऑटोमेशन",
+  "settingsToolsTitle": "टूल और शॉर्टकट",
+  "settingsToolsSubtitle": "डिवाइस नियंत्रण, क्विक सेटिंग्स, GitHub स्टोर और सार्वभौमिक पावर"
 }

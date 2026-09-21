@@ -4963,4 +4963,25 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Could not load or save the automation setting. Please try again.';
+
+  @override
+  String get settingsHardwareTitle => 'IR hardware & learning';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Choose an emitter, manage USB and learn signals';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Theme, colors and app language';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Startup, vibration, remote display and automation';
+
+  @override
+  String get settingsToolsTitle => 'Tools & shortcuts';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Device controls, Quick Settings, GitHub Store and universal power';
 }

@@ -4966,4 +4966,26 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Impossible de charger ou d’enregistrer le réglage d’automatisation. Réessayez.';
+
+  @override
+  String get settingsHardwareTitle => 'Matériel IR et apprentissage';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Choisir un émetteur, gérer l’USB et apprendre des signaux';
+
+  @override
+  String get settingsAppearanceSubtitle =>
+      'Thème, couleurs et langue de l’application';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Démarrage, vibrations, affichage des télécommandes et automatisation';
+
+  @override
+  String get settingsToolsTitle => 'Outils et raccourcis';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Commandes des appareils, réglages rapides, boutique GitHub et alimentation universelle';
 }

@@ -146,15 +146,15 @@ and [ConsumerIrManager](https://developer.android.com/reference/android/hardware
 - Custom Remote Commands: Create and manage remotes using protocol encoders or raw IR patterns.
 - Signal Tester (IR Finder / Infrared Bruteforcer): Systematically try protocol/code variations to discover working signals.
 - Transmitter Selection & Auto Switch:
-  - Choose Internal, USB, Audio (1 LED), or Audio (2 LEDs) under Settings > IR Transmitter.
+  - Choose Internal, USB, Audio (1 LED), or Audio (2 LEDs) under Settings > IR hardware & learning > IR Transmitter.
   - Optional Auto Switch uses USB when a supported dongle is attached, otherwise Internal (disabled if Audio is selected).
-- Import/Export & Maintenance (Settings > Remotes):
+- Import/Export & Maintenance (Settings > Backup):
   - Import JSON backups, Flipper Zero `.ir`, IRPLUS `.irplus` / XML (beta), and LIRC `.conf` / `.cfg` / `.lirc` (beta) files
   - Browse compatible files from GitHub repositories in GitHub Store and import them directly into the app
   - Export remotes to Downloads
   - Restore the built‑in demo remote
   - Delete all remotes
-- Learning Mode (Settings > Learning Mode):
+- Learning Mode (Settings > IR hardware & learning > Learning Mode):
   - Use a supported USB learning dongle to capture a button from a physical remote
   - Preview the learned signal, replay it, and save it into a new or existing remote
 - GitHub Store for browsing GitHub repositories and importing compatible IR files directly.
@@ -184,7 +184,7 @@ and [ConsumerIrManager](https://developer.android.com/reference/android/hardware
 
 ## Transmitters and Hardware Support
 
-Configure under Settings > IR Transmitter.
+Configure under Settings > IR hardware & learning > IR Transmitter.
 
 - Internal IR (built‑in)
   - Uses ConsumerIrManager when available, with optional carrier frequency range reporting.
@@ -238,7 +238,7 @@ The Signal Tester is designed to help discover unknown working IR commands.
 
 ## Remotes Management
 
-- Import remotes: JSON backups and Flipper Zero `.ir` files (Settings > Remotes > Import remotes).
+- Import remotes: JSON backups and Flipper Zero `.ir` files (Settings > Backup > Import backup).
 - GitHub Store: Browse GitHub repositories, preview supported files, and import them directly into your remote library.
 - Export remotes: Save a JSON backup to Downloads.
 - Restore Demo Remote: Reset to a built‑in demo configuration.
@@ -246,7 +246,7 @@ The Signal Tester is designed to help discover unknown working IR commands.
 
 ## Learning Mode
 
-- Open Settings > Learning Mode to capture a button from a physical remote with a supported USB learning dongle.
+- Open Settings > IR hardware & learning > Learning Mode to capture a button from a physical remote with a supported USB learning dongle.
 - Review the learned signal, replay it to confirm the target device reacts, then save it into a new or existing remote.
 - Learning Mode is designed for compatible USB learning receivers such as supported Tiqiaa, ZaZa, or ElkSmart-style dongles.
 
@@ -342,7 +342,7 @@ Or download the latest APK from the Releases Section.
 
 3. Launch and Configure:
    - Open IR Blaster.
-   - Choose your transmitter (Settings > IR Transmitter).
+   - Choose your transmitter (Settings > IR hardware & learning > IR Transmitter).
    - Create remotes or import a Flipper Zero `.ir` file.
 
 ## Usage
@@ -353,7 +353,7 @@ Or download the latest APK from the Releases Section.
 3. Save and test your buttons from the Remote view.
 
 ### Using the GitHub Store
-1. Open Settings > GitHub Store.
+1. Open Settings > Tools & shortcuts > GitHub Store.
 2. Enter a GitHub repository or folder URL, then load the repository when you want to browse it.
 3. Open a supported file to preview how it will be parsed.
 4. Import it into a new remote or add compatible buttons to an existing remote.
@@ -365,7 +365,7 @@ Or download the latest APK from the Releases Section.
 
 ### Using Learning Mode
 1. Connect a supported USB learning dongle and grant USB permission if Android asks.
-2. Open Settings > Learning Mode.
+2. Open Settings > IR hardware & learning > Learning Mode.
 3. Capture one button from the original remote, replay it if needed, then save it into your library.
 
 ### USB Notes

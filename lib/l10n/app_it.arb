@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "Suggerimento: sostituisci ogni cifra sconosciuta con X. Fissare cifre note in qualsiasi posizione riduce molto la ricerca.",
   "automationBroadcastsTitle": "Consenti broadcast di automazione",
   "automationBroadcastsSubtitle": "Qualsiasi app installata può inviare comandi IR tramite il trasmettitore integrato, USB o audio, anche quando questa app è chiusa. USB richiede un’autorizzazione preventiva. L’audio richiede un adattatore IR e il volume multimediale alzato.",
-  "automationSettingsError": "Impossibile caricare o salvare l’impostazione di automazione. Riprova."
+  "automationSettingsError": "Impossibile caricare o salvare l’impostazione di automazione. Riprova.",
+  "settingsHardwareTitle": "Hardware IR e apprendimento",
+  "settingsHardwareSubtitle": "Scegli un emettitore, gestisci USB e apprendi segnali",
+  "settingsAppearanceSubtitle": "Tema, colori e lingua dell’app",
+  "settingsInteractionSubtitle": "Avvio, vibrazione, visualizzazione del telecomando e automazione",
+  "settingsToolsTitle": "Strumenti e scorciatoie",
+  "settingsToolsSubtitle": "Controlli dei dispositivi, impostazioni rapide, GitHub Store e accensione universale"
 }

@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "팁: 모르는 자리를 모두 X로 바꾸세요. 코드 어디서든 알려진 자리를 고정하면 검색 범위를 크게 줄일 수 있습니다.",
   "automationBroadcastsTitle": "자동화 브로드캐스트 허용",
   "automationBroadcastsSubtitle": "설치된 모든 앱이 이 앱이 닫혀 있어도 내장 IR 송신기, USB 또는 오디오를 통해 IR 명령을 보낼 수 있습니다. USB는 사전 권한 허용이 필요합니다. 오디오는 IR 어댑터가 필요하며 미디어 볼륨을 높여야 합니다.",
-  "automationSettingsError": "자동화 설정을 불러오거나 저장하지 못했습니다. 다시 시도하세요."
+  "automationSettingsError": "자동화 설정을 불러오거나 저장하지 못했습니다. 다시 시도하세요.",
+  "settingsHardwareTitle": "IR 하드웨어 및 학습",
+  "settingsHardwareSubtitle": "송신기 선택, USB 관리 및 신호 학습",
+  "settingsAppearanceSubtitle": "테마, 색상 및 앱 언어",
+  "settingsInteractionSubtitle": "시작 동작, 진동, 리모컨 표시 및 자동화",
+  "settingsToolsTitle": "도구 및 바로가기",
+  "settingsToolsSubtitle": "기기 제어, 빠른 설정, GitHub 스토어 및 범용 전원"
 }

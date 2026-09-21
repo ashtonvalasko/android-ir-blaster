@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "提示：将每个未知位替换为 X。固定代码中任意位置的已知位都能显著缩小搜索范围。",
   "automationBroadcastsTitle": "允许自动化广播",
   "automationBroadcastsSubtitle": "任何已安装的应用都可以通过内置红外发射器、USB 或音频发送红外指令，即使本应用已关闭。USB 需要事先授权。音频需要红外适配器，并调高媒体音量。",
-  "automationSettingsError": "无法加载或保存自动化设置。请重试。"
+  "automationSettingsError": "无法加载或保存自动化设置。请重试。",
+  "settingsHardwareTitle": "红外硬件与学习",
+  "settingsHardwareSubtitle": "选择发射器、管理 USB 和学习信号",
+  "settingsAppearanceSubtitle": "主题、颜色和应用语言",
+  "settingsInteractionSubtitle": "启动、振动、遥控器显示和自动化",
+  "settingsToolsTitle": "工具与快捷方式",
+  "settingsToolsSubtitle": "设备控制、快捷设置、GitHub 商店和通用电源"
 }

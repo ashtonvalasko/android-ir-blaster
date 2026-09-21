@@ -4907,4 +4907,26 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Không thể tải hoặc lưu cài đặt tự động hóa. Vui lòng thử lại.';
+
+  @override
+  String get settingsHardwareTitle => 'Phần cứng IR và học tín hiệu';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Chọn bộ phát, quản lý USB và học tín hiệu';
+
+  @override
+  String get settingsAppearanceSubtitle =>
+      'Giao diện, màu sắc và ngôn ngữ ứng dụng';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Khởi động, rung, hiển thị điều khiển và tự động hóa';
+
+  @override
+  String get settingsToolsTitle => 'Công cụ và lối tắt';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Điều khiển thiết bị, cài đặt nhanh, kho GitHub và nguồn đa năng';
 }

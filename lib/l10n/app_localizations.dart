@@ -8923,6 +8923,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not load or save the automation setting. Please try again.'**
   String get automationSettingsError;
+
+  /// No description provided for @settingsHardwareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'IR hardware & learning'**
+  String get settingsHardwareTitle;
+
+  /// No description provided for @settingsHardwareSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an emitter, manage USB and learn signals'**
+  String get settingsHardwareSubtitle;
+
+  /// No description provided for @settingsAppearanceSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, colors and app language'**
+  String get settingsAppearanceSubtitle;
+
+  /// No description provided for @settingsInteractionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Startup, vibration, remote display and automation'**
+  String get settingsInteractionSubtitle;
+
+  /// No description provided for @settingsToolsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tools & shortcuts'**
+  String get settingsToolsTitle;
+
+  /// No description provided for @settingsToolsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Device controls, Quick Settings, GitHub Store and universal power'**
+  String get settingsToolsSubtitle;
 }
 
 class _AppLocalizationsDelegate

@@ -4952,4 +4952,25 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Impossibile caricare o salvare l’impostazione di automazione. Riprova.';
+
+  @override
+  String get settingsHardwareTitle => 'Hardware IR e apprendimento';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Scegli un emettitore, gestisci USB e apprendi segnali';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Tema, colori e lingua dell’app';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Avvio, vibrazione, visualizzazione del telecomando e automazione';
+
+  @override
+  String get settingsToolsTitle => 'Strumenti e scorciatoie';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Controlli dei dispositivi, impostazioni rapide, GitHub Store e accensione universale';
 }

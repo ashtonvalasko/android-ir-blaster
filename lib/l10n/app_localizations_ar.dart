@@ -4889,6 +4889,27 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'تعذر تحميل إعداد الأتمتة أو حفظه. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get settingsHardwareTitle => 'أجهزة الأشعة تحت الحمراء والتعلّم';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'اختيار باعث وإدارة USB وتعلّم الإشارات';
+
+  @override
+  String get settingsAppearanceSubtitle => 'المظهر والألوان ولغة التطبيق';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'بدء التشغيل والاهتزاز وعرض جهاز التحكم والأتمتة';
+
+  @override
+  String get settingsToolsTitle => 'الأدوات والاختصارات';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'التحكم بالأجهزة والإعدادات السريعة ومتجر GitHub والطاقة العامة';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -9776,4 +9797,25 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get automationSettingsError =>
       'ماقدرناش نحمّل أو نحفظ إعداد الأتمتة. جرّب تاني.';
+
+  @override
+  String get settingsHardwareTitle => 'أجهزة الأشعة تحت الحمراء والتعلّم';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'اختيار باعث وإدارة USB وتعلّم الإشارات';
+
+  @override
+  String get settingsAppearanceSubtitle => 'المظهر والألوان ولغة التطبيق';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'بدء التشغيل والاهتزاز وعرض جهاز التحكم والأتمتة';
+
+  @override
+  String get settingsToolsTitle => 'الأدوات والاختصارات';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'التحكم بالأجهزة والإعدادات السريعة ومتجر GitHub والطاقة العامة';
 }

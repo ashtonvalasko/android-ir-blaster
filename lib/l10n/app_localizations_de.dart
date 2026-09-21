@@ -4965,4 +4965,25 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Die Automatisierungseinstellung konnte nicht geladen oder gespeichert werden. Bitte erneut versuchen.';
+
+  @override
+  String get settingsHardwareTitle => 'IR-Hardware und Lernen';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Sender wählen, USB verwalten und Signale anlernen';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Design, Farben und App-Sprache';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Startverhalten, Vibration, Fernbedienungsansicht und Automatisierung';
+
+  @override
+  String get settingsToolsTitle => 'Werkzeuge und Verknüpfungen';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Gerätesteuerung, Schnelleinstellungen, GitHub Store und universelles Ein-/Ausschalten';
 }

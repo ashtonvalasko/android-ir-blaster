@@ -4957,4 +4957,25 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'De automatiseringsinstelling kon niet worden geladen of opgeslagen. Probeer het opnieuw.';
+
+  @override
+  String get settingsHardwareTitle => 'IR-hardware en leren';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Kies een zender, beheer USB en leer signalen';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Thema, kleuren en app-taal';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Opstarten, trillen, afstandsbedieningsweergave en automatisering';
+
+  @override
+  String get settingsToolsTitle => 'Hulpmiddelen en snelkoppelingen';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Apparaatbediening, snelle instellingen, GitHub Store en universele aan/uit-knop';
 }

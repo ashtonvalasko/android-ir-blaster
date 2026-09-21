@@ -4922,4 +4922,25 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Tidak dapat memuat atau menyimpan pengaturan otomatisasi. Silakan coba lagi.';
+
+  @override
+  String get settingsHardwareTitle => 'Perangkat IR dan pembelajaran';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Pilih pemancar, kelola USB, dan pelajari sinyal';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Tema, warna, dan bahasa aplikasi';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Saat memulai, getaran, tampilan remote, dan otomatisasi';
+
+  @override
+  String get settingsToolsTitle => 'Alat dan pintasan';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Kontrol perangkat, setelan cepat, GitHub Store, dan daya universal';
 }

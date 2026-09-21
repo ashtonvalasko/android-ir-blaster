@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "ヒント: 不明な桁は X に置き換えてください。コード内の既知の桁を固定すると、検索範囲を大幅に減らせます。",
   "automationBroadcastsTitle": "自動化ブロードキャストを許可",
   "automationBroadcastsSubtitle": "インストール済みのすべてのアプリが、このアプリを閉じている間も内蔵赤外線送信機、USB、オーディオ経由で赤外線コマンドを送信できます。USBには事前の許可が必要です。オーディオには赤外線アダプターが必要で、メディア音量を上げておく必要があります。",
-  "automationSettingsError": "自動化設定を読み込み、または保存できませんでした。もう一度お試しください。"
+  "automationSettingsError": "自動化設定を読み込み、または保存できませんでした。もう一度お試しください。",
+  "settingsHardwareTitle": "IR機器と学習",
+  "settingsHardwareSubtitle": "送信機の選択、USBの管理、信号の学習",
+  "settingsAppearanceSubtitle": "テーマ、色、アプリの言語",
+  "settingsInteractionSubtitle": "起動、振動、リモコン表示、自動化",
+  "settingsToolsTitle": "ツールとショートカット",
+  "settingsToolsSubtitle": "デバイスコントロール、クイック設定、GitHubストア、一括電源操作"
 }

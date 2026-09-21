@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "İpucu: bilinmeyen her basamağı X ile değiştirin. Kodun herhangi bir yerindeki bilinen basamaklar aramayı önemli ölçüde azaltır.",
   "automationBroadcastsTitle": "Otomasyon yayınlarına izin ver",
   "automationBroadcastsSubtitle": "Yüklü herhangi bir uygulama, bu uygulama kapalıyken bile dahili IR, USB veya ses çıkışı üzerinden IR komutları gönderebilir. USB için önceden izin verilmelidir. Ses çıkışı için IR adaptörü gerekir ve medya sesi açılmalıdır.",
-  "automationSettingsError": "Otomasyon ayarı yüklenemedi veya kaydedilemedi. Lütfen tekrar deneyin."
+  "automationSettingsError": "Otomasyon ayarı yüklenemedi veya kaydedilemedi. Lütfen tekrar deneyin.",
+  "settingsHardwareTitle": "IR donanımı ve öğrenme",
+  "settingsHardwareSubtitle": "Verici seçin, USB’yi yönetin ve sinyalleri öğrenin",
+  "settingsAppearanceSubtitle": "Tema, renkler ve uygulama dili",
+  "settingsInteractionSubtitle": "Başlangıç, titreşim, kumanda görünümü ve otomasyon",
+  "settingsToolsTitle": "Araçlar ve kısayollar",
+  "settingsToolsSubtitle": "Cihaz kontrolleri, hızlı ayarlar, GitHub Mağazası ve evrensel güç"
 }

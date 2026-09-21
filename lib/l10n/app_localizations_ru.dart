@@ -4924,4 +4924,25 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Не удалось загрузить или сохранить настройку автоматизации. Повторите попытку.';
+
+  @override
+  String get settingsHardwareTitle => 'ИК-оборудование и обучение';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Выбор излучателя, управление USB и обучение сигналам';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Тема, цвета и язык приложения';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Запуск, вибрация, отображение пульта и автоматизация';
+
+  @override
+  String get settingsToolsTitle => 'Инструменты и ярлыки';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Управление устройствами, быстрые настройки, магазин GitHub и универсальное питание';
 }

@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "Astuce : remplacez chaque chiffre inconnu par X. Fixer des chiffres connus à toute position réduit fortement la recherche.",
   "automationBroadcastsTitle": "Autoriser les diffusions d’automatisation",
   "automationBroadcastsSubtitle": "Toute application installée peut envoyer des commandes IR via l’émetteur intégré, USB ou audio, même lorsque cette application est fermée. L’USB nécessite une autorisation préalable. L’audio nécessite un adaptateur IR et un volume multimédia suffisant.",
-  "automationSettingsError": "Impossible de charger ou d’enregistrer le réglage d’automatisation. Réessayez."
+  "automationSettingsError": "Impossible de charger ou d’enregistrer le réglage d’automatisation. Réessayez.",
+  "settingsHardwareTitle": "Matériel IR et apprentissage",
+  "settingsHardwareSubtitle": "Choisir un émetteur, gérer l’USB et apprendre des signaux",
+  "settingsAppearanceSubtitle": "Thème, couleurs et langue de l’application",
+  "settingsInteractionSubtitle": "Démarrage, vibrations, affichage des télécommandes et automatisation",
+  "settingsToolsTitle": "Outils et raccourcis",
+  "settingsToolsSubtitle": "Commandes des appareils, réglages rapides, boutique GitHub et alimentation universelle"
 }

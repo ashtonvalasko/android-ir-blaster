@@ -4890,4 +4890,25 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'ไม่สามารถโหลดหรือบันทึกการตั้งค่าระบบอัตโนมัติได้ โปรดลองอีกครั้ง';
+
+  @override
+  String get settingsHardwareTitle => 'ฮาร์ดแวร์ IR และการเรียนรู้';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'เลือกตัวส่ง จัดการ USB และเรียนรู้สัญญาณ';
+
+  @override
+  String get settingsAppearanceSubtitle => 'ธีม สี และภาษาของแอป';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'การเริ่มต้น การสั่น การแสดงรีโมต และระบบอัตโนมัติ';
+
+  @override
+  String get settingsToolsTitle => 'เครื่องมือและทางลัด';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'การควบคุมอุปกรณ์ การตั้งค่าด่วน GitHub Store และปุ่มเปิดปิดแบบสากล';
 }

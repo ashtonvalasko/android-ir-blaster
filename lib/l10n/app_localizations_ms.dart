@@ -4921,4 +4921,25 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Tetapan automasi tidak dapat dimuatkan atau disimpan. Sila cuba lagi.';
+
+  @override
+  String get settingsHardwareTitle => 'Perkakasan IR dan pembelajaran';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Pilih pemancar, urus USB dan pelajari isyarat';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Tema, warna dan bahasa aplikasi';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Permulaan, getaran, paparan alat kawalan jauh dan automasi';
+
+  @override
+  String get settingsToolsTitle => 'Alat dan pintasan';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Kawalan peranti, tetapan pantas, GitHub Store dan kuasa universal';
 }

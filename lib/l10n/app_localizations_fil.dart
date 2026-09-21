@@ -4936,4 +4936,25 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Hindi ma-load o ma-save ang setting ng automation. Pakisubukang muli.';
+
+  @override
+  String get settingsHardwareTitle => 'IR hardware at pag-aaral';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Pumili ng transmitter, pamahalaan ang USB at matuto ng mga signal';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Tema, mga kulay at wika ng app';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Pagsisimula, pag-vibrate, pagpapakita ng remote at automation';
+
+  @override
+  String get settingsToolsTitle => 'Mga tool at shortcut';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Mga kontrol ng device, mabilisang setting, GitHub Store at unibersal na power';
 }

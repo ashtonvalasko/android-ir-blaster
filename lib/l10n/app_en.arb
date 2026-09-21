@@ -2477,5 +2477,11 @@
   "irFinderBruteforceMaskTip": "Tip: replace every unknown digit with X. Fixing known digits anywhere in the code can reduce the search dramatically.",
   "automationBroadcastsTitle": "Allow automation broadcasts",
   "automationBroadcastsSubtitle": "Any installed app can send IR commands through built-in IR, USB, or audio, even while this app is closed. USB requires prior permission. Audio requires an IR adapter and media volume turned up.",
-  "automationSettingsError": "Could not load or save the automation setting. Please try again."
+  "automationSettingsError": "Could not load or save the automation setting. Please try again.",
+  "settingsHardwareTitle": "IR hardware & learning",
+  "settingsHardwareSubtitle": "Choose an emitter, manage USB and learn signals",
+  "settingsAppearanceSubtitle": "Theme, colors and app language",
+  "settingsInteractionSubtitle": "Startup, vibration, remote display and automation",
+  "settingsToolsTitle": "Tools & shortcuts",
+  "settingsToolsSubtitle": "Device controls, Quick Settings, GitHub Store and universal power"
 }

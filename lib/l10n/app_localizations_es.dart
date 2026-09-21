@@ -4952,4 +4952,26 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'No se pudo cargar o guardar el ajuste de automatización. Inténtalo de nuevo.';
+
+  @override
+  String get settingsHardwareTitle => 'Hardware IR y aprendizaje';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Elige un emisor, gestiona el USB y aprende señales';
+
+  @override
+  String get settingsAppearanceSubtitle =>
+      'Tema, colores e idioma de la aplicación';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Inicio, vibración, vista del mando y automatización';
+
+  @override
+  String get settingsToolsTitle => 'Herramientas y accesos directos';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Controles de dispositivos, ajustes rápidos, tienda GitHub y encendido universal';
 }

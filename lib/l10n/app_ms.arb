@@ -2320,5 +2320,11 @@
   "irFinderBruteforceMaskTip": "Petua: gantikan setiap digit yang tidak diketahui dengan X. Menetapkan digit diketahui di mana-mana kedudukan boleh mengurangkan carian dengan banyak.",
   "automationBroadcastsTitle": "Benarkan siaran automasi",
   "automationBroadcastsSubtitle": "Mana-mana aplikasi yang dipasang boleh menghantar arahan IR melalui IR terbina dalam, USB atau audio, walaupun aplikasi ini ditutup. USB memerlukan kebenaran terlebih dahulu. Audio memerlukan penyesuai IR dan kelantangan media yang dinaikkan.",
-  "automationSettingsError": "Tetapan automasi tidak dapat dimuatkan atau disimpan. Sila cuba lagi."
+  "automationSettingsError": "Tetapan automasi tidak dapat dimuatkan atau disimpan. Sila cuba lagi.",
+  "settingsHardwareTitle": "Perkakasan IR dan pembelajaran",
+  "settingsHardwareSubtitle": "Pilih pemancar, urus USB dan pelajari isyarat",
+  "settingsAppearanceSubtitle": "Tema, warna dan bahasa aplikasi",
+  "settingsInteractionSubtitle": "Permulaan, getaran, paparan alat kawalan jauh dan automasi",
+  "settingsToolsTitle": "Alat dan pintasan",
+  "settingsToolsSubtitle": "Kawalan peranti, tetapan pantas, GitHub Store dan kuasa universal"
 }

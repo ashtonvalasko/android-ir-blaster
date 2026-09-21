@@ -4735,4 +4735,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get automationSettingsError => '无法加载或保存自动化设置。请重试。';
+
+  @override
+  String get settingsHardwareTitle => '红外硬件与学习';
+
+  @override
+  String get settingsHardwareSubtitle => '选择发射器、管理 USB 和学习信号';
+
+  @override
+  String get settingsAppearanceSubtitle => '主题、颜色和应用语言';
+
+  @override
+  String get settingsInteractionSubtitle => '启动、振动、遥控器显示和自动化';
+
+  @override
+  String get settingsToolsTitle => '工具与快捷方式';
+
+  @override
+  String get settingsToolsSubtitle => '设备控制、快捷设置、GitHub 商店和通用电源';
 }

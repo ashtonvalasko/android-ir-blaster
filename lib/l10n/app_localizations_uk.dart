@@ -5032,4 +5032,25 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get automationSettingsError =>
       'Не вдалося завантажити або зберегти налаштування автоматизації. Спробуйте ще раз.';
+
+  @override
+  String get settingsHardwareTitle => 'ІЧ-обладнання та навчання';
+
+  @override
+  String get settingsHardwareSubtitle =>
+      'Вибір випромінювача, керування USB і навчання сигналів';
+
+  @override
+  String get settingsAppearanceSubtitle => 'Тема, кольори та мова застосунку';
+
+  @override
+  String get settingsInteractionSubtitle =>
+      'Запуск, вібрація, відображення пульта й автоматизація';
+
+  @override
+  String get settingsToolsTitle => 'Інструменти та ярлики';
+
+  @override
+  String get settingsToolsSubtitle =>
+      'Керування пристроями, швидкі налаштування, магазин GitHub і універсальне живлення';
 }

@@ -2306,5 +2306,11 @@
   "irFinderBruteforceMaskTip": "Tipp: Unbekannte Stellen durch X ersetzen. Bekannte Stellen an jeder Position verkleinern den Suchraum deutlich.",
   "automationBroadcastsTitle": "Automatisierungs-Broadcasts erlauben",
   "automationBroadcastsSubtitle": "Jede installierte App kann IR-Befehle über den integrierten Sender, USB oder Audio senden, auch wenn diese App geschlossen ist. USB benötigt vorher eine Berechtigung. Audio benötigt einen IR-Adapter und aufgedrehte Medienlautstärke.",
-  "automationSettingsError": "Die Automatisierungseinstellung konnte nicht geladen oder gespeichert werden. Bitte erneut versuchen."
+  "automationSettingsError": "Die Automatisierungseinstellung konnte nicht geladen oder gespeichert werden. Bitte erneut versuchen.",
+  "settingsHardwareTitle": "IR-Hardware und Lernen",
+  "settingsHardwareSubtitle": "Sender wählen, USB verwalten und Signale anlernen",
+  "settingsAppearanceSubtitle": "Design, Farben und App-Sprache",
+  "settingsInteractionSubtitle": "Startverhalten, Vibration, Fernbedienungsansicht und Automatisierung",
+  "settingsToolsTitle": "Werkzeuge und Verknüpfungen",
+  "settingsToolsSubtitle": "Gerätesteuerung, Schnelleinstellungen, GitHub Store und universelles Ein-/Ausschalten"
 }
