@@ -8,6 +8,7 @@ import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
 import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 
 class AudioIrTransmitter(
@@ -20,11 +21,31 @@ class AudioIrTransmitter(
     private val EXPLICIT_USB_ROUTE_ADAPTERS = setOf(
       31 to 2849,
     )
+    private val playbacks = mutableMapOf<Any, Boolean>()
+
+    private fun reservePlayback(exclusive: Boolean): Any? = synchronized(playbacks) {
+      if (playbacks.values.any { it } || (exclusive && playbacks.isNotEmpty())) return null
+      Any().also { playbacks[it] = exclusive }
+    }
+
+    private fun releasePlayback(token: Any) { synchronized(playbacks) { playbacks.remove(token) } }
   }
 
   @Volatile private var activeTrack: AudioTrack? = null
+  @Volatile private var activeToken: Any? = null
 
   fun transmitRaw(freqHz: Int, patternUs: IntArray): Boolean {
+    return transmit(freqHz, patternUs, null, Long.MAX_VALUE) == true
+  }
+
+  // Automation must keep its broadcast alive until the static audio buffer finishes.
+  fun transmitRawAndWait(freqHz: Int, patternUs: IntArray, output: AudioDeviceInfo, deadlineMs: Long): Boolean? {
+    return transmit(freqHz, patternUs, output, deadlineMs)
+  }
+
+  private fun transmit(freqHz: Int, patternUs: IntArray, output: AudioDeviceInfo?, deadlineMs: Long): Boolean? {
+    val token = reservePlayback(exclusive = output != null) ?: return null
+    var scheduled = false
     return try {
       val safeFreq = freqHz.coerceIn(15_000, 60_000)
       val explicitRouteAdapterAttached = shouldPreferUsbOutputRoute()
@@ -75,8 +96,16 @@ class AudioIrTransmitter(
         AudioManager.AUDIO_SESSION_ID_GENERATE
       )
 
-      activeTrack = track
-      if (explicitRouteAdapterAttached) {
+      synchronized(this) {
+        activeTrack = track
+        activeToken = token
+      }
+      if (output != null) {
+        if (!track.setPreferredDevice(output)) {
+          stop()
+          return false
+        }
+      } else if (explicitRouteAdapterAttached) {
         applyPreferredUsbRoute(track)
       }
 
@@ -88,26 +117,49 @@ class AudioIrTransmitter(
       }
 
       val written = track.write(pcm, 0, pcm.size)
-      if (written <= 0) {
+      if (written <= 0 || (output != null && written != pcm.size)) {
         stop()
         return false
       }
 
+      if (SystemClock.uptimeMillis() >= deadlineMs) {
+        stop()
+        return false
+      }
       track.play()
       logRoutedDevice(track)
 
       val frames = pcm.size / channelCount
-      scheduleRelease(track, frames)
+      if (output != null) {
+        try {
+          val deadline = minOf(deadlineMs, SystemClock.uptimeMillis() + frames * 1000L / 48_000L + 1000L)
+          while (SystemClock.uptimeMillis() < deadline) {
+            val routed = track.routedDevice
+            if (routed != null && routed.id != output.id) return false
+            if ((track.playbackHeadPosition.toLong() and 0xffffffffL) >= frames.toLong()) {
+              return routed?.id == output.id
+            }
+            Thread.sleep(10L)
+          }
+          return false
+        } finally {
+          stop()
+        }
+      }
+      scheduleRelease(track, frames, token)
+      scheduled = true
 
       true
     } catch (t: Throwable) {
       Log.w(TAG, "transmitRaw failed: ${t.message}")
       stop()
       false
+    } finally {
+      if (!scheduled) releasePlayback(token)
     }
   }
 
-  fun stop() {
+  @Synchronized fun stop() {
     val t = activeTrack
     if (t != null) {
       try { t.pause() } catch (_: Throwable) {}
@@ -116,15 +168,18 @@ class AudioIrTransmitter(
       try { t.release() } catch (_: Throwable) {}
     }
     activeTrack = null
+    activeToken?.let { releasePlayback(it) }
+    activeToken = null
   }
 
-  private fun scheduleRelease(track: AudioTrack, frames: Int) {
+  private fun scheduleRelease(track: AudioTrack, frames: Int, token: Any) {
     val durationMs = ((frames.toDouble() / 48_000.0) * 1000.0).toLong().coerceAtLeast(50L)
     Thread {
       try { Thread.sleep(durationMs + 200L) } catch (_: Throwable) {}
-      try { track.stop() } catch (_: Throwable) {}
-      try { track.release() } catch (_: Throwable) {}
-      if (activeTrack === track) activeTrack = null
+      synchronized(this) {
+        if (activeTrack === track) stop()
+        else releasePlayback(token)
+      }
     }.start()
   }
 

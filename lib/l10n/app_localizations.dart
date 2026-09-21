@@ -8915,7 +8915,7 @@ abstract class AppLocalizations {
   /// No description provided for @automationBroadcastsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Any installed app can send commands through built-in IR, even while this app is closed. USB and audio dongles are not supported.'**
+  /// **'Any installed app can send IR commands through built-in IR, USB, or audio, even while this app is closed. USB requires prior permission. Audio requires an IR adapter and media volume turned up.'**
   String get automationBroadcastsSubtitle;
 
   /// No description provided for @automationSettingsError.

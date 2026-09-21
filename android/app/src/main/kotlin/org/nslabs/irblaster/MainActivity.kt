@@ -1036,6 +1036,8 @@ class MainActivity : FlutterActivity() {
     }
 
     private fun openUsbDevice(device: UsbDevice): UsbIrTransmitter? {
+        // Repeated attach/permission events must not try to claim our own active session.
+        usbTransmitter?.let { if (it.device == device) return it }
         val disc = usbDiscovery ?: return null
         val tx = disc.openTransmitter(device)
         if (tx != null) {

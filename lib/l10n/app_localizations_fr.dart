@@ -4961,7 +4961,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Toute application installée peut envoyer des commandes via l’infrarouge intégré, même lorsque cette application est fermée. Les adaptateurs USB et audio ne sont pas pris en charge.';
+      'Toute application installée peut envoyer des commandes IR via l’émetteur intégré, USB ou audio, même lorsque cette application est fermée. L’USB nécessite une autorisation préalable. L’audio nécessite un adaptateur IR et un volume multimédia suffisant.';
 
   @override
   String get automationSettingsError =>

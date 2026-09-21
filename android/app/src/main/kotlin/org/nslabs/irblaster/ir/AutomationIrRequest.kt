@@ -1,8 +1,19 @@
 package org.nslabs.ir_blaster
 
-internal data class AutomationIrRequest(val frequency: Int, val pattern: IntArray) {
+internal enum class AutomationEmitter { INTERNAL, USB, AUDIO_1_LED, AUDIO_2_LED }
+
+internal data class AutomationIrRequest(
+    val frequency: Int,
+    val pattern: IntArray,
+    val emitter: AutomationEmitter = AutomationEmitter.INTERNAL,
+) {
     companion object {
-        fun parse(frequencyExtra: Any?, patternExtra: Any?): AutomationIrRequest {
+        fun parse(frequencyExtra: Any?, patternExtra: Any?, emitterExtra: Any? = null): AutomationIrRequest {
+            val emitter = when (emitterExtra) {
+                null -> AutomationEmitter.INTERNAL
+                is String -> AutomationEmitter.valueOf(emitterExtra)
+                else -> throw IllegalArgumentException("emitter must be a supported emitter name")
+            }
             val frequency = when (frequencyExtra) {
                 is Int -> frequencyExtra
                 is String -> frequencyExtra.trim().toIntOrNull()
@@ -10,6 +21,9 @@ internal data class AutomationIrRequest(val frequency: Int, val pattern: IntArra
             }
             require(frequency != null && frequency in 10000..100000) {
                 "frequency must be an integer in Hz between 10000 and 100000"
+            }
+            if (emitter == AutomationEmitter.AUDIO_1_LED || emitter == AutomationEmitter.AUDIO_2_LED) {
+                require(frequency in 15000..60000) { "audio frequency must be between 15000 and 60000 Hz" }
             }
             val pattern = when (patternExtra) {
                 is IntArray -> {
@@ -32,7 +46,7 @@ internal data class AutomationIrRequest(val frequency: Int, val pattern: IntArra
             require(pattern.all { it > 0 }) { "pattern durations must be positive" }
             // ConsumerIrManager only accepts transmissions shorter than two seconds.
             require(pattern.sumOf { it.toLong() } < 2000000L) { "pattern must be shorter than two seconds" }
-            return AutomationIrRequest(frequency, pattern)
+            return AutomationIrRequest(frequency, pattern, emitter)
         }
     }
 }

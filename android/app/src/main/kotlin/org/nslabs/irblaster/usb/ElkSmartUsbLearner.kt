@@ -16,7 +16,8 @@ class ElkSmartUsbLearner private constructor(
     private val connection: UsbDeviceConnection,
     private val claimedInterface: UsbInterface,
     private val outEndpoint: UsbEndpoint,
-    private val inEndpoint: UsbEndpoint
+    private val inEndpoint: UsbEndpoint,
+    private val deviceLease: UsbDeviceAccess.Lease
 ) : UsbLearnerSession {
     data class LearnedSignal(
         val rawPatternUs: IntArray,
@@ -48,6 +49,17 @@ class ElkSmartUsbLearner private constructor(
 
         fun open(usb: UsbManager, device: UsbDevice): ElkSmartUsbLearner? {
             if (!UsbDeviceFilter.isElkSmart(device)) return null
+            val lease = UsbDeviceAccess.reserve(device.deviceName) ?: return null
+            var opened: ElkSmartUsbLearner? = null
+            try {
+                opened = openReserved(usb, device, lease)
+                return opened
+            } finally {
+                if (opened == null) lease.close()
+            }
+        }
+
+        private fun openReserved(usb: UsbManager, device: UsbDevice, lease: UsbDeviceAccess.Lease): ElkSmartUsbLearner? {
             for (i in 0 until device.interfaceCount) {
                 val intf = device.getInterface(i)
                 val pair = findEndpointPair(intf) ?: continue
@@ -59,7 +71,7 @@ class ElkSmartUsbLearner private constructor(
                     }
                     continue
                 }
-                return ElkSmartUsbLearner(device, conn, intf, pair.outEp, pair.inEp)
+                return ElkSmartUsbLearner(device, conn, intf, pair.outEp, pair.inEp, lease)
             }
             return null
         }
@@ -139,6 +151,7 @@ class ElkSmartUsbLearner private constructor(
             connection.close()
         } catch (_: Throwable) {
         }
+        deviceLease.close()
     }
 
     private fun authorize(): Boolean {

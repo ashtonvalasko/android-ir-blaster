@@ -4917,7 +4917,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Aplikasi apa pun yang terpasang dapat mengirim perintah melalui IR bawaan, bahkan saat aplikasi ini ditutup. Dongle USB dan audio tidak didukung.';
+      'Aplikasi apa pun yang terpasang dapat mengirim perintah IR melalui IR bawaan, USB, atau audio, bahkan saat aplikasi ini ditutup. USB memerlukan izin terlebih dahulu. Audio memerlukan adaptor IR dan volume media yang dinaikkan.';
 
   @override
   String get automationSettingsError =>

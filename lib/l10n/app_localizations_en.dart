@@ -4958,7 +4958,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Any installed app can send commands through built-in IR, even while this app is closed. USB and audio dongles are not supported.';
+      'Any installed app can send IR commands through built-in IR, USB, or audio, even while this app is closed. USB requires prior permission. Audio requires an IR adapter and media volume turned up.';
 
   @override
   String get automationSettingsError =>

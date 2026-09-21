@@ -1,10 +1,9 @@
 package org.nslabs.ir_blaster
 
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.hardware.ConsumerIrManager
+import android.os.SystemClock
 import android.util.Log
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -18,7 +17,7 @@ class IrAutomationReceiver : BroadcastReceiver() {
         }
         val request = try {
             @Suppress("DEPRECATION")
-            AutomationIrRequest.parse(intent.extras?.get("frequency"), intent.extras?.get("pattern"))
+            AutomationIrRequest.parse(intent.extras?.get("frequency"), intent.extras?.get("pattern"), intent.extras?.get("emitter"))
         } catch (e: RuntimeException) {
             reply(BAD_REQUEST, "BAD_REQUEST")
             return
@@ -29,6 +28,7 @@ class IrAutomationReceiver : BroadcastReceiver() {
             return
         }
         val ordered = isOrderedBroadcast
+        val deadlineMs = SystemClock.uptimeMillis() + 7000L
         val pending = goAsync()
         fun complete(code: Int, message: String) {
             Log.i(TAG, message)
@@ -40,14 +40,8 @@ class IrAutomationReceiver : BroadcastReceiver() {
                     if (!prefs.getBoolean(PREF_ENABLED, false)) {
                         complete(DISABLED, "DISABLED")
                     } else {
-                        val manager = context.getSystemService(ConsumerIrManager::class.java)
-                        if (manager == null || !manager.hasIrEmitter()) {
-                            complete(NO_IR, "NO_IR")
-                        } else if (InternalIrTransmitter(manager).transmitRaw(request.frequency, request.pattern)) {
-                            complete(Activity.RESULT_OK, "SENT")
-                        } else {
-                            complete(FAILED, "TRANSMIT_FAILED")
-                        }
+                        val outcome = AutomationTransmitter(context).transmit(request, deadlineMs)
+                        complete(outcome.code, outcome.name)
                     }
                 } catch (e: RuntimeException) {
                     complete(FAILED, "TRANSMIT_FAILED")

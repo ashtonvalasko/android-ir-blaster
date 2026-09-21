@@ -4931,7 +4931,7 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Maaaring magpadala ng mga utos ang anumang naka-install na app gamit ang built-in na IR kahit sarado ang app na ito. Hindi suportado ang mga USB at audio dongle.';
+      'Maaaring magpadala ng mga IR command ang anumang naka-install na app gamit ang built-in IR, USB, o audio, kahit sarado ang app na ito. Kailangan ng USB ng paunang pahintulot. Kailangan ng audio ng IR adapter at nakataas na volume ng media.';
 
   @override
   String get automationSettingsError =>

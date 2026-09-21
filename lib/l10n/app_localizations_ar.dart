@@ -4884,7 +4884,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'يمكن لأي تطبيق مثبت إرسال أوامر عبر مرسل الأشعة تحت الحمراء المدمج، حتى عندما يكون هذا التطبيق مغلقًا. محولات USB والصوت غير مدعومة.';
+      'يمكن لأي تطبيق مثبّت إرسال أوامر الأشعة تحت الحمراء عبر المرسل المدمج أو USB أو مخرج الصوت، حتى عندما يكون هذا التطبيق مغلقًا. يتطلب USB إذنًا مسبقًا. ويتطلب الصوت محوّل أشعة تحت الحمراء ورفع مستوى صوت الوسائط.';
 
   @override
   String get automationSettingsError =>
@@ -9771,7 +9771,7 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'أي تطبيق متثبت يقدر يبعت أوامر عن طريق مرسل الأشعة تحت الحمراء المدمج، حتى لو التطبيق ده مقفول. محولات USB والصوت مش مدعومة.';
+      'أي تطبيق متثبّت يقدر يبعت أوامر الأشعة تحت الحمراء من المرسل المدمج أو USB أو مخرج الصوت، حتى والتطبيق ده مقفول. USB محتاج إذن مسبق. والصوت محتاج محوّل أشعة تحت الحمراء وتعلية صوت الوسائط.';
 
   @override
   String get automationSettingsError =>

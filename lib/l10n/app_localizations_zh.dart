@@ -4731,7 +4731,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      '任何已安装的应用都可以通过内置红外发射器发送指令，即使本应用已关闭。不支持 USB 和音频适配器。';
+      '任何已安装的应用都可以通过内置红外发射器、USB 或音频发送红外指令，即使本应用已关闭。USB 需要事先授权。音频需要红外适配器，并调高媒体音量。';
 
   @override
   String get automationSettingsError => '无法加载或保存自动化设置。请重试。';

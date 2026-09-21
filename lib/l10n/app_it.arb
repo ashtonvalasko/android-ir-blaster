@@ -2319,6 +2319,6 @@
   "irFinderSmartMeaningfulBits": "La modalità intelligente varia {bits} bit significativi per questa maschera.",
   "irFinderBruteforceMaskTip": "Suggerimento: sostituisci ogni cifra sconosciuta con X. Fissare cifre note in qualsiasi posizione riduce molto la ricerca.",
   "automationBroadcastsTitle": "Consenti broadcast di automazione",
-  "automationBroadcastsSubtitle": "Qualsiasi app installata può inviare comandi tramite l’IR integrato, anche quando questa app è chiusa. Gli adattatori USB e audio non sono supportati.",
+  "automationBroadcastsSubtitle": "Qualsiasi app installata può inviare comandi IR tramite il trasmettitore integrato, USB o audio, anche quando questa app è chiusa. USB richiede un’autorizzazione preventiva. L’audio richiede un adattatore IR e il volume multimediale alzato.",
   "automationSettingsError": "Impossibile caricare o salvare l’impostazione di automazione. Riprova."
 }

@@ -2319,6 +2319,6 @@
   "irFinderSmartMeaningfulBits": "De slimme modus varieert {bits} betekenisvolle bit(s) voor dit masker.",
   "irFinderBruteforceMaskTip": "Tip: vervang elk onbekend cijfer door X. Bekende cijfers op elke positie kunnen de zoekruimte sterk verkleinen.",
   "automationBroadcastsTitle": "Automatiseringsbroadcasts toestaan",
-  "automationBroadcastsSubtitle": "Elke geïnstalleerde app kan opdrachten verzenden via de ingebouwde IR-zender, ook als deze app gesloten is. USB- en audiodongles worden niet ondersteund.",
+  "automationBroadcastsSubtitle": "Elke geïnstalleerde app kan IR-opdrachten verzenden via de ingebouwde zender, USB of audio, ook als deze app gesloten is. USB vereist vooraf toestemming. Audio vereist een IR-adapter en een hoger mediavolume.",
   "automationSettingsError": "De automatiseringsinstelling kon niet worden geladen of opgeslagen. Probeer het opnieuw."
 }

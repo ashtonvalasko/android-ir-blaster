@@ -4803,7 +4803,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      '설치된 모든 앱이 이 앱이 닫혀 있어도 내장 IR 송신기로 명령을 보낼 수 있습니다. USB 및 오디오 동글은 지원하지 않습니다.';
+      '설치된 모든 앱이 이 앱이 닫혀 있어도 내장 IR 송신기, USB 또는 오디오를 통해 IR 명령을 보낼 수 있습니다. USB는 사전 권한 허용이 필요합니다. 오디오는 IR 어댑터가 필요하며 미디어 볼륨을 높여야 합니다.';
 
   @override
   String get automationSettingsError => '자동화 설정을 불러오거나 저장하지 못했습니다. 다시 시도하세요.';

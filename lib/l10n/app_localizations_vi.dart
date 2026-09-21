@@ -4902,7 +4902,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Mọi ứng dụng đã cài đặt đều có thể gửi lệnh qua bộ phát hồng ngoại tích hợp, ngay cả khi ứng dụng này đã đóng. Không hỗ trợ bộ chuyển đổi USB và âm thanh.';
+      'Mọi ứng dụng đã cài đặt đều có thể gửi lệnh hồng ngoại qua bộ phát tích hợp, USB hoặc âm thanh, ngay cả khi ứng dụng này đã đóng. USB cần được cấp quyền trước. Âm thanh cần bộ chuyển đổi hồng ngoại và tăng âm lượng đa phương tiện.';
 
   @override
   String get automationSettingsError =>

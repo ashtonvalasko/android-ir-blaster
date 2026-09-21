@@ -13,6 +13,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.util.concurrent.atomic.AtomicLong
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.locks.ReentrantLock
 
 class UsbIrTransmitter private constructor(
     val device: UsbDevice,
@@ -30,7 +32,32 @@ class UsbIrTransmitter private constructor(
     private val readUntilMs = AtomicLong(0)
     private var readerJob: Job? = null
 
-    private val txLock = Any()
+    private val txLock = ReentrantLock()
+    private val lifetimeLock = Any()
+    private var borrowers = 0
+    private var closeRequested = false
+    internal var onClosed: (() -> Unit)? = null
+
+    internal class AutomationLease(private val tx: UsbIrTransmitter) : AutoCloseable {
+        private val released = AtomicBoolean(false)
+        fun transmit(frequency: Int, pattern: IntArray, deadlineMs: Long): Boolean? {
+            if (released.get()) return false
+            return tx.transmit(frequency, pattern, deadlineMs, automation = true)
+        }
+        override fun close() {
+            if (!released.compareAndSet(false, true)) return
+            synchronized(tx.lifetimeLock) {
+                tx.borrowers--
+                if (tx.borrowers == 0 && tx.closeRequested) tx.closeConnection()
+            }
+        }
+    }
+
+    internal fun borrowForAutomation(): AutomationLease? = synchronized(lifetimeLock) {
+        if (closeRequested || closed) return null
+        borrowers++
+        AutomationLease(this)
+    }
 
     companion object {
         fun create(
@@ -39,7 +66,8 @@ class UsbIrTransmitter private constructor(
             claimedInterface: UsbInterface,
             outEndpoint: UsbEndpoint,
             inEndpoint: UsbEndpoint,
-            protocol: UsbWireProtocol
+            protocol: UsbWireProtocol,
+            deadlineMs: Long = Long.MAX_VALUE
         ): UsbIrTransmitter? {
             val tx = UsbIrTransmitter(
                 device = device,
@@ -51,13 +79,13 @@ class UsbIrTransmitter private constructor(
             )
 
             val handshakeOk = try {
-                protocol.openHandshake(connection, inEndpoint, outEndpoint)
+                protocol.openHandshake(connection, inEndpoint, outEndpoint, deadlineMs)
             } catch (t: Throwable) {
                 Log.w("UsbIrTransmitter", "openHandshake error: ${t.message}")
                 false
             }
 
-            if (!handshakeOk && protocol.strictHandshake) {
+            if ((!handshakeOk && protocol.strictHandshake) || SystemClock.uptimeMillis() >= deadlineMs) {
                 tx.close()
                 return null
             }
@@ -67,7 +95,14 @@ class UsbIrTransmitter private constructor(
     }
 
     override fun transmitRaw(frequencyHz: Int, patternUs: IntArray): Boolean {
-        synchronized(txLock) {
+        return transmit(frequencyHz, patternUs, Long.MAX_VALUE, automation = false) == true
+    }
+
+    private fun transmit(frequencyHz: Int, patternUs: IntArray, deadlineMs: Long, automation: Boolean): Boolean? {
+        // Never block the activity's main thread behind an automation transmission.
+        if (!txLock.tryLock()) return null
+        try {
+            if (!automation && synchronized(lifetimeLock) { closeRequested }) return false
             if (closed) return false
             if (patternUs.isEmpty()) return false
 
@@ -78,14 +113,20 @@ class UsbIrTransmitter private constructor(
                 return false
             }
 
+            val post = protocol.postTransmitDelayMs(patternUs)
+            if (automation) {
+                // Reject before sending any bytes if worst-case USB timeouts cannot fit.
+                val budgetMs = frames.size * (400L + protocol.interFrameDelayMs) + post + 150L
+                if (budgetMs > deadlineMs - SystemClock.uptimeMillis()) return false
+            }
+
             for (frame in frames) {
-                val ok = sendFrame(frame) ?: return false
+                val ok = sendFrame(frame, requireFullWrite = automation) ?: return false
                 if (!ok) return false
                 val d = protocol.interFrameDelayMs
                 if (d > 0) SystemClock.sleep(d)
             }
 
-            val post = protocol.postTransmitDelayMs(patternUs)
             if (post > 0) SystemClock.sleep(post)
 
             try {
@@ -94,10 +135,20 @@ class UsbIrTransmitter private constructor(
             }
 
             return true
+        } finally {
+            txLock.unlock()
         }
     }
 
     fun close() {
+        synchronized(lifetimeLock) {
+            closeRequested = true
+            // A borrowed automation handle keeps the connection alive through its send.
+            if (borrowers == 0) closeConnection()
+        }
+    }
+
+    private fun closeConnection() {
         if (closed) return
         closed = true
         try {
@@ -113,9 +164,10 @@ class UsbIrTransmitter private constructor(
             connection.close()
         } catch (_: Throwable) {
         }
+        onClosed?.invoke()
     }
 
-    private fun sendFrame(frame: ByteArray): Boolean? {
+    private fun sendFrame(frame: ByteArray, requireFullWrite: Boolean = false): Boolean? {
         if (closed) return null
         val rc = try {
             connection.bulkTransfer(outEndpoint, frame, frame.size, 400)
@@ -123,7 +175,7 @@ class UsbIrTransmitter private constructor(
             Log.e(TAG, "bulkTransfer(out) exception: ${t.message}", t)
             return false
         }
-        if (rc <= 0) {
+        if (rc <= 0 || (requireFullWrite && rc != frame.size)) {
             Log.w(TAG, "bulkTransfer(out) failed rc=$rc len=${frame.size}")
             return false
         }

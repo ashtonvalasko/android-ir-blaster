@@ -5008,7 +5008,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Każda zainstalowana aplikacja może wysyłać polecenia przez wbudowany nadajnik IR, nawet gdy ta aplikacja jest zamknięta. Adaptery USB i audio nie są obsługiwane.';
+      'Każda zainstalowana aplikacja może wysyłać polecenia IR przez wbudowany nadajnik, USB lub wyjście audio, nawet gdy ta aplikacja jest zamknięta. USB wymaga wcześniejszego zezwolenia. Audio wymaga adaptera IR i zwiększonej głośności multimediów.';
 
   @override
   String get automationSettingsError =>

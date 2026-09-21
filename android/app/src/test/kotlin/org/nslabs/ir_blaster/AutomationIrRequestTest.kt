@@ -4,6 +4,18 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class AutomationIrRequestTest {
+    @Test fun emitterIsExplicitAndDefaultsToInternal() {
+        assertEquals(AutomationEmitter.INTERNAL, AutomationIrRequest.parse(38000, "560").emitter)
+        AutomationEmitter.entries.forEach {
+            assertEquals(it, AutomationIrRequest.parse(38000, "560", it.name).emitter)
+        }
+        listOf("", "usb", "AUTO", 1, true).forEach {
+            assertThrows(IllegalArgumentException::class.java) { AutomationIrRequest.parse(38000, "560", it) }
+        }
+        assertThrows(IllegalArgumentException::class.java) {
+            AutomationIrRequest.parse(100000, "560", "AUDIO_1_LED")
+        }
+    }
     @Test fun acceptsCommaAndWhitespaceDurationsWithoutChangingThem() {
         val request = AutomationIrRequest.parse("38000", " 9000, 4500\n560 1690,560 ")
         assertEquals(38000, request.frequency)

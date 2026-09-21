@@ -33,15 +33,17 @@ class ElkSmartUsbProtocolFormatter : UsbWireProtocol {
     override fun openHandshake(
         connection: UsbDeviceConnection,
         inEndpoint: UsbEndpoint,
-        outEndpoint: UsbEndpoint
+        outEndpoint: UsbEndpoint,
+        deadlineMs: Long
     ): Boolean {
         return try {
             val tmp = ByteArray(maxOf(inEndpoint.maxPacketSize, 64))
-            while (true) {
+            while (SystemClock.uptimeMillis() < deadlineMs) {
                 val r = connection.bulkTransfer(inEndpoint, tmp, tmp.size, 10)
                 if (r <= 0) break
             }
 
+            if (SystemClock.uptimeMillis() >= deadlineMs) return false
             val identify = byteArrayOf(
                 IDENT_PREFIX.toByte(),
                 IDENT_PREFIX.toByte(),

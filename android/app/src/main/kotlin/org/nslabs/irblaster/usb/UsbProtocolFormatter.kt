@@ -10,7 +10,7 @@ interface UsbWireProtocol {
   val wantsBackgroundReader: Boolean
   val interFrameDelayMs: Long
 
-  fun openHandshake(connection: UsbDeviceConnection, inEndpoint: UsbEndpoint, outEndpoint: UsbEndpoint): Boolean
+  fun openHandshake(connection: UsbDeviceConnection, inEndpoint: UsbEndpoint, outEndpoint: UsbEndpoint, deadlineMs: Long = Long.MAX_VALUE): Boolean
   fun encode(frequencyHz: Int, patternUs: IntArray): List<ByteArray>
   fun postTransmitDelayMs(patternUs: IntArray): Long
   fun drainAfterTransmit(connection: UsbDeviceConnection, inEndpoint: UsbEndpoint) {}
@@ -59,15 +59,17 @@ object UsbProtocolFormatter : UsbWireProtocol {
   override fun openHandshake(
     connection: UsbDeviceConnection,
     inEndpoint: UsbEndpoint,
-    outEndpoint: UsbEndpoint
+    outEndpoint: UsbEndpoint,
+    deadlineMs: Long
   ): Boolean {
     return try {
       val tmp = ByteArray(maxOf(inEndpoint.maxPacketSize, 64))
-      while (true) {
+      while (android.os.SystemClock.uptimeMillis() < deadlineMs) {
         val r = connection.bulkTransfer(inEndpoint, tmp, tmp.size, 10)
         if (r <= 0) break
       }
 
+      if (android.os.SystemClock.uptimeMillis() >= deadlineMs) return false
       for (frame in handshakeFrames()) {
         val rc = connection.bulkTransfer(outEndpoint, frame, frame.size, 250)
         if (rc <= 0) return false

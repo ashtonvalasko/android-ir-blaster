@@ -4952,7 +4952,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Elke geïnstalleerde app kan opdrachten verzenden via de ingebouwde IR-zender, ook als deze app gesloten is. USB- en audiodongles worden niet ondersteund.';
+      'Elke geïnstalleerde app kan IR-opdrachten verzenden via de ingebouwde zender, USB of audio, ook als deze app gesloten is. USB vereist vooraf toestemming. Audio vereist een IR-adapter en een hoger mediavolume.';
 
   @override
   String get automationSettingsError =>

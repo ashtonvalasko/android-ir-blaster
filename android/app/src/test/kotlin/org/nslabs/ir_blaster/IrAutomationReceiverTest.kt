@@ -90,7 +90,25 @@ class IrAutomationReceiverTest {
         enable()
         assertEquals(IrAutomationReceiver.BAD_REQUEST, await(dispatch(intent().putExtra("pattern", "1,,2"))))
         assertEquals(IrAutomationReceiver.BAD_REQUEST, await(dispatch(intent().putExtra("frequency", true))))
+        assertEquals(IrAutomationReceiver.BAD_REQUEST, await(dispatch(intent().putExtra("emitter", "AUTO"))))
+        assertEquals(IrAutomationReceiver.BAD_REQUEST, await(dispatch(intent().putExtra("emitter", 1))))
         assertNull(RecordingIrManager.pattern)
+    }
+
+    @Test fun externalEmitterRequestsNeverFallBackToInternal() {
+        enable()
+        assertEquals(AutomationResult.NO_USB_DEVICE.code, await(dispatch(intent().putExtra("emitter", "USB"))))
+        assertEquals(AutomationResult.NO_AUDIO_OUTPUT.code, await(dispatch(intent().putExtra("emitter", "AUDIO_1_LED"))))
+        assertEquals(AutomationResult.NO_AUDIO_OUTPUT.code, await(dispatch(intent().putExtra("emitter", "AUDIO_2_LED"))))
+        assertEquals(0, RecordingIrManager.calls.get())
+    }
+
+    @Test fun omittedEmitterIgnoresNormalRemotePreference() {
+        enable()
+        context.getSharedPreferences("ir_blaster_prefs", Context.MODE_PRIVATE).edit()
+            .putString("tx_type", "USB").commit()
+        assertEquals(Activity.RESULT_OK, await(dispatch()))
+        assertEquals(1, RecordingIrManager.calls.get())
     }
 
     @Test fun transmitsExactlyOnceOffTheMainThreadWithoutOpeningActivity() {

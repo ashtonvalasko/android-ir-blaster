@@ -4910,7 +4910,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'कोई भी इंस्टॉल किया गया ऐप इस ऐप के बंद होने पर भी बिल्ट-इन IR से कमांड भेज सकता है। USB और ऑडियो डोंगल समर्थित नहीं हैं।';
+      'कोई भी इंस्टॉल किया गया ऐप बिल्ट-इन IR, USB या ऑडियो से IR कमांड भेज सकता है, भले ही यह ऐप बंद हो। USB के लिए पहले से अनुमति चाहिए। ऑडियो के लिए IR अडैप्टर चाहिए और मीडिया की आवाज़ बढ़ानी होगी।';
 
   @override
   String get automationSettingsError =>

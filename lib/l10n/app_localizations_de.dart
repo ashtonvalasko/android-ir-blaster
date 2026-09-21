@@ -4960,7 +4960,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Jede installierte App kann Befehle über den integrierten IR-Sender senden, auch wenn diese App geschlossen ist. USB- und Audio-Adapter werden nicht unterstützt.';
+      'Jede installierte App kann IR-Befehle über den integrierten Sender, USB oder Audio senden, auch wenn diese App geschlossen ist. USB benötigt vorher eine Berechtigung. Audio benötigt einen IR-Adapter und aufgedrehte Medienlautstärke.';
 
   @override
   String get automationSettingsError =>

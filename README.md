@@ -57,9 +57,10 @@ Tip: At least one transmit path must be available (Internal, USB, or Audio). A b
 ## Android Automation Broadcasts
 
 Tasker, MacroDroid, Automation, and other apps can send raw IR without a plugin
-or opening this app. This API uses **built-in IR only**, regardless of the
-transmitter selected for normal remote buttons. USB/audio adapters are not
-supported by this API.
+or opening this app. Each request can explicitly select built-in IR, a supported
+USB IR dongle, or an audio IR adapter. **Built-in IR remains the default** when
+`emitter` is omitted, regardless of the transmitter selected in Settings.
+There is no automatic fallback to another emitter.
 
 First enable **Settings > Interaction > Allow automation broadcasts** (off by
 default). Enabling this allows **any installed app** to request transmissions;
@@ -74,6 +75,7 @@ Configure the automation app's **Send Intent / Broadcast** action:
 | Action | `org.irblaster.TRANSMIT` |
 | Package | `org.nslabs.ir_blaster` |
 | Receiver class, if needed | `org.nslabs.ir_blaster.IrAutomationReceiver` |
+| `emitter` extra (optional string) | `INTERNAL` (default), `USB`, `AUDIO_1_LED`, or `AUDIO_2_LED`; names are case-sensitive |
 | `frequency` extra | Integer Hz, e.g. `38000`; a decimal string is also accepted |
 | `pattern` extra | Comma- or whitespace-separated decimal durations in microseconds, starting with a mark; an Android `int[]` is also accepted |
 
@@ -88,23 +90,49 @@ adb shell am broadcast \
 ```
 
 Replace the example with the full raw pattern and carrier for your button.
-Patterns are sent once, exactly as supplied, with no bit reversal or added
-repeats. Odd-length patterns ending in a mark are accepted. Limits: 10,000 to
+Requests send one command, without adding protocol repeats or bit reversal.
+USB and audio use the same hardware formatting as normal remote buttons.
+Odd-length patterns ending in a mark are accepted. Limits: 10,000 to
 100,000 Hz (also subject to hardware support), 1 to 4,096 positive durations,
 less than two seconds total, and at most 32,768 characters of pattern text.
 Malformed requests are rejected completely. Send sequentially: overlapping
 automation requests are rejected rather than queued.
 
+To use USB, add `--es emitter USB` to the example. Connect one supported USB IR
+dongle and grant its USB permission in the app first, including after reconnecting
+if Android requests permission again. Automation never opens a permission dialog.
+It reuses an existing transmitter connection, but refuses to interrupt learning
+or an active transmission. Long USB payloads that cannot fit the broadcast's
+bounded transfer budget are rejected before any payload bytes are sent. Failed
+sends are not automatically retried, to avoid sending an appliance command twice.
+
+For audio, use `--es emitter AUDIO_1_LED` or `--es emitter AUDIO_2_LED`, matching
+the mode that works for your adapter in the app. Attach one USB-audio or wired IR
+adapter and turn up **media volume**; automation never changes system volume.
+Only use an IR accessory, not headphones. Audio carriers must be 15,000 to
+60,000 Hz. Phone speakers and Bluetooth are not supported. The existing 48 kHz
+audio waveform and adapter-specific stereo handling are retained. Automation
+waits for playback completion and fails on routing/playback errors. It does not
+mix its signal with this app's standard audio transmitter. Stop other media
+playback while using an audio IR adapter. If multiple
+eligible USB dongles or audio outputs are attached, disconnect the others first.
+
 Ordered broadcasts, including `adb shell am broadcast`, return a result code:
 
 | Code | Result |
 | --- | --- |
-| `-1` | `SENT`: Android's transmission call completed; this does not confirm appliance reception |
+| `-1` | `SENT`: transmission/playback completed; this does not confirm appliance reception |
 | `1` | `DISABLED`: enable the setting first |
 | `2` | `BAD_REQUEST`: invalid or missing extras |
-| `3` | `BUSY`: another automation transmission is running |
+| `3` | `BUSY`: another automation request, IR audio playback, USB send, USB opening, or learning session is running |
 | `4` | `NO_IR`: no built-in IR emitter |
 | `5` | `TRANSMIT_FAILED`: hardware rejected or failed the transmission |
+| `6` | `NO_USB_DEVICE`: no supported USB IR dongle |
+| `7` | `USB_PERMISSION_REQUIRED`: grant permission in the app first |
+| `8` | `USB_OPEN_FAILED`: USB initialization failed |
+| `9` | `NO_AUDIO_OUTPUT`: no eligible wired/USB audio output |
+| `10` | `AUDIO_MUTED`: media is muted or its volume is zero |
+| `11` | `AMBIGUOUS_DEVICE`: more than one eligible device/output is attached |
 
 Ordinary broadcasts have no reply; results are logged under `IrAutomation`.
 Use an explicit package or receiver component: Android restricts implicit

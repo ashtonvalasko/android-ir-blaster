@@ -4885,7 +4885,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'แอปที่ติดตั้งทุกแอปจะส่งคำสั่งผ่านตัวส่งอินฟราเรดในเครื่องได้ แม้แอปนี้จะปิดอยู่ ไม่รองรับดองเกิล USB และดองเกิลเสียง';
+      'แอปที่ติดตั้งไว้ทุกแอปสามารถส่งคำสั่ง IR ผ่านตัวส่งในเครื่อง USB หรือเสียงได้ แม้แอปนี้จะปิดอยู่ USB ต้องได้รับอนุญาตล่วงหน้า ส่วนเสียงต้องใช้อะแดปเตอร์ IR และเพิ่มระดับเสียงสื่อ';
 
   @override
   String get automationSettingsError =>

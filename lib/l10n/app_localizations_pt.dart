@@ -4949,7 +4949,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Qualquer aplicação instalada pode enviar comandos pelo emissor IR integrado, mesmo com esta aplicação fechada. Os adaptadores USB e de áudio não são suportados.';
+      'Qualquer aplicação instalada pode enviar comandos IR pelo emissor integrado, USB ou áudio, mesmo com esta aplicação fechada. USB requer autorização prévia. O áudio requer um adaptador IR e o volume multimédia aumentado.';
 
   @override
   String get automationSettingsError =>
@@ -9905,7 +9905,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Qualquer aplicativo instalado pode enviar comandos pelo emissor IR integrado, mesmo com este aplicativo fechado. Adaptadores USB e de áudio não são compatíveis.';
+      'Qualquer aplicativo instalado pode enviar comandos IR pelo emissor integrado, USB ou áudio, mesmo com este aplicativo fechado. USB exige permissão prévia. O áudio exige um adaptador IR e o volume de mídia aumentado.';
 
   @override
   String get automationSettingsError =>

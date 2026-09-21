@@ -2476,6 +2476,6 @@
   "@irFinderSmartMeaningfulBits": {"placeholders":{"bits":{"type":"int"}}},
   "irFinderBruteforceMaskTip": "Tip: replace every unknown digit with X. Fixing known digits anywhere in the code can reduce the search dramatically.",
   "automationBroadcastsTitle": "Allow automation broadcasts",
-  "automationBroadcastsSubtitle": "Any installed app can send commands through built-in IR, even while this app is closed. USB and audio dongles are not supported.",
+  "automationBroadcastsSubtitle": "Any installed app can send IR commands through built-in IR, USB, or audio, even while this app is closed. USB requires prior permission. Audio requires an IR adapter and media volume turned up.",
   "automationSettingsError": "Could not load or save the automation setting. Please try again."
 }

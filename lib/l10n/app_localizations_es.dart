@@ -4947,7 +4947,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Cualquier aplicación instalada puede enviar comandos mediante el emisor IR integrado, incluso con esta aplicación cerrada. No se admiten adaptadores USB ni de audio.';
+      'Cualquier aplicación instalada puede enviar comandos IR mediante el emisor integrado, USB o audio, incluso con esta aplicación cerrada. USB requiere permiso previo. El audio requiere un adaptador IR y subir el volumen multimedia.';
 
   @override
   String get automationSettingsError =>

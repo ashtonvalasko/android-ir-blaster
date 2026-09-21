@@ -4916,7 +4916,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Mana-mana aplikasi yang dipasang boleh menghantar arahan melalui IR terbina dalam, walaupun aplikasi ini ditutup. Dongel USB dan audio tidak disokong.';
+      'Mana-mana aplikasi yang dipasang boleh menghantar arahan IR melalui IR terbina dalam, USB atau audio, walaupun aplikasi ini ditutup. USB memerlukan kebenaran terlebih dahulu. Audio memerlukan penyesuai IR dan kelantangan media yang dinaikkan.';
 
   @override
   String get automationSettingsError =>

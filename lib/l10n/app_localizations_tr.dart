@@ -4912,7 +4912,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'Yüklü herhangi bir uygulama, bu uygulama kapalıyken bile dahili IR vericisi üzerinden komut gönderebilir. USB ve ses adaptörleri desteklenmez.';
+      'Yüklü herhangi bir uygulama, bu uygulama kapalıyken bile dahili IR, USB veya ses çıkışı üzerinden IR komutları gönderebilir. USB için önceden izin verilmelidir. Ses çıkışı için IR adaptörü gerekir ve medya sesi açılmalıdır.';
 
   @override
   String get automationSettingsError =>

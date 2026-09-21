@@ -4788,7 +4788,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get automationBroadcastsSubtitle =>
-      'インストール済みのすべてのアプリが、このアプリを閉じている間も内蔵赤外線送信機でコマンドを送信できます。USB・オーディオドングルには対応していません。';
+      'インストール済みのすべてのアプリが、このアプリを閉じている間も内蔵赤外線送信機、USB、オーディオ経由で赤外線コマンドを送信できます。USBには事前の許可が必要です。オーディオには赤外線アダプターが必要で、メディア音量を上げておく必要があります。';
 
   @override
   String get automationSettingsError => '自動化設定を読み込み、または保存できませんでした。もう一度お試しください。';

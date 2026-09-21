@@ -2319,6 +2319,6 @@
   "irFinderSmartMeaningfulBits": "O modo inteligente varia {bits} bit(s) significativos para esta máscara.",
   "irFinderBruteforceMaskTip": "Dica: substitua cada dígito desconhecido por X. Fixar dígitos conhecidos em qualquer posição reduz bastante a busca.",
   "automationBroadcastsTitle": "Permitir transmissões de automação",
-  "automationBroadcastsSubtitle": "Qualquer aplicativo instalado pode enviar comandos pelo emissor IR integrado, mesmo com este aplicativo fechado. Adaptadores USB e de áudio não são compatíveis.",
+  "automationBroadcastsSubtitle": "Qualquer aplicativo instalado pode enviar comandos IR pelo emissor integrado, USB ou áudio, mesmo com este aplicativo fechado. USB exige permissão prévia. O áudio exige um adaptador IR e o volume de mídia aumentado.",
   "automationSettingsError": "Não foi possível carregar ou salvar a configuração de automação. Tente novamente."
 }

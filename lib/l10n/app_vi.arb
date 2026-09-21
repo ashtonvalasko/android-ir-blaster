@@ -2319,6 +2319,6 @@
   "irFinderSmartMeaningfulBits": "Chế độ thông minh thay đổi {bits} bit có ý nghĩa cho mặt nạ này.",
   "irFinderBruteforceMaskTip": "Mẹo: thay mọi chữ số chưa biết bằng X. Cố định chữ số đã biết ở bất kỳ vị trí nào có thể giảm đáng kể phạm vi tìm kiếm.",
   "automationBroadcastsTitle": "Cho phép phát quảng bá tự động hóa",
-  "automationBroadcastsSubtitle": "Mọi ứng dụng đã cài đặt đều có thể gửi lệnh qua bộ phát hồng ngoại tích hợp, ngay cả khi ứng dụng này đã đóng. Không hỗ trợ bộ chuyển đổi USB và âm thanh.",
+  "automationBroadcastsSubtitle": "Mọi ứng dụng đã cài đặt đều có thể gửi lệnh hồng ngoại qua bộ phát tích hợp, USB hoặc âm thanh, ngay cả khi ứng dụng này đã đóng. USB cần được cấp quyền trước. Âm thanh cần bộ chuyển đổi hồng ngoại và tăng âm lượng đa phương tiện.",
   "automationSettingsError": "Không thể tải hoặc lưu cài đặt tự động hóa. Vui lòng thử lại."
 }

@@ -19,7 +19,8 @@ class TiqiaaUsbLearner private constructor(
     private val connection: UsbDeviceConnection,
     private val claimedInterface: UsbInterface,
     private val outEndpoint: UsbEndpoint,
-    private val inEndpoint: UsbEndpoint
+    private val inEndpoint: UsbEndpoint,
+    private val deviceLease: UsbDeviceAccess.Lease
 ) : UsbLearnerSession {
     private data class ParsedFrame(
         val type: Int,
@@ -70,6 +71,17 @@ class TiqiaaUsbLearner private constructor(
 
         fun open(usb: UsbManager, device: UsbDevice): TiqiaaUsbLearner? {
             if (!UsbDeviceFilter.isTiqiaaTviewFamily(device)) return null
+            val lease = UsbDeviceAccess.reserve(device.deviceName) ?: return null
+            var opened: TiqiaaUsbLearner? = null
+            try {
+                opened = openReserved(usb, device, lease)
+                return opened
+            } finally {
+                if (opened == null) lease.close()
+            }
+        }
+
+        private fun openReserved(usb: UsbManager, device: UsbDevice, lease: UsbDeviceAccess.Lease): TiqiaaUsbLearner? {
             for (i in 0 until device.interfaceCount) {
                 val intf = device.getInterface(i)
                 val pair = findEndpointPair(intf) ?: continue
@@ -87,6 +99,7 @@ class TiqiaaUsbLearner private constructor(
                     claimedInterface = intf,
                     outEndpoint = pair.outEp,
                     inEndpoint = pair.inEp,
+                    deviceLease = lease,
                 )
             }
             return null
@@ -238,6 +251,7 @@ class TiqiaaUsbLearner private constructor(
             connection.close()
         } catch (_: Throwable) {
         }
+        deviceLease.close()
     }
 
     private fun nextSeqByte(): Byte {

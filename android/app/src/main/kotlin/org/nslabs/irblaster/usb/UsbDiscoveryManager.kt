@@ -10,6 +10,7 @@ import android.hardware.usb.UsbEndpoint
 import android.hardware.usb.UsbInterface
 import android.hardware.usb.UsbManager
 import android.util.Log
+import android.os.SystemClock
 
 class UsbDiscoveryManager(
   private val context: Context,
@@ -30,7 +31,20 @@ class UsbDiscoveryManager(
     usb.requestPermission(device, pi)
   }
 
-  fun openTransmitter(device: UsbDevice): UsbIrTransmitter? {
+  fun openTransmitter(device: UsbDevice, deadlineMs: Long = Long.MAX_VALUE): UsbIrTransmitter? {
+    val lease = UsbDeviceAccess.reserve(device.deviceName) ?: return null
+    var opened: UsbIrTransmitter? = null
+    try {
+      opened = openReservedTransmitter(device, deadlineMs)
+      opened?.onClosed = { lease.close() }
+      opened?.let { tx -> lease.borrow = { tx.borrowForAutomation() } }
+      return opened
+    } finally {
+      if (opened == null) lease.close()
+    }
+  }
+
+  private fun openReservedTransmitter(device: UsbDevice, deadlineMs: Long): UsbIrTransmitter? {
     Log.i(
       TAG,
       "openTransmitter: ${device.productName} vid=0x${device.vendorId.toString(16)} pid=0x${device.productId.toString(16)} ifCount=${device.interfaceCount}"
@@ -54,6 +68,7 @@ class UsbDiscoveryManager(
       if (pairs.isEmpty()) continue
 
       for (pair in pairs) {
+        if (SystemClock.uptimeMillis() >= deadlineMs) return null
         val conn: UsbDeviceConnection = usb.openDevice(device) ?: run {
           Log.w(TAG, "openDevice() returned null")
           return null
@@ -80,7 +95,8 @@ class UsbDiscoveryManager(
           claimedInterface = intf,
           outEndpoint = pair.outEp,
           inEndpoint = pair.inEp,
-          protocol = protocol
+          protocol = protocol,
+          deadlineMs = deadlineMs
         )
 
         if (tx != null) {
