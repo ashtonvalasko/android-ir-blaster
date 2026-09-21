@@ -1,0 +1,8 @@
+- Customize remote grids, button shapes and blank spaces.
+- Find database codes faster with clearer brand and model search.
+- Improve Code Finder with fewer duplicate tests, live cooldown control and safer hit saving.
+- Organize settings into easy-to-find categories.
+- Add optional automation for built-in, USB and audio IR.
+- Fix file imports and several IR protocols.
+- Make macros safer to run, cancel, edit and save.
+- Fix remote and waveform screen cleanup.
