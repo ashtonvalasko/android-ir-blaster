@@ -145,7 +145,10 @@ class RemoteViewState extends State<RemoteView> {
     _highlightTimer?.cancel();
     _gridScrollController.dispose();
     _display.removeListener(_handleDisplayPrefsChanged);
-    _stopLoop(silent: true);
+    _loopTimer?.cancel();
+    _loopTimer = null;
+    _loopButton = null;
+    _loopSending = false;
     super.dispose();
   }
 

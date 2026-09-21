@@ -107,19 +107,15 @@ class IrWaveformPanel extends StatelessWidget {
                 color: colorScheme.outlineVariant.withValues(alpha: 0.65),
               ),
             ),
-            child: Scrollbar(
-              thumbVisibility: true,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: CustomPaint(
-                  size: Size(graphWidth, compact ? 150 : 178),
-                  painter: IrWaveformPainter(
-                    pattern: pattern,
-                    colorScheme: colorScheme,
-                    onLabel: l10n.irWaveformOnLabel,
-                    offLabel: l10n.irWaveformOffLabel,
-                    playheadProgress: playheadProgress,
-                  ),
+            child: _WaveformScroller(
+              child: CustomPaint(
+                size: Size(graphWidth, compact ? 150 : 178),
+                painter: IrWaveformPainter(
+                  pattern: pattern,
+                  colorScheme: colorScheme,
+                  onLabel: l10n.irWaveformOnLabel,
+                  offLabel: l10n.irWaveformOffLabel,
+                  playheadProgress: playheadProgress,
                 ),
               ),
             ),
@@ -155,6 +151,35 @@ class IrWaveformPanel extends StatelessWidget {
     }
     return '$microsµs';
   }
+}
+
+class _WaveformScroller extends StatefulWidget {
+  const _WaveformScroller({required this.child});
+  final Widget child;
+
+  @override
+  State<_WaveformScroller> createState() => _WaveformScrollerState();
+}
+
+class _WaveformScrollerState extends State<_WaveformScroller> {
+  final _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scrollbar(
+        controller: _controller,
+        thumbVisibility: true,
+        child: SingleChildScrollView(
+          controller: _controller,
+          scrollDirection: Axis.horizontal,
+          child: widget.child,
+        ),
+      );
 }
 
 class _WaveformChip extends StatelessWidget {
