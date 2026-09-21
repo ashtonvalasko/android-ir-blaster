@@ -28,7 +28,7 @@ class MacroRunScreen extends StatefulWidget {
 }
 
 class _MacroRunScreenState extends State<MacroRunScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   bool _running = false;
   bool _waitingForManual = false;
   bool _executing = false;
@@ -36,6 +36,10 @@ class _MacroRunScreenState extends State<MacroRunScreen>
   int _currentStep = 0;
   int _remainingMs = 0;
   DateTime? _startTime;
+  Duration? _stoppedElapsed;
+  Timer? _delayTimer;
+  Timer? _countdownTimer;
+  Completer<void>? _delayDone;
   String? _lastError;
 
   late AnimationController _pulseController;
@@ -44,6 +48,7 @@ class _MacroRunScreenState extends State<MacroRunScreen>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     unawaited(
       ContinueContextsPrefs.saveLastMacro(
         macro: widget.macro,
@@ -67,14 +72,16 @@ class _MacroRunScreenState extends State<MacroRunScreen>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _running = false;
     _waitingForManual = false;
+    _endDelay();
     _pulseController.dispose();
     super.dispose();
   }
 
   Future<void> _start() async {
-    if (_executing) return;
+    if (_executing || _running) return;
     if (widget.macro.steps.isEmpty) return;
 
     setState(() {
@@ -84,11 +91,12 @@ class _MacroRunScreenState extends State<MacroRunScreen>
       _currentStep = 0;
       _remainingMs = 0;
       _startTime = DateTime.now();
+      _stoppedElapsed = null;
       _lastError = null;
     });
 
     _pulseController.repeat(reverse: true);
-    await Haptics.mediumImpact();
+    unawaited(Haptics.mediumImpact());
 
     await _executeSteps();
   }
@@ -98,10 +106,27 @@ class _MacroRunScreenState extends State<MacroRunScreen>
       _running = false;
       _waitingForManual = false;
       _remainingMs = 0;
+      _stoppedElapsed = DateTime.now().difference(_startTime!);
     });
+    _endDelay();
     _pulseController.stop();
     _pulseController.reset();
     Haptics.selectionClick();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (_running &&
+        (state == AppLifecycleState.hidden ||
+            state == AppLifecycleState.paused ||
+            state == AppLifecycleState.detached)) {
+      _cancel();
+    }
+  }
+
+  void _fail(String message) {
+    _cancel();
+    setState(() => _lastError = message);
   }
 
   Future<void> _continueManual() async {
@@ -118,6 +143,7 @@ class _MacroRunScreenState extends State<MacroRunScreen>
     Haptics.selectionClick();
 
     if (_running) {
+      _pulseController.repeat(reverse: true);
       await _executeSteps();
     }
   }
@@ -162,14 +188,7 @@ class _MacroRunScreenState extends State<MacroRunScreen>
         final step = steps[_currentStep];
 
         if (!step.isValid) {
-          setState(() {
-            _running = false;
-            _waitingForManual = false;
-            _remainingMs = 0;
-            _lastError = context.l10n.invalidStepEncountered;
-          });
-          _pulseController.stop();
-          _pulseController.reset();
+          _fail(context.l10n.invalidStepEncountered);
           return;
         }
 
@@ -178,36 +197,34 @@ class _MacroRunScreenState extends State<MacroRunScreen>
           if (button != null) {
             try {
               await sendIR(button);
+              if (!mounted || !_running) return;
               Haptics.lightImpact();
-              if (!mounted) return;
               setState(() {
                 _lastError = null;
               });
             } catch (_) {
-              if (!mounted) return;
-              setState(() {
-                _lastError = context.l10n.failedToSendNamed(
-                  displayButtonLabel(
-                    button,
-                    fallback: context.l10n.unnamedButton,
-                    iconFallback: context.l10n.iconFallback,
-                    iconNameLocalizer: (name) =>
-                        localizedIconPickerName(context.l10n, name),
-                  ),
-                );
-              });
+              if (!mounted || !_running) return;
+              _fail(context.l10n.failedToSendNamed(
+                displayButtonLabel(
+                  button,
+                  fallback: context.l10n.unnamedButton,
+                  iconFallback: context.l10n.iconFallback,
+                  iconNameLocalizer: (name) =>
+                      localizedIconPickerName(context.l10n, name),
+                ),
+              ));
+              return;
             }
           } else {
             final fallback = (step.buttonRef ?? step.buttonId ?? '').trim();
             if (!mounted) return;
-            setState(() {
-              _lastError = fallback.isEmpty
-                  ? context.l10n.buttonNotFound
-                  : context.l10n.buttonNotFoundNamed(
-                      displayButtonRefLabel(fallback,
-                          fallback: context.l10n.unknownButton),
-                    );
-            });
+            _fail(fallback.isEmpty
+                ? context.l10n.buttonNotFound
+                : context.l10n.buttonNotFoundNamed(
+                    displayButtonRefLabel(fallback,
+                        fallback: context.l10n.unknownButton),
+                  ));
+            return;
           }
 
           if (!mounted) return;
@@ -254,6 +271,7 @@ class _MacroRunScreenState extends State<MacroRunScreen>
           _waitingForManual = false;
           _remainingMs = 0;
           _completed = true;
+          _stoppedElapsed = DateTime.now().difference(_startTime!);
         });
         _pulseController.stop();
         _pulseController.reset();
@@ -261,6 +279,7 @@ class _MacroRunScreenState extends State<MacroRunScreen>
       }
     } finally {
       _executing = false;
+      if (mounted) setState(() {});
     }
   }
 
@@ -273,20 +292,23 @@ class _MacroRunScreenState extends State<MacroRunScreen>
     }
 
     final sw = Stopwatch()..start();
-    const tickMs = 100;
-
-    while (mounted && _running) {
-      final remaining = ms - sw.elapsedMilliseconds;
-      if (remaining <= 0) {
-        setState(() => _remainingMs = 0);
-        return;
+    final done = Completer<void>();
+    _delayDone = done;
+    _delayTimer = Timer(Duration(milliseconds: ms), _endDelay);
+    _countdownTimer = Timer.periodic(const Duration(milliseconds: 100), (_) {
+      if (mounted && _running) {
+        setState(() => _remainingMs = (ms - sw.elapsedMilliseconds).clamp(0, ms));
       }
+    });
+    await done.future;
+  }
 
-      setState(() => _remainingMs = remaining);
-
-      final sleep = remaining < tickMs ? remaining : tickMs;
-      await Future.delayed(Duration(milliseconds: sleep));
-    }
+  void _endDelay() {
+    _delayTimer?.cancel();
+    _countdownTimer?.cancel();
+    final done = _delayDone;
+    _delayDone = null;
+    if (done != null && !done.isCompleted) done.complete();
   }
 
   String _formatDuration(Duration d) {
@@ -314,8 +336,8 @@ class _MacroRunScreenState extends State<MacroRunScreen>
 
     final total = widget.macro.steps.length;
     final progress = total == 0 ? 0.0 : (_currentStep / total).clamp(0.0, 1.0);
-    final elapsed =
-        _startTime == null ? null : DateTime.now().difference(_startTime!);
+    final elapsed = _stoppedElapsed ??
+        (_startTime == null ? null : DateTime.now().difference(_startTime!));
 
     final canStart = !_running && total > 0 && !_completed;
     final canRestart = !_running && total > 0 && _completed;
@@ -339,7 +361,7 @@ class _MacroRunScreenState extends State<MacroRunScreen>
               onPressed: () async {
                 final next = !RemoteOrientationController.instance.flipped;
                 await RemoteOrientationController.instance.setFlipped(next);
-                setState(() {});
+                if (mounted) setState(() {});
               },
               icon: const Icon(Icons.screen_rotation_rounded),
             ),
@@ -408,6 +430,10 @@ class _MacroRunScreenState extends State<MacroRunScreen>
       statusIcon = Icons.check_circle_rounded;
       statusColor = Colors.green;
       statusLabel = context.l10n.completed;
+    } else if (_lastError != null) {
+      statusIcon = Icons.error_outline_rounded;
+      statusColor = cs.error;
+      statusLabel = context.l10n.error;
     } else if (_waitingForManual) {
       statusIcon = Icons.pause_circle_rounded;
       statusColor = cs.tertiary;
@@ -924,7 +950,7 @@ class _MacroRunScreenState extends State<MacroRunScreen>
               SizedBox(
                 width: double.infinity,
                 child: FilledButton.icon(
-                  onPressed: _start,
+                  onPressed: _executing ? null : _start,
                   icon: Icon(canRestart
                       ? Icons.replay_rounded
                       : Icons.play_arrow_rounded),
