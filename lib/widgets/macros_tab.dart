@@ -16,31 +16,36 @@ class MacrosTab extends StatefulWidget {
 }
 
 class _MacrosTabState extends State<MacrosTab> {
+  bool _saving = false;
+
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-      valueListenable: macrosRevision,
-      builder: (context, _, __) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(context.l10n.macrosTitle),
-            actions: [
-              if (macros.isNotEmpty)
-                IconButton(
-                  tooltip: context.l10n.help,
-                  onPressed: _showHelp,
-                  icon: const Icon(Icons.help_outline_rounded),
-                ),
-            ],
-          ),
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: _addMacro,
-            icon: const Icon(Icons.add_rounded),
-            label: Text(context.l10n.createMacro),
-          ),
-          body: macros.isEmpty ? _buildEmptyState() : _buildMacroList(),
-        );
-      },
+    return AbsorbPointer(
+      absorbing: _saving,
+      child: ValueListenableBuilder<int>(
+        valueListenable: macrosRevision,
+        builder: (context, _, __) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(context.l10n.macrosTitle),
+              actions: [
+                if (macros.isNotEmpty)
+                  IconButton(
+                    tooltip: context.l10n.help,
+                    onPressed: _showHelp,
+                    icon: const Icon(Icons.help_outline_rounded),
+                  ),
+              ],
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: _addMacro,
+              icon: const Icon(Icons.add_rounded),
+              label: Text(context.l10n.createMacro),
+            ),
+            body: macros.isEmpty ? _buildEmptyState() : _buildMacroList(),
+          );
+        },
+      ),
     );
   }
 
@@ -520,9 +525,23 @@ class _MacrosTabState extends State<MacrosTab> {
     );
   }
 
-  Future<void> _persistAndNotify() async {
-    await writeMacrosList(macros);
-    notifyMacrosChanged();
+  Future<bool> _persistAndNotify(List<TimedMacro> next) async {
+    if (_saving) return false;
+    setState(() => _saving = true);
+    try {
+      await writeMacrosList(next);
+      setMacros(next);
+      return true;
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.failedToSaveMacros)),
+        );
+      }
+      return false;
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
   }
 
   Remote? _findRemoteByName(String name) {
@@ -545,16 +564,8 @@ class _MacrosTabState extends State<MacrosTab> {
         builder: (context) => MacroEditorScreen(remote: remote),
       ),
     );
-    if (macro == null) return;
-    macros.add(macro);
-    try {
-      await _persistAndNotify();
-    } catch (_) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.failedToSaveMacros)),
-      );
-    }
+    if (!mounted || macro == null) return;
+    await _persistAndNotify([...macros, macro]);
   }
 
   Future<void> _editMacro(int index) async {
@@ -569,16 +580,12 @@ class _MacrosTabState extends State<MacrosTab> {
         builder: (context) => MacroEditorScreen(macro: macro, remote: remote),
       ),
     );
-    if (edited == null) return;
-    macros[index] = edited;
-    try {
-      await _persistAndNotify();
-    } catch (_) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.failedToSaveMacros)),
-      );
-    }
+    if (!mounted || edited == null) return;
+    final currentIndex = macros.indexWhere((m) => m.id == macro.id);
+    if (currentIndex < 0) return;
+    final next = List<TimedMacro>.from(macros);
+    next[currentIndex] = edited;
+    await _persistAndNotify(next);
   }
 
   Future<void> _duplicateMacro(int index) async {
@@ -588,34 +595,18 @@ class _MacrosTabState extends State<MacrosTab> {
       id: nowId,
       name: '${original.name} (Copy)',
     );
-    macros.insert(index + 1, dup);
-    try {
-      await _persistAndNotify();
-    } catch (_) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.failedToSaveMacros)),
-      );
-    }
+    final next = List<TimedMacro>.from(macros)..insert(index + 1, dup);
+    await _persistAndNotify(next);
   }
 
   Future<void> _deleteMacro(int index) async {
-    final ok = await _confirmDelete();
-    if (ok != true) return;
-    final removedIndex = index;
     final removedMacro = macros[index];
-    macros.removeAt(removedIndex);
-    try {
-      await _persistAndNotify();
-    } catch (_) {
-      macros.insert(removedIndex.clamp(0, macros.length), removedMacro);
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.failedToSaveMacros)),
-      );
-      return;
-    }
-    if (!mounted) return;
+    final ok = await _confirmDelete();
+    if (!mounted || ok != true) return;
+    final removedIndex = macros.indexWhere((m) => m.id == removedMacro.id);
+    if (removedIndex < 0) return;
+    final next = List<TimedMacro>.from(macros)..removeAt(removedIndex);
+    if (!await _persistAndNotify(next) || !mounted) return;
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -623,18 +614,10 @@ class _MacrosTabState extends State<MacrosTab> {
         action: SnackBarAction(
           label: context.l10n.undo,
           onPressed: () async {
-            macros.insert(
-              removedIndex.clamp(0, macros.length),
-              removedMacro,
-            );
-            try {
-              await _persistAndNotify();
-            } catch (_) {
-              if (!mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.l10n.failedToRestoreMacro)),
-              );
-            }
+            if (!mounted || macros.any((m) => m.id == removedMacro.id)) return;
+            final restored = List<TimedMacro>.from(macros)
+              ..insert(removedIndex.clamp(0, macros.length), removedMacro);
+            await _persistAndNotify(restored);
           },
         ),
       ),

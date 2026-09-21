@@ -26,18 +26,25 @@ Future<File> _macrosFile() async {
   return File('${dir.path}/macros.json');
 }
 
-Future<void> writeMacrosList(List<TimedMacro> macros) async {
-  final file = await _macrosFile();
-  final tmp = File('${file.path}.tmp');
+Future<void>? _pendingWrite;
+
+Future<void> writeMacrosList(List<TimedMacro> macros) {
+  // Snapshot before awaiting; callers may edit the list while a save is queued.
   final payload =
       jsonEncode(macros.map((m) => m.copyWith(version: 1).toJson()).toList());
-  await tmp.writeAsString(payload, flush: true);
-  try {
-    if (await file.exists()) {
-      await file.delete();
-    }
-  } catch (_) {}
-  await tmp.rename(file.path);
+  final write = (_pendingWrite ?? Future<void>.value()).then((_) async {
+    final file = await _macrosFile();
+    final tmp = File('${file.path}.tmp');
+    await tmp.writeAsString(payload, flush: true);
+    await tmp.rename(file.path);
+  });
+  // A failed save must not block later saves, but still reaches its caller.
+  late final Future<void> queued;
+  queued = write.catchError((Object _) {}).whenComplete(() {
+    if (identical(_pendingWrite, queued)) _pendingWrite = null;
+  });
+  _pendingWrite = queued;
+  return write;
 }
 
 Future<List<TimedMacro>> readMacros() async {
