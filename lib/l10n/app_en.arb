@@ -2500,5 +2500,7 @@
   "layoutCell": "Row {row}, column {column}",
   "@layoutCell": {"placeholders":{"row":{"type":"int"},"column":{"type":"int"}}},
   "dbBrandSearchHelp": "Start with the brand, such as Sony or TCL. Then choose a device or remote model.",
-  "dbModelSearchHelp": "Search the model printed on your device or remote. Spaces and hyphens do not need to match."
+  "dbModelSearchHelp": "Search the model printed on your device or remote. Spaces and hyphens do not need to match.",
+  "irFinderDatabaseSearchHint": "Start with a brand in Database mode to test known codes without duplicates. Smart brute force prioritizes guesses; it cannot detect a device response. Save a hit when you see a response.",
+  "irFinderClearSearchToJump": "Clear the search to jump to a scan position."
 }

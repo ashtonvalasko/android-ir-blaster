@@ -5042,4 +5042,12 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Suche nach der Modellnummer auf deinem Gerät oder deiner Fernbedienung. Leerzeichen und Bindestriche müssen nicht übereinstimmen.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Wähle zuerst eine Marke im Datenbankmodus, um bekannte Codes ohne Duplikate zu testen. Die intelligente Brute-Force-Suche priorisiert Vermutungen, erkennt aber keine Gerätereaktion. Speichere einen Treffer, wenn das Gerät reagiert.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Lösche die Suche, um zu einer Testposition zu springen.';
 }

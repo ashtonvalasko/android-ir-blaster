@@ -4991,4 +4991,12 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'अपने डिवाइस या रिमोट पर लिखा मॉडल खोजें। खाली जगहों और हाइफ़न का मेल खाना ज़रूरी नहीं है।';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'पहले डेटाबेस मोड में ब्रांड चुनें ताकि ज्ञात कोड बिना दोहराव के जाँचे जा सकें। स्मार्ट ब्रूट फ़ोर्स अनुमानों को प्राथमिकता देता है, लेकिन डिवाइस की प्रतिक्रिया पहचान नहीं सकता। प्रतिक्रिया दिखने पर सफल कोड सहेजें।';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'परीक्षण की किसी स्थिति पर जाने के लिए खोज साफ़ करें।';
 }

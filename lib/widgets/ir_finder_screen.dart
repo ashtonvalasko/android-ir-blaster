@@ -256,7 +256,8 @@ class _IrFinderScreenState extends State<IrFinderScreen>
 
   Future<void> _browseDbCandidates(BuildContext context) async {
     final brand = _brand;
-    if (!_dbReady || brand == null) return;
+    if (!_dbReady || brand == null || _run.busy) return;
+    _run.pause();
 
     await showModalBottomSheet<void>(
       context: context,
@@ -268,6 +269,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
         model: _model,
         protocolId: _dbOnlySelectedProtocol ? _protocolId : null,
         quickWinsFirst: _dbQuickWinsFirst,
+        uniqueSignals: _run.uniqueDbSignals,
         hexPrefixUpper: (_prefixParsed != null &&
                 _prefixParsed!.ok &&
                 _prefixParsed!.bytes.isNotEmpty)
@@ -325,7 +327,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
 
   int _pageIndex = 0;
 
-  IrFinderMode _mode = IrFinderMode.bruteforce;
+  IrFinderMode _mode = IrFinderMode.database;
   String _protocolId = 'nec';
 
   final TextEditingController _prefixCtl = TextEditingController();
@@ -342,12 +344,15 @@ class _IrFinderScreenState extends State<IrFinderScreen>
 
   bool _dbReady = false;
   bool _dbInitFailed = false;
+  List<IrDbKeyCandidate> _candidatePage = [];
+  int _candidatePageStart = 0;
+  Object? _candidatePageKey;
 
   String? _brand;
   String? _model;
-  bool _dbOnlySelectedProtocol = true;
+  bool _dbOnlySelectedProtocol = false;
   bool _dbQuickWinsFirst = true;
-  int _dbMaxKeysToTest = 1000000;
+  int _dbMaxKeysToTest = 2000;
 
   final List<IrFinderHit> _hits = <IrFinderHit>[];
   static const String _hitsFile = 'ir_finder_hits.json';
@@ -780,7 +785,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
 
     if (!_dbReady) return null;
 
-    final String? brand = _brand;
+    final String? brand = ctl.brand;
     if (brand == null || brand.trim().isEmpty) return null;
 
     final String? hexPrefixUpper = (_prefixParsed != null &&
@@ -791,19 +796,26 @@ class _IrFinderScreenState extends State<IrFinderScreen>
             .toUpperCase()
         : null;
 
-    final rows = await _db.fetchCandidateKeys(
-      brand: brand,
-      model: _model,
-      selectedProtocolId: _dbOnlySelectedProtocol ? _protocolId : null,
-      quickWinsFirst: _dbQuickWinsFirst,
-      hexPrefixUpper: hexPrefixUpper,
-      limit: 1,
-      offset: ctl.currentOffset,
-    );
-
-    if (rows.isEmpty) return null;
-
-    final row = rows.first;
+    final protocol = ctl.onlySelectedProtocol ? ctl.protocolId : null;
+    final pageKey = (brand, ctl.model, protocol, ctl.quickWinsFirst,
+        hexPrefixUpper, ctl.uniqueDbSignals);
+    final offset = ctl.currentOffset;
+    if (_candidatePageKey != pageKey || offset < _candidatePageStart ||
+        offset >= _candidatePageStart + _candidatePage.length) {
+      final rows = await _db.fetchCandidateKeys(
+        brand: brand, model: ctl.model, selectedProtocolId: protocol,
+        quickWinsFirst: ctl.quickWinsFirst, hexPrefixUpper: hexPrefixUpper,
+        uniqueSignals: ctl.uniqueDbSignals, limit: 80, offset: offset,
+      );
+      _candidatePageKey = pageKey;
+      _candidatePageStart = offset;
+      _candidatePage = rows;
+    }
+    ctl.candidatesExhausted = _candidatePage.isEmpty;
+    if (ctl.candidatesExhausted) {
+      return null;
+    }
+    final row = _candidatePage[offset - _candidatePageStart];
     final normId = row.protocol.trim().toLowerCase().replaceAll('-', '_');
 
     IrProtocolDefinition def;
@@ -830,8 +842,8 @@ class _IrFinderScreenState extends State<IrFinderScreen>
       source: IrFinderSource.database,
       dbRemoteId: row.remoteId,
       dbLabel: row.label,
-      dbBrand: _brand,
-      dbModel: _model,
+      dbBrand: row.brand,
+      dbModel: row.model,
     );
   }
 
@@ -983,6 +995,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
       bruteCursor: cursor,
       startedAt: s.startedAt,
       paused: true,
+      uniqueDbSignals: s.v >= 3,
     );
 
     setState(() => _pageIndex = 1);
@@ -1425,28 +1438,32 @@ class _IrFinderScreenState extends State<IrFinderScreen>
       padding: const EdgeInsets.all(16),
       children: [
         _TopInfoCard(
-          protocolName: def.displayName,
-          protocolDescription: def.description ?? '',
+          protocolName: isBruteforce || _dbOnlySelectedProtocol
+              ? def.displayName : context.l10n.all,
+          protocolDescription: isBruteforce || _dbOnlySelectedProtocol
+              ? def.description ?? '' : context.l10n.irFinderDatabaseSearchHint,
           mode: _mode,
         ),
         const SizedBox(height: 12),
-        _ProtocolPicker(
-          protocolId: _protocolId,
-          onChanged: _run.running
-              ? null
-              : (id) {
-                  setState(() {
-                    _protocolId = id;
-                    _applyPrefixLimitForCurrentProtocol();
-                    if (_mode == IrFinderMode.database) {
-                      _brand = null;
-                      _model = null;
-                    }
-                  });
-                  _syncRunConfigToController();
-                },
-        ),
-        const SizedBox(height: 12),
+        if (isBruteforce || _dbOnlySelectedProtocol) ...[
+          _ProtocolPicker(
+            protocolId: _protocolId,
+            onChanged: _run.running
+                ? null
+                : (id) {
+                    setState(() {
+                      _protocolId = id;
+                      _applyPrefixLimitForCurrentProtocol();
+                      if (_mode == IrFinderMode.database) {
+                        _brand = null;
+                        _model = null;
+                      }
+                    });
+                    _syncRunConfigToController();
+                  },
+          ),
+          const SizedBox(height: 12),
+          ],
         _ModePicker(
           mode: _mode,
           onChanged: _run.running
@@ -1463,6 +1480,9 @@ class _IrFinderScreenState extends State<IrFinderScreen>
                   _syncRunConfigToController();
                 },
         ),
+        const SizedBox(height: 8),
+        Text(context.l10n.irFinderDatabaseSearchHint,
+            style: theme.textTheme.bodySmall),
         const SizedBox(height: 12),
         TextField(
           controller: _prefixCtl,
@@ -1715,7 +1735,7 @@ class _IrFinderScreenState extends State<IrFinderScreen>
         const SizedBox(height: 14),
         if (_mode == IrFinderMode.database)
           FilledButton.tonalIcon(
-            onPressed: !_dbReady || _brand == null
+            onPressed: !_dbReady || _brand == null || _run.busy
                 ? null
                 : () => _browseDbCandidates(context),
             icon: const Icon(Icons.list_alt_rounded),
@@ -1946,28 +1966,19 @@ class _TopInfoCard extends StatelessWidget {
               tilePadding: EdgeInsets.zero,
               leading:
                   Icon(Icons.info_outline, color: theme.colorScheme.primary),
-              title: Row(
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Text(
-                      context.l10n.irFinderProtocolTitle(protocolName),
-                      style: theme.textTheme.titleMedium,
-                    ),
+                  Text(
+                    context.l10n.irFinderProtocolTitle(protocolName),
+                    style: theme.textTheme.titleMedium,
                   ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.secondaryContainer
-                          .withValues(alpha: 0.65),
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Text(
-                      modeLabel,
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        color: theme.colorScheme.onSecondaryContainer,
-                        fontWeight: FontWeight.w700,
-                      ),
+                  const SizedBox(height: 4),
+                  Text(
+                    modeLabel,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: theme.colorScheme.primary,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ],
@@ -3097,6 +3108,7 @@ class _DbCandidatesSheet extends StatefulWidget {
   final String? model;
   final String? protocolId;
   final bool quickWinsFirst;
+  final bool uniqueSignals;
   final String? hexPrefixUpper;
   final ValueChanged<int> onJumpToOffset;
   final Future<void> Function(String protocolId, String codeHex) onSend;
@@ -3108,6 +3120,7 @@ class _DbCandidatesSheet extends StatefulWidget {
     required this.model,
     required this.protocolId,
     required this.quickWinsFirst,
+    required this.uniqueSignals,
     required this.hexPrefixUpper,
     required this.onJumpToOffset,
     required this.onSend,
@@ -3123,6 +3136,7 @@ class _DbCandidatesSheetState extends State<_DbCandidatesSheet> {
   final TextEditingController _searchCtl = TextEditingController();
   final ScrollController _scrollCtl = ScrollController();
   bool _loading = false;
+  String _rowsSearch = '';
   bool _exhausted = false;
   int _offset = 0;
   final List<IrDbKeyCandidate> _rows = <IrDbKeyCandidate>[];
@@ -3166,18 +3180,21 @@ class _DbCandidatesSheetState extends State<_DbCandidatesSheet> {
         _exhausted = false;
         _rows.clear();
       }
+      final search = _searchCtl.text.trim();
       final rows = await widget.db.fetchCandidateKeys(
         brand: widget.brand,
         model: widget.model,
         selectedProtocolId: widget.protocolId,
         quickWinsFirst: widget.quickWinsFirst,
+        uniqueSignals: widget.uniqueSignals,
         hexPrefixUpper: widget.hexPrefixUpper,
-        search: _searchCtl.text.trim(),
+        search: search,
         limit: 60,
         offset: _offset,
       );
       if (!mounted) return;
       setState(() {
+        _rowsSearch = search;
         _rows.addAll(rows);
         _offset += rows.length;
         if (rows.isEmpty) _exhausted = true;
@@ -3260,8 +3277,12 @@ class _DbCandidatesSheetState extends State<_DbCandidatesSheet> {
                             spacing: 8,
                             children: [
                               IconButton(
-                                tooltip: context.l10n.irFinderJumpHere,
-                                onPressed: () => widget.onJumpToOffset(i),
+                                tooltip: _searchCtl.text.trim().isEmpty && _rowsSearch.isEmpty
+                                    ? context.l10n.irFinderJumpHere
+                                    : context.l10n.irFinderClearSearchToJump,
+                                onPressed: _searchCtl.text.trim().isEmpty && _rowsSearch.isEmpty
+                                    ? () => widget.onJumpToOffset(i)
+                                    : null,
                                 icon: const Icon(Icons.my_location_rounded),
                               ),
                               IconButton(

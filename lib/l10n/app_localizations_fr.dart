@@ -5044,4 +5044,12 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Recherchez le modèle indiqué sur votre appareil ou télécommande. Les espaces et les traits d’union peuvent être différents.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Commencez par une marque en mode Base de données pour tester des codes connus sans doublons. La recherche intelligente par force brute privilégie certaines hypothèses, mais ne détecte pas la réaction de l’appareil. Enregistrez le résultat si l’appareil réagit.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Effacez la recherche pour accéder à une position du test.';
 }

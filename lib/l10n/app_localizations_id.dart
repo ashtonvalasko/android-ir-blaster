@@ -4998,4 +4998,12 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Cari model yang tercetak pada perangkat atau remote. Spasi dan tanda hubung tidak harus sama.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Mulai dengan memilih merek dalam mode Database untuk menguji kode yang dikenal tanpa duplikat. Brute force cerdas memprioritaskan dugaan, tetapi tidak dapat mendeteksi respons perangkat. Simpan kode yang berhasil saat Anda melihat respons.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Hapus pencarian untuk melompat ke posisi pengujian.';
 }

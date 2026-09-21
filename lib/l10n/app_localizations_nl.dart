@@ -5033,4 +5033,12 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Zoek het model dat op je apparaat of afstandsbediening staat. Spaties en koppeltekens hoeven niet overeen te komen.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Kies eerst een merk in de databasemodus om bekende codes zonder duplicaten te testen. Slimme brute force geeft voorrang aan bepaalde mogelijkheden, maar kan geen reactie van het apparaat detecteren. Sla een treffer op wanneer je een reactie ziet.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Wis de zoekopdracht om naar een testpositie te springen.';
 }

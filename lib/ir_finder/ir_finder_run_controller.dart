@@ -33,6 +33,8 @@ class IrFinderRunController extends ChangeNotifier {
 
   bool onlySelectedProtocol = true;
   bool quickWinsFirst = true;
+  bool uniqueDbSignals = true;
+  bool candidatesExhausted = false;
 
   bool running = false;
   bool paused = false;
@@ -103,7 +105,11 @@ class IrFinderRunController extends ChangeNotifier {
     required BigInt bruteCursor,
     required DateTime? startedAt,
     required bool paused,
+    bool uniqueDbSignals = true,
   }) {
+    _generation++;
+    this.uniqueDbSignals = uniqueDbSignals;
+    candidatesExhausted = false;
     this.attempted = attempted.clamp(0, 2147483647);
     this.currentOffset = currentOffset.clamp(0, 2147483647);
     this.bruteCursor = bruteCursor < BigInt.zero ? BigInt.zero : bruteCursor;
@@ -120,6 +126,8 @@ class IrFinderRunController extends ChangeNotifier {
 
     _cancelTimer();
     _generation++;
+    uniqueDbSignals = true;
+    candidatesExhausted = false;
 
     running = true;
     paused = false;
@@ -206,7 +214,7 @@ class IrFinderRunController extends ChangeNotifier {
 
   IrFinderSessionSnapshot snapshot() {
     return IrFinderSessionSnapshot(
-      v: 2,
+      v: uniqueDbSignals ? 3 : 2,
       mode: mode,
       protocolId: protocolId,
       brand: brand,
@@ -300,6 +308,10 @@ class IrFinderRunController extends ChangeNotifier {
       if (automatic && (paused || pauseRevision != _pauseRevision)) return;
 
       if (c == null) {
+        if (candidatesExhausted) {
+          await stop(clearPersistedSession: false);
+          return;
+        }
         _nullCandidateSkips += 1;
         if (mode == IrFinderMode.bruteforce) {
           lastError ??= 'No more candidates (exhausted).';
@@ -335,6 +347,7 @@ class IrFinderRunController extends ChangeNotifier {
       lastCandidate = c;
       lastError = err;
       _nullCandidateSkips = 0;
+      if (err != null) pause();
 
       if (advance) {
         _advanceAfterSend();

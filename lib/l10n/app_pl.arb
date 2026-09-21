@@ -2344,5 +2344,7 @@
   "layoutEmptyHint": "Dotknij pustego pola, aby dodać przycisk. Przytrzymaj przycisk, aby zobaczyć więcej opcji.",
   "layoutCell": "Wiersz {row}, kolumna {column}",
   "dbBrandSearchHelp": "Zacznij od marki, np. Sony lub TCL. Następnie wybierz model urządzenia lub pilota.",
-  "dbModelSearchHelp": "Wyszukaj model podany na urządzeniu lub pilocie. Spacje i łączniki nie muszą się zgadzać."
+  "dbModelSearchHelp": "Wyszukaj model podany na urządzeniu lub pilocie. Spacje i łączniki nie muszą się zgadzać.",
+  "irFinderDatabaseSearchHint": "Zacznij od wyboru marki w trybie bazy danych, aby sprawdzić znane kody bez powtórzeń. Inteligentne przeszukiwanie nadaje priorytet wybranym możliwościom, ale nie wykrywa reakcji urządzenia. Zapisz trafienie, gdy zauważysz reakcję.",
+  "irFinderClearSearchToJump": "Wyczyść wyszukiwanie, aby przejść do pozycji testowania."
 }

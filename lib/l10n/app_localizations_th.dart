@@ -4966,4 +4966,12 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'ค้นหาชื่อรุ่นที่พิมพ์ไว้บนอุปกรณ์หรือรีโมต โดยเว้นวรรคและขีดกลางไม่จำเป็นต้องตรงกัน';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'เริ่มจากเลือกยี่ห้อในโหมดฐานข้อมูลเพื่อทดสอบรหัสที่มีอยู่โดยไม่ซ้ำกัน การลองรหัสแบบอัจฉริยะจะจัดลำดับรหัสที่คาดว่าใช่ แต่ตรวจจับการตอบสนองของอุปกรณ์ไม่ได้ เมื่อเห็นอุปกรณ์ตอบสนอง ให้บันทึกรหัสที่ใช้ได้';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'ล้างการค้นหาเพื่อข้ามไปยังตำแหน่งทดสอบ';
 }

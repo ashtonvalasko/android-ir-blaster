@@ -2342,5 +2342,7 @@
   "layoutEmptyHint": "Chạm vào ô trống để thêm nút. Nhấn giữ nút để xem thêm tùy chọn.",
   "layoutCell": "Hàng {row}, cột {column}",
   "dbBrandSearchHelp": "Bắt đầu với thương hiệu, như Sony hoặc TCL. Sau đó chọn mẫu thiết bị hoặc điều khiển.",
-  "dbModelSearchHelp": "Tìm mã mẫu in trên thiết bị hoặc điều khiển. Khoảng trắng và dấu gạch nối không cần trùng khớp."
+  "dbModelSearchHelp": "Tìm mã mẫu in trên thiết bị hoặc điều khiển. Khoảng trắng và dấu gạch nối không cần trùng khớp.",
+  "irFinderDatabaseSearchHint": "Bắt đầu bằng cách chọn thương hiệu trong chế độ Cơ sở dữ liệu để thử các mã đã biết mà không lặp lại. Dò mã thông minh ưu tiên các phỏng đoán nhưng không thể phát hiện phản hồi của thiết bị. Lưu mã thành công khi bạn thấy thiết bị phản hồi.",
+  "irFinderClearSearchToJump": "Xóa nội dung tìm kiếm để chuyển đến vị trí thử mã."
 }

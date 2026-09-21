@@ -34,6 +34,48 @@ void configure(IrFinderRunController controller, int delay) =>
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
+  testWidgets('legacy database cursors keep old ordering until a fresh start',
+      (tester) async {
+    final controller = IrFinderRunController(
+      fetchCandidate: (_) async => candidate,
+      sendCandidate: (_) async {},
+    );
+    controller.restoreProgress(
+        attempted: 21,
+        currentOffset: 21,
+        bruteCursor: BigInt.zero,
+        startedAt: null,
+        paused: true,
+        uniqueDbSignals: false);
+    expect(controller.snapshot().v, 2);
+    expect(controller.currentOffset, 21);
+    controller.resume();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(controller.uniqueDbSignals, isFalse);
+    await controller.stop();
+    await controller.start();
+    expect(controller.snapshot().v, 3);
+    expect(controller.currentOffset, 0);
+    controller.dispose();
+  });
+
+  testWidgets('database exhaustion stops immediately without a false error',
+      (tester) async {
+    final controller = IrFinderRunController(
+      fetchCandidate: (controller) async {
+        controller.candidatesExhausted = true;
+        return null;
+      },
+      sendCandidate: (_) async => fail('Must not send'),
+    )..mode = IrFinderMode.database;
+    await controller.start();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(controller.running, isFalse);
+    expect(controller.lastError, isNull);
+    expect(controller.attempted, 0);
+    controller.dispose();
+  });
+
   testWidgets('cooldown is a full gap after send completion', (tester) async {
     var sends = 0;
     final sent = Completer<void>();
@@ -159,6 +201,25 @@ void main() {
     expect(controller.paused, isTrue);
     expect(controller.lastError, isStateError);
     expect(controller.pauseForHit(), isNull);
+    controller.dispose();
+  });
+
+  testWidgets('send failures pause scanning and cannot be saved as hits',
+      (tester) async {
+    var sends = 0;
+    final controller = IrFinderRunController(
+      fetchCandidate: (_) async => candidate,
+      sendCandidate: (_) async {
+        sends++;
+        throw StateError('Dongle disconnected');
+      },
+    );
+    await controller.start();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(controller.paused, isTrue);
+    expect(controller.pauseForHit(), isNull);
+    await tester.pump(const Duration(seconds: 5));
+    expect(sends, 1);
     controller.dispose();
   });
 

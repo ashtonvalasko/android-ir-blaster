@@ -2342,5 +2342,7 @@
   "layoutEmptyHint": "Düğme eklemek için boş bir hücreye dokunun. Daha fazla seçenek için bir düğmeye uzun basın.",
   "layoutCell": "Satır {row}, sütun {column}",
   "dbBrandSearchHelp": "Önce Sony veya TCL gibi bir marka seçin. Ardından cihaz veya kumanda modelini seçin.",
-  "dbModelSearchHelp": "Cihazınızın veya kumandanızın üzerinde yazan modeli arayın. Boşlukların ve kısa çizgilerin eşleşmesi gerekmez."
+  "dbModelSearchHelp": "Cihazınızın veya kumandanızın üzerinde yazan modeli arayın. Boşlukların ve kısa çizgilerin eşleşmesi gerekmez.",
+  "irFinderDatabaseSearchHint": "Bilinen kodları tekrarlamadan denemek için Veritabanı modunda bir marka seçerek başlayın. Akıllı kaba kuvvet tahminleri önceliklendirir, ancak cihazın tepkisini algılayamaz. Bir tepki gördüğünüzde başarılı kodu kaydedin.",
+  "irFinderClearSearchToJump": "Bir test konumuna atlamak için aramayı temizleyin."
 }

@@ -5030,4 +5030,12 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Busca el modelo que aparece en tu dispositivo o mando. Los espacios y guiones no tienen que coincidir.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Empieza por una marca en el modo Base de datos para probar códigos conocidos sin duplicados. La fuerza bruta inteligente prioriza posibilidades, pero no detecta la respuesta del dispositivo. Guarda un acierto cuando veas una respuesta.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Borra la búsqueda para saltar a una posición de prueba.';
 }

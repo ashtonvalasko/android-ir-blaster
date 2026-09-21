@@ -5013,4 +5013,12 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Hanapin ang modelong nakasulat sa device o remote. Hindi kailangang magkatugma ang mga espasyo at gitling.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Magsimula sa pagpili ng brand sa Database mode para subukan ang mga kilalang code nang walang pag-uulit. Inuuna ng smart brute force ang ilang hula, pero hindi nito matutukoy ang tugon ng device. I-save ang matagumpay na code kapag may nakita kang tugon.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'I-clear ang paghahanap para lumipat sa isang posisyon ng pagsubok.';
 }

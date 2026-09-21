@@ -2342,5 +2342,7 @@
   "layoutEmptyHint": "I-tap ang bakanteng puwesto para magdagdag ng button. Pindutin nang matagal ang button para sa iba pang opsyon.",
   "layoutCell": "Hanay {row}, column {column}",
   "dbBrandSearchHelp": "Magsimula sa brand, gaya ng Sony o TCL. Pagkatapos, pumili ng modelo ng device o remote.",
-  "dbModelSearchHelp": "Hanapin ang modelong nakasulat sa device o remote. Hindi kailangang magkatugma ang mga espasyo at gitling."
+  "dbModelSearchHelp": "Hanapin ang modelong nakasulat sa device o remote. Hindi kailangang magkatugma ang mga espasyo at gitling.",
+  "irFinderDatabaseSearchHint": "Magsimula sa pagpili ng brand sa Database mode para subukan ang mga kilalang code nang walang pag-uulit. Inuuna ng smart brute force ang ilang hula, pero hindi nito matutukoy ang tugon ng device. I-save ang matagumpay na code kapag may nakita kang tugon.",
+  "irFinderClearSearchToJump": "I-clear ang paghahanap para lumipat sa isang posisyon ng pagsubok."
 }

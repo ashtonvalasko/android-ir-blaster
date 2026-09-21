@@ -4803,4 +4803,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get dbModelSearchHelp => '搜索设备或遥控器上标注的型号。空格和连字符无需完全一致。';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      '先在数据库模式中选择品牌，测试已知代码并跳过重复项。智能穷举仅对候选代码排序，无法检测设备响应。观察到响应时，请保存命中结果。';
+
+  @override
+  String get irFinderClearSearchToJump => '清除搜索后才能跳转到测试位置。';
 }

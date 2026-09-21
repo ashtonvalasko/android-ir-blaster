@@ -354,6 +354,7 @@ class IrBlasterDb {
     required bool quickWinsFirst,
     String? hexPrefixUpper,
     String? search,
+    bool uniqueSignals = false,
     int limit = 100,
     int offset = 0,
   }) async {
@@ -419,7 +420,27 @@ class IrBlasterDb {
  k.id ASC
  ''';
 
-    final sql = '''
+    final modelFilterCount = m == null ? 1 : 2;
+    final keyFilters = where.skip(modelFilterCount).join(' AND ');
+    // Imports retain every named key. Finder scans can instead select one
+    // real database row per signal, without expanding thousands of model aliases.
+    final sql = uniqueSignals ? '''
+ WITH matched AS (
+   SELECT k.rowid AS key_rowid, k.id AS remote_id,
+          k.label, k.hexcode, k.protocol, m.brand, m.model
+   FROM (
+     SELECT id, brand, MIN(model) AS model FROM models m
+     WHERE ${where.take(modelFilterCount).join(' AND ')} GROUP BY id
+   ) m
+   JOIN keys k ON k.id = m.id
+   ${keyFilters.isEmpty ? '' : 'WHERE $keyFilters'}
+ ), chosen AS (
+   SELECT MIN(key_rowid) AS key_rowid FROM matched GROUP BY protocol, hexcode
+ )
+ SELECT k.* FROM matched k JOIN chosen USING (key_rowid)
+ ORDER BY ${orderBy.replaceAll('k.id', 'k.remote_id')}
+ LIMIT ? OFFSET ?
+ ''' : '''
  SELECT
    k.id AS remote_id,
    k.label AS label,

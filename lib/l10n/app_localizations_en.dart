@@ -5040,4 +5040,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Search the model printed on your device or remote. Spaces and hyphens do not need to match.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Start with a brand in Database mode to test known codes without duplicates. Smart brute force prioritizes guesses; it cannot detect a device response. Save a hit when you see a response.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Clear the search to jump to a scan position.';
 }

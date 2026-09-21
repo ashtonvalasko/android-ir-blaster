@@ -5109,4 +5109,12 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Шукайте модель, зазначену на пристрої чи пульті. Пробіли та дефіси можуть відрізнятися.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Почніть із вибору марки в режимі бази даних, щоб перевірити відомі коди без повторів. Розумний перебір визначає пріоритет варіантів, але не виявляє реакцію пристрою. Збережіть знайдений код, коли побачите відгук.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Очистьте пошук, щоб перейти до позиції тестування.';
 }

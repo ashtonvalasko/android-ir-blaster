@@ -4966,6 +4966,14 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'ابحث عن الطراز المطبوع على الجهاز أو جهاز التحكم عن بُعد. لا يلزم تطابق المسافات والشرطات.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'ابدأ باختيار العلامة التجارية في وضع قاعدة البيانات لاختبار الرموز المعروفة دون تكرار. يرتب البحث الشامل الذكي الاحتمالات حسب الأولوية، لكنه لا يكتشف استجابة الجهاز. احفظ الرمز الناجح عندما تلاحظ استجابة.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'امسح البحث للانتقال إلى موضع في الاختبار.';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -9930,4 +9938,12 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get dbModelSearchHelp =>
       'ابحث عن الموديل المكتوب على الجهاز أو الريموت. مش لازم المسافات والشرطات تكون متطابقة.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'ابدأ باختيار الماركة في وضع قاعدة البيانات عشان تختبر الأكواد المعروفة من غير تكرار. البحث الشامل الذكي بيرتب الاحتمالات حسب الأولوية، لكنه مش بيكتشف استجابة الجهاز. احفظ الكود الناجح لما تلاحظ استجابة.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'امسح البحث عشان تنتقل لموضع في الاختبار.';
 }

@@ -5090,4 +5090,12 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Wyszukaj model podany na urządzeniu lub pilocie. Spacje i łączniki nie muszą się zgadzać.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Zacznij od wyboru marki w trybie bazy danych, aby sprawdzić znane kody bez powtórzeń. Inteligentne przeszukiwanie nadaje priorytet wybranym możliwościom, ale nie wykrywa reakcji urządzenia. Zapisz trafienie, gdy zauważysz reakcję.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Wyczyść wyszukiwanie, aby przejść do pozycji testowania.';
 }

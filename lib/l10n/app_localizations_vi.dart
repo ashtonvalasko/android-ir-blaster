@@ -4985,4 +4985,12 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Tìm mã mẫu in trên thiết bị hoặc điều khiển. Khoảng trắng và dấu gạch nối không cần trùng khớp.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Bắt đầu bằng cách chọn thương hiệu trong chế độ Cơ sở dữ liệu để thử các mã đã biết mà không lặp lại. Dò mã thông minh ưu tiên các phỏng đoán nhưng không thể phát hiện phản hồi của thiết bị. Lưu mã thành công khi bạn thấy thiết bị phản hồi.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Xóa nội dung tìm kiếm để chuyển đến vị trí thử mã.';
 }

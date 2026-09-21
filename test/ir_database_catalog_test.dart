@@ -122,6 +122,71 @@ void main() {
       }
     });
 
+    test('Finder scans unique TCL signals while imports retain all named keys',
+        () async {
+      final db = IrBlasterDb.instance;
+      final imported = await db.fetchCandidateKeys(
+          brand: 'TCL', quickWinsFirst: true, limit: 10000);
+      final scanned = await db.fetchCandidateKeys(
+          brand: 'TCL',
+          quickWinsFirst: true,
+          uniqueSignals: true,
+          limit: 10000);
+      String identity(dynamic row) => '${row.protocol}:${row.hexcode}';
+      expect(imported.length, 2144);
+      expect(scanned.length, 598);
+      expect(scanned.map(identity).toSet(), imported.map(identity).toSet());
+      for (final row in scanned) {
+        expect(
+            imported.any((original) =>
+                identity(original) == identity(row) &&
+                original.remoteId == row.remoteId &&
+                original.model == row.model &&
+                original.label == row.label),
+            isTrue);
+      }
+      final page = await db.fetchCandidateKeys(
+          brand: 'TCL',
+          quickWinsFirst: true,
+          uniqueSignals: true,
+          limit: 80,
+          offset: 80);
+      expect(page.map(identity), scanned.skip(80).take(80).map(identity));
+      expect(
+          await db.fetchCandidateKeys(
+              brand: 'TCL',
+              quickWinsFirst: true,
+              uniqueSignals: true,
+              offset: scanned.length),
+          isEmpty);
+    });
+
+    test('unique Finder scans respect model, protocol and prefix filters',
+        () async {
+      for (final brand in ['SONY', 'TCL']) {
+        final rows = await IrBlasterDb.instance.fetchCandidateKeys(
+            brand: brand, quickWinsFirst: true, uniqueSignals: true, limit: 80);
+        expect(rows, isNotEmpty);
+        final sample = rows.first;
+        final prefix = sample.hexcode.substring(0, 2);
+        final filtered = await IrBlasterDb.instance.fetchCandidateKeys(
+            brand: brand,
+            model: sample.model,
+            selectedProtocolId: sample.protocol,
+            hexPrefixUpper: prefix,
+            uniqueSignals: true,
+            quickWinsFirst: true);
+        expect(filtered, isNotEmpty);
+        expect(
+            filtered.every((row) =>
+                row.brand == brand &&
+                row.model == sample.model &&
+                row.protocol == sample.protocol &&
+                row.hexcode.startsWith(prefix)),
+            isTrue);
+      }
+    });
+
     testWidgets('bulk import guides brand to model and returns selected codes',
         (tester) async {
       tester.view.physicalSize = const Size(420, 1000);

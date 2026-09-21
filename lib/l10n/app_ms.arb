@@ -2342,5 +2342,7 @@
   "layoutEmptyHint": "Ketik sel kosong untuk menambah butang. Tekan lama butang untuk lebih banyak pilihan.",
   "layoutCell": "Baris {row}, lajur {column}",
   "dbBrandSearchHelp": "Mulakan dengan jenama, seperti Sony atau TCL. Kemudian pilih model peranti atau alat kawalan jauh.",
-  "dbModelSearchHelp": "Cari model yang tertera pada peranti atau alat kawalan jauh. Ruang dan tanda sempang tidak perlu sepadan."
+  "dbModelSearchHelp": "Cari model yang tertera pada peranti atau alat kawalan jauh. Ruang dan tanda sempang tidak perlu sepadan.",
+  "irFinderDatabaseSearchHint": "Mulakan dengan memilih jenama dalam mod Pangkalan data untuk menguji kod yang diketahui tanpa pendua. Carian cuba semua pintar mengutamakan tekaan, tetapi tidak dapat mengesan respons peranti. Simpan kod yang berjaya apabila anda melihat respons.",
+  "irFinderClearSearchToJump": "Kosongkan carian untuk melompat ke kedudukan ujian."
 }

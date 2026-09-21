@@ -5028,4 +5028,12 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Cerca il modello indicato sul dispositivo o sul telecomando. Spazi e trattini non devono necessariamente corrispondere.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Inizia da una marca in modalità Database per provare codici noti senza duplicati. La ricerca intelligente a forza bruta dà priorità ad alcune ipotesi, ma non rileva la risposta del dispositivo. Salva un risultato quando il dispositivo risponde.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Cancella la ricerca per passare a una posizione del test.';
 }

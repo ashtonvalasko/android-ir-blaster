@@ -2342,5 +2342,7 @@
   "layoutEmptyHint": "Toque numa célula vazia para adicionar um botão. Mantenha um botão premido para mais opções.",
   "layoutCell": "Linha {row}, coluna {column}",
   "dbBrandSearchHelp": "Comece pela marca, como Sony ou TCL. Depois escolha um modelo de dispositivo ou comando.",
-  "dbModelSearchHelp": "Procure o modelo indicado no dispositivo ou comando. Os espaços e hífenes não precisam de corresponder."
+  "dbModelSearchHelp": "Procure o modelo indicado no dispositivo ou comando. Os espaços e hífenes não precisam de corresponder.",
+  "irFinderDatabaseSearchHint": "Comece por uma marca no modo Base de dados para testar códigos conhecidos sem duplicados. A força bruta inteligente dá prioridade a algumas hipóteses, mas não deteta a resposta do dispositivo. Guarde um resultado quando observar uma resposta.",
+  "irFinderClearSearchToJump": "Limpe a pesquisa para saltar para uma posição do teste."
 }

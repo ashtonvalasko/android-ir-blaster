@@ -2342,5 +2342,7 @@
   "layoutEmptyHint": "빈칸을 탭하여 버튼을 추가하세요. 버튼을 길게 누르면 더 많은 옵션이 표시됩니다.",
   "layoutCell": "{row}행, {column}열",
   "dbBrandSearchHelp": "먼저 Sony나 TCL 같은 브랜드를 선택한 다음 기기 또는 리모컨 모델을 선택하세요.",
-  "dbModelSearchHelp": "기기나 리모컨에 표시된 모델명을 검색하세요. 공백과 하이픈은 일치하지 않아도 됩니다."
+  "dbModelSearchHelp": "기기나 리모컨에 표시된 모델명을 검색하세요. 공백과 하이픈은 일치하지 않아도 됩니다.",
+  "irFinderDatabaseSearchHint": "데이터베이스 모드에서 브랜드를 선택하면 알려진 코드를 중복 없이 테스트할 수 있습니다. 스마트 무차별 대입은 후보의 우선순위를 정하지만 기기의 반응을 감지하지는 못합니다. 반응을 확인하면 성공한 코드를 저장하세요.",
+  "irFinderClearSearchToJump": "테스트 위치로 이동하려면 검색을 지우세요."
 }

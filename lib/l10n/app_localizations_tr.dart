@@ -4994,4 +4994,12 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Cihazınızın veya kumandanızın üzerinde yazan modeli arayın. Boşlukların ve kısa çizgilerin eşleşmesi gerekmez.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Bilinen kodları tekrarlamadan denemek için Veritabanı modunda bir marka seçerek başlayın. Akıllı kaba kuvvet tahminleri önceliklendirir, ancak cihazın tepkisini algılayamaz. Bir tepki gördüğünüzde başarılı kodu kaydedin.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Bir test konumuna atlamak için aramayı temizleyin.';
 }

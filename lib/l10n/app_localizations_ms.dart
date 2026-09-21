@@ -4997,4 +4997,12 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Cari model yang tertera pada peranti atau alat kawalan jauh. Ruang dan tanda sempang tidak perlu sepadan.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Mulakan dengan memilih jenama dalam mod Pangkalan data untuk menguji kod yang diketahui tanpa pendua. Carian cuba semua pintar mengutamakan tekaan, tetapi tidak dapat mengesan respons peranti. Simpan kod yang berjaya apabila anda melihat respons.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Kosongkan carian untuk melompat ke kedudukan ujian.';
 }

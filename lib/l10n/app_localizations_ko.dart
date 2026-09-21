@@ -4879,4 +4879,11 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       '기기나 리모컨에 표시된 모델명을 검색하세요. 공백과 하이픈은 일치하지 않아도 됩니다.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      '데이터베이스 모드에서 브랜드를 선택하면 알려진 코드를 중복 없이 테스트할 수 있습니다. 스마트 무차별 대입은 후보의 우선순위를 정하지만 기기의 반응을 감지하지는 못합니다. 반응을 확인하면 성공한 코드를 저장하세요.';
+
+  @override
+  String get irFinderClearSearchToJump => '테스트 위치로 이동하려면 검색을 지우세요.';
 }

@@ -2328,5 +2328,7 @@
   "layoutEmptyHint": "Ein leeres Feld antippen, um eine Taste hinzuzufügen. Eine Taste für weitere Optionen gedrückt halten.",
   "layoutCell": "Zeile {row}, Spalte {column}",
   "dbBrandSearchHelp": "Wähle zuerst die Marke, etwa Sony oder TCL. Wähle dann ein Geräte- oder Fernbedienungsmodell.",
-  "dbModelSearchHelp": "Suche nach der Modellnummer auf deinem Gerät oder deiner Fernbedienung. Leerzeichen und Bindestriche müssen nicht übereinstimmen."
+  "dbModelSearchHelp": "Suche nach der Modellnummer auf deinem Gerät oder deiner Fernbedienung. Leerzeichen und Bindestriche müssen nicht übereinstimmen.",
+  "irFinderDatabaseSearchHint": "Wähle zuerst eine Marke im Datenbankmodus, um bekannte Codes ohne Duplikate zu testen. Die intelligente Brute-Force-Suche priorisiert Vermutungen, erkennt aber keine Gerätereaktion. Speichere einen Treffer, wenn das Gerät reagiert.",
+  "irFinderClearSearchToJump": "Lösche die Suche, um zu einer Testposition zu springen."
 }

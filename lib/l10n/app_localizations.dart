@@ -9055,6 +9055,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search the model printed on your device or remote. Spaces and hyphens do not need to match.'**
   String get dbModelSearchHelp;
+
+  /// No description provided for @irFinderDatabaseSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with a brand in Database mode to test known codes without duplicates. Smart brute force prioritizes guesses; it cannot detect a device response. Save a hit when you see a response.'**
+  String get irFinderDatabaseSearchHint;
+
+  /// No description provided for @irFinderClearSearchToJump.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear the search to jump to a scan position.'**
+  String get irFinderClearSearchToJump;
 }
 
 class _AppLocalizationsDelegate

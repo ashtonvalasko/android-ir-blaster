@@ -4863,4 +4863,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get dbModelSearchHelp => '機器やリモコンに記載された型番で検索できます。スペースやハイフンの有無は問いません。';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'まずデータベースモードでメーカーを選び、既知のコードを重複なくテストしてください。スマート総当たりは候補に優先順位を付けますが、機器の反応は検出できません。反応を確認したらヒットを保存してください。';
+
+  @override
+  String get irFinderClearSearchToJump => 'テスト位置に移動するには検索をクリアしてください。';
 }

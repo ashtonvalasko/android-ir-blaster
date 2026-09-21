@@ -5031,6 +5031,14 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Procure o modelo indicado no dispositivo ou comando. Os espaços e hífenes não precisam de corresponder.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Comece por uma marca no modo Base de dados para testar códigos conhecidos sem duplicados. A força bruta inteligente dá prioridade a algumas hipóteses, mas não deteta a resposta do dispositivo. Guarde um resultado quando observar uma resposta.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Limpe a pesquisa para saltar para uma posição do teste.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -10064,4 +10072,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get dbModelSearchHelp =>
       'Busque o modelo indicado no aparelho ou controle remoto. Espaços e hífens não precisam ser iguais.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Comece por uma marca no modo Banco de dados para testar códigos conhecidos sem duplicatas. A força bruta inteligente prioriza algumas possibilidades, mas não detecta a resposta do aparelho. Salve um acerto quando observar uma resposta.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Limpe a busca para ir a uma posição do teste.';
 }

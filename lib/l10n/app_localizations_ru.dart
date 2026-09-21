@@ -5001,4 +5001,12 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get dbModelSearchHelp =>
       'Найдите модель, указанную на устройстве или пульте. Пробелы и дефисы могут отличаться.';
+
+  @override
+  String get irFinderDatabaseSearchHint =>
+      'Начните с выбора марки в режиме базы данных, чтобы проверить известные коды без повторов. Умный перебор задаёт приоритет вариантов, но не распознаёт реакцию устройства. Сохраните найденный код, когда увидите отклик.';
+
+  @override
+  String get irFinderClearSearchToJump =>
+      'Очистите поиск, чтобы перейти к позиции тестирования.';
 }
