@@ -4825,4 +4825,50 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsToolsSubtitle => '기기 제어, 빠른 설정, GitHub 스토어 및 범용 전원';
+
+  @override
+  String get layoutCustom => '사용자 지정';
+
+  @override
+  String get layoutCustomDescription => '열 수, 모양 및 빈 공간 선택';
+
+  @override
+  String get layoutColumns => '행당 버튼 수';
+
+  @override
+  String get layoutShape => '버튼 모양';
+
+  @override
+  String get layoutCircle => '원';
+
+  @override
+  String get layoutRoundedSquare => '모서리가 둥근 정사각형';
+
+  @override
+  String get layoutRectangle => '직사각형';
+
+  @override
+  String get layoutReflowHint =>
+      '열 수를 변경하면 격자가 재배치됩니다. 좁은 화면에서는 옆으로 스와이프하여 버튼을 누르기 쉬운 크기로 유지할 수 있습니다.';
+
+  @override
+  String get layoutUpdated => '배치가 업데이트되었습니다';
+
+  @override
+  String get layoutArrange => '배치 편집';
+
+  @override
+  String get layoutAddRow => '빈 행 추가';
+
+  @override
+  String get layoutArrangeHint =>
+      '버튼을 드래그하거나 버튼을 탭한 다음 목적지를 탭하세요. 이미 버튼이 있는 칸은 서로 위치가 바뀝니다.';
+
+  @override
+  String get layoutEmptyHint => '빈칸을 탭하여 버튼을 추가하세요. 버튼을 길게 누르면 더 많은 옵션이 표시됩니다.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return '$row행, $column열';
+  }
 }

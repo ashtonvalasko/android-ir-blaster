@@ -94,11 +94,19 @@ List<IRButton> cloneButtonsForImport(Iterable<IRButton> buttons) {
 List<Remote> cloneRemotesForImport(Iterable<Remote> remotes) {
   return remotes
       .map(
-        (remote) => Remote(
-          buttons: cloneButtonsForImport(remote.buttons),
-          name: remote.name,
-          useNewStyle: remote.useNewStyle,
-        ),
+        (remote) {
+          final buttons = cloneButtonsForImport(remote.buttons);
+          final ids = <String, String>{
+            for (var i = 0; i < buttons.length; i++)
+              remote.buttons[i].id: buttons[i].id,
+          };
+          return Remote(
+            buttons: buttons,
+            name: remote.name,
+            useNewStyle: remote.useNewStyle,
+            gridLayout: remote.resolvedGridLayout?.remap(ids),
+          );
+        },
       )
       .toList();
 }

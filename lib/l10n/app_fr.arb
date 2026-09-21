@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Thème, couleurs et langue de l’application",
   "settingsInteractionSubtitle": "Démarrage, vibrations, affichage des télécommandes et automatisation",
   "settingsToolsTitle": "Outils et raccourcis",
-  "settingsToolsSubtitle": "Commandes des appareils, réglages rapides, boutique GitHub et alimentation universelle"
+  "settingsToolsSubtitle": "Commandes des appareils, réglages rapides, boutique GitHub et alimentation universelle",
+  "layoutCustom": "Personnalisé",
+  "layoutCustomDescription": "Choisir les colonnes, les formes et les espaces vides",
+  "layoutColumns": "Boutons par ligne",
+  "layoutShape": "Forme des boutons",
+  "layoutCircle": "Cercle",
+  "layoutRoundedSquare": "Carré arrondi",
+  "layoutRectangle": "Rectangle",
+  "layoutReflowHint": "Changer le nombre de colonnes réorganise la grille. Sur un écran étroit, faites défiler horizontalement pour garder des boutons faciles à toucher.",
+  "layoutUpdated": "Disposition mise à jour",
+  "layoutArrange": "Organiser la disposition",
+  "layoutAddRow": "Ajouter une ligne vide",
+  "layoutArrangeHint": "Faites glisser un bouton, ou touchez-le puis touchez sa destination. Les cellules occupées sont échangées.",
+  "layoutEmptyHint": "Touchez une cellule vide pour ajouter un bouton. Appuyez longuement sur un bouton pour plus d’options.",
+  "layoutCell": "Ligne {row}, colonne {column}"
 }

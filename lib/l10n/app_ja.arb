@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "テーマ、色、アプリの言語",
   "settingsInteractionSubtitle": "起動、振動、リモコン表示、自動化",
   "settingsToolsTitle": "ツールとショートカット",
-  "settingsToolsSubtitle": "デバイスコントロール、クイック設定、GitHubストア、一括電源操作"
+  "settingsToolsSubtitle": "デバイスコントロール、クイック設定、GitHubストア、一括電源操作",
+  "layoutCustom": "カスタム",
+  "layoutCustomDescription": "列数、形、空きスペースを選択",
+  "layoutColumns": "1行のボタン数",
+  "layoutShape": "ボタンの形",
+  "layoutCircle": "円",
+  "layoutRoundedSquare": "角丸の正方形",
+  "layoutRectangle": "長方形",
+  "layoutReflowHint": "列数を変更すると配置が組み直されます。画面が狭い場合は横にスワイプすると、押しやすいボタンのサイズを保てます。",
+  "layoutUpdated": "配置を更新しました",
+  "layoutArrange": "配置を編集",
+  "layoutAddRow": "空の行を追加",
+  "layoutArrangeHint": "ボタンをドラッグするか、ボタンをタップしてから移動先をタップします。移動先にボタンがある場合は入れ替わります。",
+  "layoutEmptyHint": "空のマスをタップするとボタンを追加できます。ボタンを長押しするとその他の操作を表示します。",
+  "layoutCell": "{row}行、{column}列"
 }

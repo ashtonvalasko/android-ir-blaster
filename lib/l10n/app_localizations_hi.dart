@@ -4936,4 +4936,51 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'डिवाइस नियंत्रण, क्विक सेटिंग्स, GitHub स्टोर और सार्वभौमिक पावर';
+
+  @override
+  String get layoutCustom => 'कस्टम';
+
+  @override
+  String get layoutCustomDescription => 'कॉलम, आकार और खाली जगह चुनें';
+
+  @override
+  String get layoutColumns => 'प्रति पंक्ति बटन';
+
+  @override
+  String get layoutShape => 'बटन का आकार';
+
+  @override
+  String get layoutCircle => 'वृत्त';
+
+  @override
+  String get layoutRoundedSquare => 'गोल कोनों वाला वर्ग';
+
+  @override
+  String get layoutRectangle => 'आयत';
+
+  @override
+  String get layoutReflowHint =>
+      'कॉलम बदलने से ग्रिड फिर से व्यवस्थित होता है। संकरी स्क्रीन पर बटन आसानी से दबाने लायक रखने के लिए बगल की ओर स्वाइप करें।';
+
+  @override
+  String get layoutUpdated => 'लेआउट अपडेट हो गया';
+
+  @override
+  String get layoutArrange => 'लेआउट व्यवस्थित करें';
+
+  @override
+  String get layoutAddRow => 'खाली पंक्ति जोड़ें';
+
+  @override
+  String get layoutArrangeHint =>
+      'बटन खींचें, या पहले उसे और फिर गंतव्य को टैप करें। भरे हुए खानों की जगह आपस में बदल जाती है।';
+
+  @override
+  String get layoutEmptyHint =>
+      'बटन जोड़ने के लिए खाली खाने को टैप करें। अधिक विकल्पों के लिए बटन को देर तक दबाएँ।';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'पंक्ति $row, कॉलम $column';
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:irblaster_controller/l10n/l10n.dart';
 import 'package:irblaster_controller/widgets/remote_editor/remote_editor_draft.dart';
+import 'package:irblaster_controller/utils/remote_grid_layout.dart';
+import 'package:irblaster_controller/widgets/remote_editor/remote_layout_picker.dart';
 
 class RemoteSetupScreen extends StatefulWidget {
   const RemoteSetupScreen({super.key});
@@ -12,6 +14,7 @@ class RemoteSetupScreen extends StatefulWidget {
 class _RemoteSetupScreenState extends State<RemoteSetupScreen> {
   late final TextEditingController _nameController;
   RemoteLayoutStyle _layoutStyle = RemoteLayoutStyle.compact;
+  RemoteGridLayout? _gridLayout;
 
   bool get _isDirty =>
       _nameController.text.trim().isNotEmpty ||
@@ -40,6 +43,7 @@ class _RemoteSetupScreenState extends State<RemoteSetupScreen> {
       RemoteEditorDraft.create(
         defaultName: name,
         layoutStyle: _layoutStyle,
+        gridLayout: _gridLayout,
       ),
     );
   }
@@ -64,118 +68,6 @@ class _RemoteSetupScreenState extends State<RemoteSetupScreen> {
       ),
     );
     return result ?? false;
-  }
-
-  Widget _buildLayoutPreviewCard(
-    BuildContext context, {
-    required RemoteLayoutStyle style,
-    required bool selected,
-  }) {
-    final theme = Theme.of(context);
-    final cs = theme.colorScheme;
-    final bool isWide = style == RemoteLayoutStyle.wide;
-
-    return Expanded(
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(18),
-          onTap: () => setState(() => _layoutStyle = style),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 180),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
-              color: selected
-                  ? cs.primaryContainer.withValues(alpha: 0.75)
-                  : cs.surfaceContainerHighest.withValues(alpha: 0.45),
-              border: Border.all(
-                color: selected ? cs.primary : cs.outlineVariant,
-                width: selected ? 1.8 : 1,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      isWide
-                          ? Icons.view_agenda_outlined
-                          : Icons.grid_view_outlined,
-                      size: 18,
-                      color: selected
-                          ? cs.onPrimaryContainer
-                          : cs.onSurfaceVariant,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        isWide
-                            ? context.l10n.layoutWide
-                            : context.l10n.layoutCompact,
-                        style: theme.textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.w800,
-                          color: selected
-                              ? cs.onPrimaryContainer
-                              : cs.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  height: 92,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    color: cs.surface.withValues(alpha: 0.9),
-                    border: Border.all(
-                      color: cs.outlineVariant.withValues(alpha: 0.55),
-                    ),
-                  ),
-                  child: isWide
-                      ? GridView.count(
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 6,
-                          crossAxisSpacing: 6,
-                          childAspectRatio: 2.3,
-                          children: List.generate(
-                            6,
-                            (_) => Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color:
-                                    cs.secondaryContainer.withValues(alpha: 0.75),
-                              ),
-                            ),
-                          ),
-                        )
-                      : GridView.count(
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          mainAxisSpacing: 6,
-                          crossAxisSpacing: 6,
-                          children: List.generate(
-                            8,
-                            (_) => Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color:
-                                    cs.secondaryContainer.withValues(alpha: 0.75),
-                              ),
-                            ),
-                          ),
-                        ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -280,47 +172,13 @@ class _RemoteSetupScreenState extends State<RemoteSetupScreen> {
                 clipBehavior: Clip.antiAlias,
                 child: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.layoutStyle,
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          _buildLayoutPreviewCard(
-                            context,
-                            style: RemoteLayoutStyle.compact,
-                            selected:
-                                _layoutStyle == RemoteLayoutStyle.compact,
-                          ),
-                          const SizedBox(width: 10),
-                          _buildLayoutPreviewCard(
-                            context,
-                            style: RemoteLayoutStyle.wide,
-                            selected: _layoutStyle == RemoteLayoutStyle.wide,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 180),
-                        child: Text(
-                          _layoutStyle == RemoteLayoutStyle.wide
-                              ? l10n.layoutWideDescription
-                              : l10n.layoutCompactDescription,
-                          key: ValueKey(_layoutStyle),
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: cs.onSurfaceVariant,
-                            height: 1.35,
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: RemoteLayoutPicker(
+                    style: _layoutStyle,
+                    grid: _gridLayout,
+                    onChanged: (style, grid) => setState(() {
+                      _layoutStyle = style;
+                      _gridLayout = grid;
+                    }),
                   ),
                 ),
               ),

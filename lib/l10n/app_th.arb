@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "ธีม สี และภาษาของแอป",
   "settingsInteractionSubtitle": "การเริ่มต้น การสั่น การแสดงรีโมต และระบบอัตโนมัติ",
   "settingsToolsTitle": "เครื่องมือและทางลัด",
-  "settingsToolsSubtitle": "การควบคุมอุปกรณ์ การตั้งค่าด่วน GitHub Store และปุ่มเปิดปิดแบบสากล"
+  "settingsToolsSubtitle": "การควบคุมอุปกรณ์ การตั้งค่าด่วน GitHub Store และปุ่มเปิดปิดแบบสากล",
+  "layoutCustom": "กำหนดเอง",
+  "layoutCustomDescription": "เลือกคอลัมน์ รูปร่าง และพื้นที่ว่าง",
+  "layoutColumns": "จำนวนปุ่มต่อแถว",
+  "layoutShape": "รูปร่างปุ่ม",
+  "layoutCircle": "วงกลม",
+  "layoutRoundedSquare": "สี่เหลี่ยมจัตุรัสมุมมน",
+  "layoutRectangle": "สี่เหลี่ยมผืนผ้า",
+  "layoutReflowHint": "การเปลี่ยนคอลัมน์จะจัดตารางใหม่ บนหน้าจอแคบ ให้ปัดไปด้านข้างเพื่อคงขนาดปุ่มที่แตะได้ง่าย",
+  "layoutUpdated": "อัปเดตการจัดวางแล้ว",
+  "layoutArrange": "จัดวางปุ่ม",
+  "layoutAddRow": "เพิ่มแถวว่าง",
+  "layoutArrangeHint": "ลากปุ่ม หรือแตะปุ่มแล้วแตะตำแหน่งปลายทาง ช่องที่มีปุ่มอยู่แล้วจะสลับตำแหน่งกัน",
+  "layoutEmptyHint": "แตะช่องว่างเพื่อเพิ่มปุ่ม กดปุ่มค้างไว้เพื่อดูตัวเลือกเพิ่มเติม",
+  "layoutCell": "แถว {row} คอลัมน์ {column}"
 }

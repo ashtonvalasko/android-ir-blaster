@@ -4957,4 +4957,52 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Mga kontrol ng device, mabilisang setting, GitHub Store at unibersal na power';
+
+  @override
+  String get layoutCustom => 'Pasadya';
+
+  @override
+  String get layoutCustomDescription =>
+      'Pumili ng mga column, hugis at bakanteng espasyo';
+
+  @override
+  String get layoutColumns => 'Mga button bawat hanay';
+
+  @override
+  String get layoutShape => 'Hugis ng button';
+
+  @override
+  String get layoutCircle => 'Bilog';
+
+  @override
+  String get layoutRoundedSquare => 'Parisukat na bilugan ang mga sulok';
+
+  @override
+  String get layoutRectangle => 'Parihaba';
+
+  @override
+  String get layoutReflowHint =>
+      'Inaayos muli ang grid kapag binago ang mga column. Sa makitid na screen, mag-swipe patagilid para manatiling madaling pindutin ang mga button.';
+
+  @override
+  String get layoutUpdated => 'Na-update ang layout';
+
+  @override
+  String get layoutArrange => 'Ayusin ang layout';
+
+  @override
+  String get layoutAddRow => 'Magdagdag ng bakanteng hanay';
+
+  @override
+  String get layoutArrangeHint =>
+      'I-drag ang button, o i-tap ito at pagkatapos ay ang destinasyon. Magpapalitan ang mga puwestong may laman.';
+
+  @override
+  String get layoutEmptyHint =>
+      'I-tap ang bakanteng puwesto para magdagdag ng button. Pindutin nang matagal ang button para sa iba pang opsyon.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Hanay $row, column $column';
+  }
 }

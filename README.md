@@ -238,6 +238,9 @@ The Signal Tester is designed to help discover unknown working IR commands.
 
 ## Remotes Management
 
+- Layouts: keep the existing Compact or Wide presets, or choose Custom when creating a remote or editing its settings in Remote Studio.
+- Custom layouts: choose 1–6 buttons per row and a shared circle, rounded-square, or rectangle shape. In **Arrange layout**, drag a button or tap it and then its destination; occupied cells swap. Add empty rows or tap an empty cell to create a button there. Changes support Undo and the studio's Save/discard flow.
+- Gaps are invisible and inactive when using the remote, and do not count as buttons. Custom positions are preserved in JSON backups and imports. Narrow screens can scroll sideways without changing the arrangement. Older app versions can still read the real buttons, but do not preserve the custom layout when saving.
 - Import remotes: JSON backups and Flipper Zero `.ir` files (Settings > Backup > Import backup).
 - GitHub Store: Browse GitHub repositories, preview supported files, and import them directly into your remote library.
 - Export remotes: Save a JSON backup to Downloads.

@@ -4810,4 +4810,50 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsToolsSubtitle => 'デバイスコントロール、クイック設定、GitHubストア、一括電源操作';
+
+  @override
+  String get layoutCustom => 'カスタム';
+
+  @override
+  String get layoutCustomDescription => '列数、形、空きスペースを選択';
+
+  @override
+  String get layoutColumns => '1行のボタン数';
+
+  @override
+  String get layoutShape => 'ボタンの形';
+
+  @override
+  String get layoutCircle => '円';
+
+  @override
+  String get layoutRoundedSquare => '角丸の正方形';
+
+  @override
+  String get layoutRectangle => '長方形';
+
+  @override
+  String get layoutReflowHint =>
+      '列数を変更すると配置が組み直されます。画面が狭い場合は横にスワイプすると、押しやすいボタンのサイズを保てます。';
+
+  @override
+  String get layoutUpdated => '配置を更新しました';
+
+  @override
+  String get layoutArrange => '配置を編集';
+
+  @override
+  String get layoutAddRow => '空の行を追加';
+
+  @override
+  String get layoutArrangeHint =>
+      'ボタンをドラッグするか、ボタンをタップしてから移動先をタップします。移動先にボタンがある場合は入れ替わります。';
+
+  @override
+  String get layoutEmptyHint => '空のマスをタップするとボタンを追加できます。ボタンを長押しするとその他の操作を表示します。';
+
+  @override
+  String layoutCell(int row, int column) {
+    return '$row行、$column列';
+  }
 }

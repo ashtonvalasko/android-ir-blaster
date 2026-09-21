@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:irblaster_controller/l10n/l10n.dart';
 import 'package:irblaster_controller/widgets/remote_editor/remote_editor_draft.dart';
+import 'package:irblaster_controller/utils/remote_grid_layout.dart';
+import 'package:irblaster_controller/widgets/remote_editor/remote_layout_picker.dart';
 
 class RemoteSettingsResult {
   const RemoteSettingsResult({
     required this.name,
     required this.layoutStyle,
+    this.gridLayout,
   });
 
   final String name;
   final RemoteLayoutStyle layoutStyle;
+  final RemoteGridLayout? gridLayout;
 }
 
 class RemoteSettingsSheet extends StatefulWidget {
@@ -17,10 +21,12 @@ class RemoteSettingsSheet extends StatefulWidget {
     super.key,
     required this.initialName,
     required this.initialLayoutStyle,
+    this.initialGridLayout,
   });
 
   final String initialName;
   final RemoteLayoutStyle initialLayoutStyle;
+  final RemoteGridLayout? initialGridLayout;
 
   @override
   State<RemoteSettingsSheet> createState() => _RemoteSettingsSheetState();
@@ -29,12 +35,14 @@ class RemoteSettingsSheet extends StatefulWidget {
 class _RemoteSettingsSheetState extends State<RemoteSettingsSheet> {
   late final TextEditingController _nameController;
   late RemoteLayoutStyle _layoutStyle;
+  RemoteGridLayout? _gridLayout;
 
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget.initialName);
     _layoutStyle = widget.initialLayoutStyle;
+    _gridLayout = widget.initialGridLayout;
   }
 
   @override
@@ -51,6 +59,7 @@ class _RemoteSettingsSheetState extends State<RemoteSettingsSheet> {
             ? l10n.untitledRemote
             : _nameController.text.trim(),
         layoutStyle: _layoutStyle,
+        gridLayout: _gridLayout,
       ),
     );
   }
@@ -59,7 +68,8 @@ class _RemoteSettingsSheetState extends State<RemoteSettingsSheet> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
-    return Padding(
+    return SingleChildScrollView(
+        child: Padding(
       padding: EdgeInsets.fromLTRB(
         16,
         8,
@@ -72,7 +82,8 @@ class _RemoteSettingsSheetState extends State<RemoteSettingsSheet> {
         children: [
           Text(
             l10n.editRemote,
-            style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+            style: theme.textTheme.titleLarge
+                ?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 12),
           TextField(
@@ -85,28 +96,13 @@ class _RemoteSettingsSheetState extends State<RemoteSettingsSheet> {
             ),
           ),
           const SizedBox(height: 16),
-          Text(
-            l10n.layoutStyle,
-            style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
-          ),
-          const SizedBox(height: 8),
-          SegmentedButton<RemoteLayoutStyle>(
-            segments: [
-              ButtonSegment(
-                value: RemoteLayoutStyle.compact,
-                icon: const Icon(Icons.grid_view_outlined),
-                label: Text(l10n.layoutCompact),
-              ),
-              ButtonSegment(
-                value: RemoteLayoutStyle.wide,
-                icon: const Icon(Icons.view_agenda_outlined),
-                label: Text(l10n.layoutWide),
-              ),
-            ],
-            selected: {_layoutStyle},
-            onSelectionChanged: (selection) {
-              setState(() => _layoutStyle = selection.first);
-            },
+          RemoteLayoutPicker(
+            style: _layoutStyle,
+            grid: _gridLayout,
+            onChanged: (style, grid) => setState(() {
+              _layoutStyle = style;
+              _gridLayout = grid;
+            }),
           ),
           const SizedBox(height: 16),
           Row(
@@ -128,6 +124,6 @@ class _RemoteSettingsSheetState extends State<RemoteSettingsSheet> {
           ),
         ],
       ),
-    );
+    ));
   }
 }

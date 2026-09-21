@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:irblaster_controller/utils/remote_grid_layout.dart';
 
 class IRButton {
   final String id;
@@ -131,6 +132,10 @@ class Remote {
   final List<IRButton> buttons;
   String name;
   bool useNewStyle;
+  RemoteGridLayout? gridLayout;
+
+  RemoteGridLayout? get resolvedGridLayout =>
+      gridLayout?.reconcile(buttons.map((button) => button.id));
 
   static int _nextId = 1;
 
@@ -139,6 +144,7 @@ class Remote {
     required this.buttons,
     required this.name,
     this.useNewStyle = false,
+    this.gridLayout,
   }) : id = id ?? _nextId++;
 
   Map<String, dynamic> toJson() => {
@@ -146,6 +152,7 @@ class Remote {
         'buttons': buttons.map((b) => b.toJson()).toList(),
         'name': name,
         'useNewStyle': useNewStyle,
+        if (gridLayout != null) 'gridLayout': resolvedGridLayout!.toJson(),
       };
 
   factory Remote.fromJson(Map<String, dynamic> json) {
@@ -157,6 +164,7 @@ class Remote {
           .toList(),
       name: (json['name'] as String?) ?? '',
       useNewStyle: (json['useNewStyle'] as bool?) ?? false,
+      gridLayout: RemoteGridLayout.fromJson(json['gridLayout']),
     );
   }
 }

@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Tema, colori e lingua dell’app",
   "settingsInteractionSubtitle": "Avvio, vibrazione, visualizzazione del telecomando e automazione",
   "settingsToolsTitle": "Strumenti e scorciatoie",
-  "settingsToolsSubtitle": "Controlli dei dispositivi, impostazioni rapide, GitHub Store e accensione universale"
+  "settingsToolsSubtitle": "Controlli dei dispositivi, impostazioni rapide, GitHub Store e accensione universale",
+  "layoutCustom": "Personalizzato",
+  "layoutCustomDescription": "Scegli colonne, forme e spazi vuoti",
+  "layoutColumns": "Pulsanti per riga",
+  "layoutShape": "Forma dei pulsanti",
+  "layoutCircle": "Cerchio",
+  "layoutRoundedSquare": "Quadrato arrotondato",
+  "layoutRectangle": "Rettangolo",
+  "layoutReflowHint": "Cambiare le colonne riorganizza la griglia. Sugli schermi stretti, scorri lateralmente per mantenere i pulsanti facili da toccare.",
+  "layoutUpdated": "Disposizione aggiornata",
+  "layoutArrange": "Organizza disposizione",
+  "layoutAddRow": "Aggiungi riga vuota",
+  "layoutArrangeHint": "Trascina un pulsante oppure toccalo e poi tocca la destinazione. Le celle occupate vengono scambiate.",
+  "layoutEmptyHint": "Tocca una cella vuota per aggiungere un pulsante. Tieni premuto un pulsante per altre opzioni.",
+  "layoutCell": "Riga {row}, colonna {column}"
 }

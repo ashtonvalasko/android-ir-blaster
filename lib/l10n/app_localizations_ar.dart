@@ -4910,6 +4910,54 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'التحكم بالأجهزة والإعدادات السريعة ومتجر GitHub والطاقة العامة';
+
+  @override
+  String get layoutCustom => 'مخصص';
+
+  @override
+  String get layoutCustomDescription =>
+      'اختر الأعمدة والأشكال والمساحات الفارغة';
+
+  @override
+  String get layoutColumns => 'الأزرار في كل صف';
+
+  @override
+  String get layoutShape => 'شكل الأزرار';
+
+  @override
+  String get layoutCircle => 'دائرة';
+
+  @override
+  String get layoutRoundedSquare => 'مربع مستدير الزوايا';
+
+  @override
+  String get layoutRectangle => 'مستطيل';
+
+  @override
+  String get layoutReflowHint =>
+      'يؤدي تغيير الأعمدة إلى إعادة ترتيب الشبكة. على الشاشات الضيقة، اسحب جانبياً للحفاظ على حجم أزرار يسهل لمسها.';
+
+  @override
+  String get layoutUpdated => 'تم تحديث التخطيط';
+
+  @override
+  String get layoutArrange => 'ترتيب التخطيط';
+
+  @override
+  String get layoutAddRow => 'إضافة صف فارغ';
+
+  @override
+  String get layoutArrangeHint =>
+      'اسحب الزر، أو المسه ثم المس وجهته. يتم تبديل الخلايا المشغولة.';
+
+  @override
+  String get layoutEmptyHint =>
+      'المس خلية فارغة لإضافة زر. اضغط مطولاً على زر لعرض المزيد من الخيارات.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'الصف $row، العمود $column';
+  }
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -9818,4 +9866,52 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get settingsToolsSubtitle =>
       'التحكم بالأجهزة والإعدادات السريعة ومتجر GitHub والطاقة العامة';
+
+  @override
+  String get layoutCustom => 'مخصص';
+
+  @override
+  String get layoutCustomDescription =>
+      'اختر الأعمدة والأشكال والمساحات الفارغة';
+
+  @override
+  String get layoutColumns => 'الأزرار في كل صف';
+
+  @override
+  String get layoutShape => 'شكل الأزرار';
+
+  @override
+  String get layoutCircle => 'دائرة';
+
+  @override
+  String get layoutRoundedSquare => 'مربع مستدير الزوايا';
+
+  @override
+  String get layoutRectangle => 'مستطيل';
+
+  @override
+  String get layoutReflowHint =>
+      'يؤدي تغيير الأعمدة إلى إعادة ترتيب الشبكة. على الشاشات الضيقة، اسحب جانبياً للحفاظ على حجم أزرار يسهل لمسها.';
+
+  @override
+  String get layoutUpdated => 'تم تحديث التخطيط';
+
+  @override
+  String get layoutArrange => 'ترتيب التخطيط';
+
+  @override
+  String get layoutAddRow => 'إضافة صف فارغ';
+
+  @override
+  String get layoutArrangeHint =>
+      'اسحب الزر، أو المسه ثم المس وجهته. يتم تبديل الخلايا المشغولة.';
+
+  @override
+  String get layoutEmptyHint =>
+      'المس خلية فارغة لإضافة زر. اضغط مطولاً على زر لعرض المزيد من الخيارات.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'الصف $row، العمود $column';
+  }
 }

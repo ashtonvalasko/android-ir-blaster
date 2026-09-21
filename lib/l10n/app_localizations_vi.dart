@@ -4929,4 +4929,52 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Điều khiển thiết bị, cài đặt nhanh, kho GitHub và nguồn đa năng';
+
+  @override
+  String get layoutCustom => 'Tùy chỉnh';
+
+  @override
+  String get layoutCustomDescription =>
+      'Chọn số cột, hình dạng và khoảng trống';
+
+  @override
+  String get layoutColumns => 'Số nút mỗi hàng';
+
+  @override
+  String get layoutShape => 'Hình dạng nút';
+
+  @override
+  String get layoutCircle => 'Hình tròn';
+
+  @override
+  String get layoutRoundedSquare => 'Hình vuông bo góc';
+
+  @override
+  String get layoutRectangle => 'Hình chữ nhật';
+
+  @override
+  String get layoutReflowHint =>
+      'Thay đổi số cột sẽ sắp xếp lại lưới. Trên màn hình hẹp, hãy vuốt ngang để giữ các nút ở kích thước dễ chạm.';
+
+  @override
+  String get layoutUpdated => 'Đã cập nhật bố cục';
+
+  @override
+  String get layoutArrange => 'Sắp xếp bố cục';
+
+  @override
+  String get layoutAddRow => 'Thêm hàng trống';
+
+  @override
+  String get layoutArrangeHint =>
+      'Kéo nút hoặc chạm vào nút rồi chạm vào vị trí đích. Các ô đã có nút sẽ đổi chỗ cho nhau.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Chạm vào ô trống để thêm nút. Nhấn giữ nút để xem thêm tùy chọn.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Hàng $row, cột $column';
+  }
 }

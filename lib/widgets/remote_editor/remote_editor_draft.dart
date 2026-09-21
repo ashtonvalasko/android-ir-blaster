@@ -1,6 +1,7 @@
 import 'package:irblaster_controller/utils/remote.dart';
+import 'package:irblaster_controller/utils/remote_grid_layout.dart';
 
-enum RemoteLayoutStyle { compact, wide }
+enum RemoteLayoutStyle { compact, wide, custom }
 
 class RemoteEditorDraft {
   RemoteEditorDraft({
@@ -8,18 +9,22 @@ class RemoteEditorDraft {
     required this.name,
     required this.layoutStyle,
     required List<IRButton> buttons,
+    this.gridLayout,
   })  : buttons = List<IRButton>.from(buttons),
         _initialName = name,
         _initialLayoutStyle = layoutStyle,
+        _initialGridLayout = gridLayout,
         _initialButtons = List<IRButton>.from(buttons);
 
   factory RemoteEditorDraft.create({
     required String defaultName,
     RemoteLayoutStyle layoutStyle = RemoteLayoutStyle.compact,
+    RemoteGridLayout? gridLayout,
   }) {
     return RemoteEditorDraft(
       name: defaultName,
       layoutStyle: layoutStyle,
+      gridLayout: gridLayout,
       buttons: const <IRButton>[],
     );
   }
@@ -28,20 +33,25 @@ class RemoteEditorDraft {
     return RemoteEditorDraft(
       remoteId: remote.id,
       name: remote.name,
-      layoutStyle: remote.useNewStyle
-          ? RemoteLayoutStyle.wide
-          : RemoteLayoutStyle.compact,
+      layoutStyle: remote.gridLayout != null
+          ? RemoteLayoutStyle.custom
+          : remote.useNewStyle
+              ? RemoteLayoutStyle.wide
+              : RemoteLayoutStyle.compact,
       buttons: remote.buttons,
+      gridLayout: remote.resolvedGridLayout,
     );
   }
 
   final int? remoteId;
   final String _initialName;
   final RemoteLayoutStyle _initialLayoutStyle;
+  final RemoteGridLayout? _initialGridLayout;
   final List<IRButton> _initialButtons;
 
   String name;
   RemoteLayoutStyle layoutStyle;
+  RemoteGridLayout? gridLayout;
   final List<IRButton> buttons;
 
   bool get useNewStyle => layoutStyle == RemoteLayoutStyle.wide;
@@ -50,6 +60,12 @@ class RemoteEditorDraft {
   bool get isDirty {
     if (name != _initialName) return true;
     if (layoutStyle != _initialLayoutStyle) return true;
+    if (layoutStyle == RemoteLayoutStyle.custom &&
+        (gridLayout == null
+            ? _initialGridLayout != null
+            : !gridLayout!.sameAs(_initialGridLayout))) {
+      return true;
+    }
     return !_sameButtons(buttons, _initialButtons);
   }
 
@@ -59,6 +75,7 @@ class RemoteEditorDraft {
       name: name,
       layoutStyle: layoutStyle,
       buttons: buttons,
+      gridLayout: gridLayout,
     );
   }
 
@@ -68,6 +85,10 @@ class RemoteEditorDraft {
       name: name,
       buttons: List<IRButton>.from(buttons),
       useNewStyle: useNewStyle,
+      gridLayout: layoutStyle == RemoteLayoutStyle.custom
+          ? (gridLayout ?? RemoteGridLayout(columns: 3))
+              .reconcile(buttons.map((button) => button.id))
+          : null,
     );
   }
 
@@ -80,23 +101,41 @@ class RemoteEditorDraft {
   }
 
   void replaceButtonAt(int index, IRButton button) {
+    final oldId = buttons[index].id;
     buttons[index] = button;
+    gridLayout = gridLayout?.copyWith(
+      cells: gridLayout!.cells.map((id) => id == oldId ? button.id : id),
+    );
   }
 
-  void addButton(IRButton button) {
+  void addButton(IRButton button, {int? cell}) {
     buttons.add(button);
+    if (cell != null && gridLayout != null) {
+      final cells = gridLayout!.cells.toList();
+      cells[cell] = button.id;
+      gridLayout = gridLayout!.copyWith(cells: cells);
+    }
+    _syncGrid();
   }
 
   void addButtons(Iterable<IRButton> values) {
     buttons.addAll(values);
+    _syncGrid();
   }
 
   void insertButton(int index, IRButton button) {
     buttons.insert(index, button);
+    _syncGrid();
   }
 
   IRButton removeButtonAt(int index) {
-    return buttons.removeAt(index);
+    final button = buttons.removeAt(index);
+    _syncGrid();
+    return button;
+  }
+
+  void _syncGrid() {
+    gridLayout = gridLayout?.reconcile(buttons.map((button) => button.id));
   }
 
   static bool _sameButtons(List<IRButton> a, List<IRButton> b) {

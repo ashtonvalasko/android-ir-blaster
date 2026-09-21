@@ -4973,4 +4973,51 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Controlli dei dispositivi, impostazioni rapide, GitHub Store e accensione universale';
+
+  @override
+  String get layoutCustom => 'Personalizzato';
+
+  @override
+  String get layoutCustomDescription => 'Scegli colonne, forme e spazi vuoti';
+
+  @override
+  String get layoutColumns => 'Pulsanti per riga';
+
+  @override
+  String get layoutShape => 'Forma dei pulsanti';
+
+  @override
+  String get layoutCircle => 'Cerchio';
+
+  @override
+  String get layoutRoundedSquare => 'Quadrato arrotondato';
+
+  @override
+  String get layoutRectangle => 'Rettangolo';
+
+  @override
+  String get layoutReflowHint =>
+      'Cambiare le colonne riorganizza la griglia. Sugli schermi stretti, scorri lateralmente per mantenere i pulsanti facili da toccare.';
+
+  @override
+  String get layoutUpdated => 'Disposizione aggiornata';
+
+  @override
+  String get layoutArrange => 'Organizza disposizione';
+
+  @override
+  String get layoutAddRow => 'Aggiungi riga vuota';
+
+  @override
+  String get layoutArrangeHint =>
+      'Trascina un pulsante oppure toccalo e poi tocca la destinazione. Le celle occupate vengono scambiate.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Tocca una cella vuota per aggiungere un pulsante. Tieni premuto un pulsante per altre opzioni.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Riga $row, colonna $column';
+  }
 }

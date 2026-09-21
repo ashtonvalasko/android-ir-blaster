@@ -2328,5 +2328,19 @@
   "settingsAppearanceSubtitle": "Motyw, kolory i język aplikacji",
   "settingsInteractionSubtitle": "Uruchamianie, wibracje, widok pilota i automatyzacja",
   "settingsToolsTitle": "Narzędzia i skróty",
-  "settingsToolsSubtitle": "Sterowanie urządzeniami, szybkie ustawienia, sklep GitHub i uniwersalne zasilanie"
+  "settingsToolsSubtitle": "Sterowanie urządzeniami, szybkie ustawienia, sklep GitHub i uniwersalne zasilanie",
+  "layoutCustom": "Własny",
+  "layoutCustomDescription": "Wybierz kolumny, kształty i puste miejsca",
+  "layoutColumns": "Przyciski w wierszu",
+  "layoutShape": "Kształt przycisków",
+  "layoutCircle": "Koło",
+  "layoutRoundedSquare": "Zaokrąglony kwadrat",
+  "layoutRectangle": "Prostokąt",
+  "layoutReflowHint": "Zmiana liczby kolumn zmienia układ siatki. Na wąskich ekranach przesuwaj w bok, aby przyciski pozostały łatwe do dotknięcia.",
+  "layoutUpdated": "Układ zaktualizowany",
+  "layoutArrange": "Rozmieść przyciski",
+  "layoutAddRow": "Dodaj pusty wiersz",
+  "layoutArrangeHint": "Przeciągnij przycisk lub dotknij go, a następnie miejsca docelowego. Zajęte pola zamienią się miejscami.",
+  "layoutEmptyHint": "Dotknij pustego pola, aby dodać przycisk. Przytrzymaj przycisk, aby zobaczyć więcej opcji.",
+  "layoutCell": "Wiersz {row}, kolumna {column}"
 }

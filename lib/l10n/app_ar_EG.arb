@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "المظهر والألوان ولغة التطبيق",
   "settingsInteractionSubtitle": "بدء التشغيل والاهتزاز وعرض جهاز التحكم والأتمتة",
   "settingsToolsTitle": "الأدوات والاختصارات",
-  "settingsToolsSubtitle": "التحكم بالأجهزة والإعدادات السريعة ومتجر GitHub والطاقة العامة"
+  "settingsToolsSubtitle": "التحكم بالأجهزة والإعدادات السريعة ومتجر GitHub والطاقة العامة",
+  "layoutCustom": "مخصص",
+  "layoutCustomDescription": "اختر الأعمدة والأشكال والمساحات الفارغة",
+  "layoutColumns": "الأزرار في كل صف",
+  "layoutShape": "شكل الأزرار",
+  "layoutCircle": "دائرة",
+  "layoutRoundedSquare": "مربع مستدير الزوايا",
+  "layoutRectangle": "مستطيل",
+  "layoutReflowHint": "يؤدي تغيير الأعمدة إلى إعادة ترتيب الشبكة. على الشاشات الضيقة، اسحب جانبياً للحفاظ على حجم أزرار يسهل لمسها.",
+  "layoutUpdated": "تم تحديث التخطيط",
+  "layoutArrange": "ترتيب التخطيط",
+  "layoutAddRow": "إضافة صف فارغ",
+  "layoutArrangeHint": "اسحب الزر، أو المسه ثم المس وجهته. يتم تبديل الخلايا المشغولة.",
+  "layoutEmptyHint": "المس خلية فارغة لإضافة زر. اضغط مطولاً على زر لعرض المزيد من الخيارات.",
+  "layoutCell": "الصف {row}، العمود {column}"
 }

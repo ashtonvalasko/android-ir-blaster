@@ -2483,5 +2483,20 @@
   "settingsAppearanceSubtitle": "Theme, colors and app language",
   "settingsInteractionSubtitle": "Startup, vibration, remote display and automation",
   "settingsToolsTitle": "Tools & shortcuts",
-  "settingsToolsSubtitle": "Device controls, Quick Settings, GitHub Store and universal power"
+  "settingsToolsSubtitle": "Device controls, Quick Settings, GitHub Store and universal power",
+  "layoutCustom": "Custom",
+  "layoutCustomDescription": "Choose columns, shapes and empty spaces",
+  "layoutColumns": "Buttons per row",
+  "layoutShape": "Button shape",
+  "layoutCircle": "Circle",
+  "layoutRoundedSquare": "Rounded square",
+  "layoutRectangle": "Rectangle",
+  "layoutReflowHint": "Changing columns reflows the grid. On narrow screens, swipe sideways to keep buttons easy to tap.",
+  "layoutUpdated": "Layout updated",
+  "layoutArrange": "Arrange layout",
+  "layoutAddRow": "Add empty row",
+  "layoutArrangeHint": "Drag a button, or tap it then tap a destination. Occupied cells swap.",
+  "layoutEmptyHint": "Tap an empty cell to add a button. Long-press a button for more options.",
+  "layoutCell": "Row {row}, column {column}",
+  "@layoutCell": {"placeholders":{"row":{"type":"int"},"column":{"type":"int"}}}
 }

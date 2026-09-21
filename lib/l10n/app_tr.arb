@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Tema, renkler ve uygulama dili",
   "settingsInteractionSubtitle": "Başlangıç, titreşim, kumanda görünümü ve otomasyon",
   "settingsToolsTitle": "Araçlar ve kısayollar",
-  "settingsToolsSubtitle": "Cihaz kontrolleri, hızlı ayarlar, GitHub Mağazası ve evrensel güç"
+  "settingsToolsSubtitle": "Cihaz kontrolleri, hızlı ayarlar, GitHub Mağazası ve evrensel güç",
+  "layoutCustom": "Özel",
+  "layoutCustomDescription": "Sütunları, şekilleri ve boş alanları seçin",
+  "layoutColumns": "Satır başına düğme",
+  "layoutShape": "Düğme şekli",
+  "layoutCircle": "Daire",
+  "layoutRoundedSquare": "Yuvarlatılmış kare",
+  "layoutRectangle": "Dikdörtgen",
+  "layoutReflowHint": "Sütunları değiştirmek ızgarayı yeniden düzenler. Dar ekranlarda düğmelerin kolayca dokunulabilir kalması için yana kaydırın.",
+  "layoutUpdated": "Düzen güncellendi",
+  "layoutArrange": "Düzeni ayarla",
+  "layoutAddRow": "Boş satır ekle",
+  "layoutArrangeHint": "Bir düğmeyi sürükleyin veya önce düğmeye, sonra hedefe dokunun. Dolu hücreler yer değiştirir.",
+  "layoutEmptyHint": "Düğme eklemek için boş bir hücreye dokunun. Daha fazla seçenek için bir düğmeye uzun basın.",
+  "layoutCell": "Satır {row}, sütun {column}"
 }

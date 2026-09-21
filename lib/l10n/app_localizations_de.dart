@@ -4986,4 +4986,52 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Gerätesteuerung, Schnelleinstellungen, GitHub Store und universelles Ein-/Ausschalten';
+
+  @override
+  String get layoutCustom => 'Benutzerdefiniert';
+
+  @override
+  String get layoutCustomDescription =>
+      'Spalten, Formen und freie Felder wählen';
+
+  @override
+  String get layoutColumns => 'Tasten pro Zeile';
+
+  @override
+  String get layoutShape => 'Tastenform';
+
+  @override
+  String get layoutCircle => 'Kreis';
+
+  @override
+  String get layoutRoundedSquare => 'Abgerundetes Quadrat';
+
+  @override
+  String get layoutRectangle => 'Rechteck';
+
+  @override
+  String get layoutReflowHint =>
+      'Eine andere Spaltenzahl ordnet das Raster neu an. Auf schmalen Bildschirmen seitlich wischen, damit die Tasten gut bedienbar bleiben.';
+
+  @override
+  String get layoutUpdated => 'Layout aktualisiert';
+
+  @override
+  String get layoutArrange => 'Layout anordnen';
+
+  @override
+  String get layoutAddRow => 'Leere Zeile hinzufügen';
+
+  @override
+  String get layoutArrangeHint =>
+      'Eine Taste ziehen oder erst die Taste und dann das Ziel antippen. Belegte Felder werden getauscht.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Ein leeres Feld antippen, um eine Taste hinzuzufügen. Eine Taste für weitere Optionen gedrückt halten.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Zeile $row, Spalte $column';
+  }
 }

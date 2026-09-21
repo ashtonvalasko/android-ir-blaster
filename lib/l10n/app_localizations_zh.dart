@@ -4753,4 +4753,48 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsToolsSubtitle => '设备控制、快捷设置、GitHub 商店和通用电源';
+
+  @override
+  String get layoutCustom => '自定义';
+
+  @override
+  String get layoutCustomDescription => '选择列数、形状和空白位置';
+
+  @override
+  String get layoutColumns => '每行按钮数';
+
+  @override
+  String get layoutShape => '按钮形状';
+
+  @override
+  String get layoutCircle => '圆形';
+
+  @override
+  String get layoutRoundedSquare => '圆角正方形';
+
+  @override
+  String get layoutRectangle => '矩形';
+
+  @override
+  String get layoutReflowHint => '更改列数会重新排列网格。在较窄的屏幕上，可左右滑动，以保持按钮易于点击的大小。';
+
+  @override
+  String get layoutUpdated => '布局已更新';
+
+  @override
+  String get layoutArrange => '调整布局';
+
+  @override
+  String get layoutAddRow => '添加空行';
+
+  @override
+  String get layoutArrangeHint => '拖动按钮，或先点击按钮再点击目标位置。如果目标格已有按钮，两个按钮将交换位置。';
+
+  @override
+  String get layoutEmptyHint => '点击空格添加按钮。长按按钮查看更多选项。';
+
+  @override
+  String layoutCell(int row, int column) {
+    return '第 $row 行，第 $column 列';
+  }
 }

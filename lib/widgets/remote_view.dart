@@ -23,6 +23,8 @@ import 'package:irblaster_controller/widgets/create_button.dart';
 import 'package:irblaster_controller/widgets/ir_waveform_view.dart';
 import 'package:irblaster_controller/widgets/quick_tile_chooser.dart';
 import 'package:irblaster_controller/widgets/remote_editor/remote_editor_draft.dart';
+import 'package:irblaster_controller/widgets/remote_editor/remote_custom_grid.dart';
+import 'package:irblaster_controller/widgets/remote_editor/remote_grid_button.dart';
 import 'package:irblaster_controller/widgets/remote_studio_screen.dart';
 import 'package:reorderable_grid_view/reorderable_grid_view.dart';
 import 'package:uuid/uuid.dart';
@@ -180,11 +182,16 @@ class RemoteViewState extends State<RemoteView> {
 
   void _scrollToHighlightedButton(String focusId) {
     if (!_gridScrollController.hasClients) return;
-    final int index = _remote.buttons.indexWhere((b) => b.id == focusId);
+    final custom = _remote.resolvedGridLayout;
+    final int index = custom != null ? custom.cells.indexOf(focusId)
+        : _remote.buttons.indexWhere((b) => b.id == focusId);
     if (index < 0) return;
 
     final double topPadding = 12;
-    final double targetOffset = _remote.useNewStyle
+    final double targetOffset = custom != null
+        ? topPadding + (index ~/ custom.columns) *
+            RemoteCustomGrid.rowExtent(MediaQuery.sizeOf(context).width, custom) - 16
+        : _remote.useNewStyle
         ? _estimatedComfortOffset(index, topPadding)
         : _estimatedCompactOffset(index, topPadding);
     final double maxOffset = _gridScrollController.position.maxScrollExtent;
@@ -982,7 +989,9 @@ class RemoteViewState extends State<RemoteView> {
                               Text(
                                 context.l10n.remoteLayoutSummary(
                                   _remote.buttons.length,
-                                  _remote.useNewStyle
+                                  _remote.gridLayout != null
+                                      ? context.l10n.layoutCustom
+                                      : _remote.useNewStyle
                                       ? context.l10n.layoutComfort
                                       : context.l10n.layoutCompact,
                                 ),
@@ -1611,8 +1620,13 @@ class RemoteViewState extends State<RemoteView> {
             ),
           IconButton(
             tooltip:
+                _remote.gridLayout != null ? context.l10n.layoutArrange :
                 _reorderMode ? context.l10n.done : context.l10n.reorderButtons,
             onPressed: () {
+              if (_remote.gridLayout != null) {
+                _editRemote();
+                return;
+              }
               setState(() => _reorderMode = !_reorderMode);
               Haptics.selectionClick();
               if (_reorderMode && mounted) {
@@ -1661,7 +1675,9 @@ class RemoteViewState extends State<RemoteView> {
                   angle: _rotate180 ? 3.1415926535897932 : 0.0,
                   child: count == 0
                       ? _EmptyRemoteState(onManage: _openRemoteActionsSheet)
-                      : (useNewStyle
+                      : _remote.gridLayout != null
+                          ? _buildCustomGrid()
+                          : (useNewStyle
                           ? _buildComfortGrid()
                           : _buildCompactGrid()),
                 ),
@@ -1679,6 +1695,27 @@ class RemoteViewState extends State<RemoteView> {
       return false;
     }
     return true;
+  }
+
+  Widget _buildCustomGrid() {
+    final grid = _remote.resolvedGridLayout!.padded();
+    final buttons = {for (final button in _remote.buttons) button.id: button};
+    return RemoteCustomGrid(
+      controller: _gridScrollController,
+      layout: grid,
+      itemBuilder: (context, index) {
+        final button = buttons[grid.cells[index]];
+        if (button == null) return const SizedBox.shrink();
+        return RemoteGridButton(
+          key: ValueKey(button.id),
+          button: button,
+          shape: grid.shape,
+          selected: _highlightButtonId == button.id || _isLoopingThis(button),
+          onTap: () => _handleButtonPress(button),
+          onLongPress: () => _openButtonActions(button),
+        );
+      },
+    );
   }
 
   Widget _buildCompactGrid() {

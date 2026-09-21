@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Thema, kleuren en app-taal",
   "settingsInteractionSubtitle": "Opstarten, trillen, afstandsbedieningsweergave en automatisering",
   "settingsToolsTitle": "Hulpmiddelen en snelkoppelingen",
-  "settingsToolsSubtitle": "Apparaatbediening, snelle instellingen, GitHub Store en universele aan/uit-knop"
+  "settingsToolsSubtitle": "Apparaatbediening, snelle instellingen, GitHub Store en universele aan/uit-knop",
+  "layoutCustom": "Aangepast",
+  "layoutCustomDescription": "Kies kolommen, vormen en lege ruimtes",
+  "layoutColumns": "Knoppen per rij",
+  "layoutShape": "Knopvorm",
+  "layoutCircle": "Cirkel",
+  "layoutRoundedSquare": "Afgerond vierkant",
+  "layoutRectangle": "Rechthoek",
+  "layoutReflowHint": "Een ander aantal kolommen deelt het raster opnieuw in. Veeg op smalle schermen zijwaarts zodat de knoppen makkelijk te bedienen blijven.",
+  "layoutUpdated": "Indeling bijgewerkt",
+  "layoutArrange": "Indeling aanpassen",
+  "layoutAddRow": "Lege rij toevoegen",
+  "layoutArrangeHint": "Sleep een knop of tik erop en tik daarna op de bestemming. Bezette vakken wisselen van plaats.",
+  "layoutEmptyHint": "Tik op een leeg vak om een knop toe te voegen. Houd een knop ingedrukt voor meer opties.",
+  "layoutCell": "Rij {row}, kolom {column}"
 }

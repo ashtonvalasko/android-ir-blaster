@@ -4911,4 +4911,51 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'การควบคุมอุปกรณ์ การตั้งค่าด่วน GitHub Store และปุ่มเปิดปิดแบบสากล';
+
+  @override
+  String get layoutCustom => 'กำหนดเอง';
+
+  @override
+  String get layoutCustomDescription => 'เลือกคอลัมน์ รูปร่าง และพื้นที่ว่าง';
+
+  @override
+  String get layoutColumns => 'จำนวนปุ่มต่อแถว';
+
+  @override
+  String get layoutShape => 'รูปร่างปุ่ม';
+
+  @override
+  String get layoutCircle => 'วงกลม';
+
+  @override
+  String get layoutRoundedSquare => 'สี่เหลี่ยมจัตุรัสมุมมน';
+
+  @override
+  String get layoutRectangle => 'สี่เหลี่ยมผืนผ้า';
+
+  @override
+  String get layoutReflowHint =>
+      'การเปลี่ยนคอลัมน์จะจัดตารางใหม่ บนหน้าจอแคบ ให้ปัดไปด้านข้างเพื่อคงขนาดปุ่มที่แตะได้ง่าย';
+
+  @override
+  String get layoutUpdated => 'อัปเดตการจัดวางแล้ว';
+
+  @override
+  String get layoutArrange => 'จัดวางปุ่ม';
+
+  @override
+  String get layoutAddRow => 'เพิ่มแถวว่าง';
+
+  @override
+  String get layoutArrangeHint =>
+      'ลากปุ่ม หรือแตะปุ่มแล้วแตะตำแหน่งปลายทาง ช่องที่มีปุ่มอยู่แล้วจะสลับตำแหน่งกัน';
+
+  @override
+  String get layoutEmptyHint =>
+      'แตะช่องว่างเพื่อเพิ่มปุ่ม กดปุ่มค้างไว้เพื่อดูตัวเลือกเพิ่มเติม';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'แถว $row คอลัมน์ $column';
+  }
 }

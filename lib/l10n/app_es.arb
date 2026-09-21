@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Tema, colores e idioma de la aplicación",
   "settingsInteractionSubtitle": "Inicio, vibración, vista del mando y automatización",
   "settingsToolsTitle": "Herramientas y accesos directos",
-  "settingsToolsSubtitle": "Controles de dispositivos, ajustes rápidos, tienda GitHub y encendido universal"
+  "settingsToolsSubtitle": "Controles de dispositivos, ajustes rápidos, tienda GitHub y encendido universal",
+  "layoutCustom": "Personalizado",
+  "layoutCustomDescription": "Elige columnas, formas y espacios vacíos",
+  "layoutColumns": "Botones por fila",
+  "layoutShape": "Forma de los botones",
+  "layoutCircle": "Círculo",
+  "layoutRoundedSquare": "Cuadrado redondeado",
+  "layoutRectangle": "Rectángulo",
+  "layoutReflowHint": "Cambiar las columnas reorganiza la cuadrícula. En pantallas estrechas, desliza lateralmente para mantener los botones fáciles de pulsar.",
+  "layoutUpdated": "Diseño actualizado",
+  "layoutArrange": "Organizar diseño",
+  "layoutAddRow": "Añadir fila vacía",
+  "layoutArrangeHint": "Arrastra un botón o púlsalo y luego pulsa su destino. Las celdas ocupadas se intercambian.",
+  "layoutEmptyHint": "Pulsa una celda vacía para añadir un botón. Mantén pulsado un botón para ver más opciones.",
+  "layoutCell": "Fila {row}, columna {column}"
 }

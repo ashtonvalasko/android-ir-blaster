@@ -4988,4 +4988,52 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Commandes des appareils, réglages rapides, boutique GitHub et alimentation universelle';
+
+  @override
+  String get layoutCustom => 'Personnalisé';
+
+  @override
+  String get layoutCustomDescription =>
+      'Choisir les colonnes, les formes et les espaces vides';
+
+  @override
+  String get layoutColumns => 'Boutons par ligne';
+
+  @override
+  String get layoutShape => 'Forme des boutons';
+
+  @override
+  String get layoutCircle => 'Cercle';
+
+  @override
+  String get layoutRoundedSquare => 'Carré arrondi';
+
+  @override
+  String get layoutRectangle => 'Rectangle';
+
+  @override
+  String get layoutReflowHint =>
+      'Changer le nombre de colonnes réorganise la grille. Sur un écran étroit, faites défiler horizontalement pour garder des boutons faciles à toucher.';
+
+  @override
+  String get layoutUpdated => 'Disposition mise à jour';
+
+  @override
+  String get layoutArrange => 'Organiser la disposition';
+
+  @override
+  String get layoutAddRow => 'Ajouter une ligne vide';
+
+  @override
+  String get layoutArrangeHint =>
+      'Faites glisser un bouton, ou touchez-le puis touchez sa destination. Les cellules occupées sont échangées.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Touchez une cellule vide pour ajouter un bouton. Appuyez longuement sur un bouton pour plus d’options.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Ligne $row, colonne $column';
+  }
 }

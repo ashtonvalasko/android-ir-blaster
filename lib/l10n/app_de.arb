@@ -2312,5 +2312,19 @@
   "settingsAppearanceSubtitle": "Design, Farben und App-Sprache",
   "settingsInteractionSubtitle": "Startverhalten, Vibration, Fernbedienungsansicht und Automatisierung",
   "settingsToolsTitle": "Werkzeuge und Verknüpfungen",
-  "settingsToolsSubtitle": "Gerätesteuerung, Schnelleinstellungen, GitHub Store und universelles Ein-/Ausschalten"
+  "settingsToolsSubtitle": "Gerätesteuerung, Schnelleinstellungen, GitHub Store und universelles Ein-/Ausschalten",
+  "layoutCustom": "Benutzerdefiniert",
+  "layoutCustomDescription": "Spalten, Formen und freie Felder wählen",
+  "layoutColumns": "Tasten pro Zeile",
+  "layoutShape": "Tastenform",
+  "layoutCircle": "Kreis",
+  "layoutRoundedSquare": "Abgerundetes Quadrat",
+  "layoutRectangle": "Rechteck",
+  "layoutReflowHint": "Eine andere Spaltenzahl ordnet das Raster neu an. Auf schmalen Bildschirmen seitlich wischen, damit die Tasten gut bedienbar bleiben.",
+  "layoutUpdated": "Layout aktualisiert",
+  "layoutArrange": "Layout anordnen",
+  "layoutAddRow": "Leere Zeile hinzufügen",
+  "layoutArrangeHint": "Eine Taste ziehen oder erst die Taste und dann das Ziel antippen. Belegte Felder werden getauscht.",
+  "layoutEmptyHint": "Ein leeres Feld antippen, um eine Taste hinzuzufügen. Eine Taste für weitere Optionen gedrückt halten.",
+  "layoutCell": "Zeile {row}, Spalte {column}"
 }

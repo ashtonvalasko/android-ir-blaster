@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Tema, warna, dan bahasa aplikasi",
   "settingsInteractionSubtitle": "Saat memulai, getaran, tampilan remote, dan otomatisasi",
   "settingsToolsTitle": "Alat dan pintasan",
-  "settingsToolsSubtitle": "Kontrol perangkat, setelan cepat, GitHub Store, dan daya universal"
+  "settingsToolsSubtitle": "Kontrol perangkat, setelan cepat, GitHub Store, dan daya universal",
+  "layoutCustom": "Kustom",
+  "layoutCustomDescription": "Pilih kolom, bentuk, dan ruang kosong",
+  "layoutColumns": "Tombol per baris",
+  "layoutShape": "Bentuk tombol",
+  "layoutCircle": "Lingkaran",
+  "layoutRoundedSquare": "Persegi bersudut membulat",
+  "layoutRectangle": "Persegi panjang",
+  "layoutReflowHint": "Mengubah kolom akan menata ulang kisi. Pada layar sempit, geser ke samping agar tombol tetap mudah diketuk.",
+  "layoutUpdated": "Tata letak diperbarui",
+  "layoutArrange": "Atur tata letak",
+  "layoutAddRow": "Tambah baris kosong",
+  "layoutArrangeHint": "Seret tombol, atau ketuk tombol lalu ketuk tujuannya. Sel yang terisi akan bertukar tempat.",
+  "layoutEmptyHint": "Ketuk sel kosong untuk menambahkan tombol. Tekan lama tombol untuk opsi lainnya.",
+  "layoutCell": "Baris {row}, kolom {column}"
 }

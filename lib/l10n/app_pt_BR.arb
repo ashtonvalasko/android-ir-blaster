@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Tema, cores e idioma do aplicativo",
   "settingsInteractionSubtitle": "Inicialização, vibração, exibição do controle e automação",
   "settingsToolsTitle": "Ferramentas e atalhos",
-  "settingsToolsSubtitle": "Controles de dispositivos, configurações rápidas, loja GitHub e ligar/desligar universal"
+  "settingsToolsSubtitle": "Controles de dispositivos, configurações rápidas, loja GitHub e ligar/desligar universal",
+  "layoutCustom": "Personalizado",
+  "layoutCustomDescription": "Escolha colunas, formas e espaços vazios",
+  "layoutColumns": "Botões por linha",
+  "layoutShape": "Formato dos botões",
+  "layoutCircle": "Círculo",
+  "layoutRoundedSquare": "Quadrado arredondado",
+  "layoutRectangle": "Retângulo",
+  "layoutReflowHint": "Alterar as colunas reorganiza a grade. Em telas estreitas, deslize para os lados para manter os botões fáceis de tocar.",
+  "layoutUpdated": "Layout atualizado",
+  "layoutArrange": "Organizar layout",
+  "layoutAddRow": "Adicionar linha vazia",
+  "layoutArrangeHint": "Arraste um botão ou toque nele e depois no destino. As células ocupadas trocam de lugar.",
+  "layoutEmptyHint": "Toque em uma célula vazia para adicionar um botão. Mantenha um botão pressionado para mais opções.",
+  "layoutCell": "Linha {row}, coluna {column}"
 }

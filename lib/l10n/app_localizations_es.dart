@@ -4974,4 +4974,52 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Controles de dispositivos, ajustes rápidos, tienda GitHub y encendido universal';
+
+  @override
+  String get layoutCustom => 'Personalizado';
+
+  @override
+  String get layoutCustomDescription =>
+      'Elige columnas, formas y espacios vacíos';
+
+  @override
+  String get layoutColumns => 'Botones por fila';
+
+  @override
+  String get layoutShape => 'Forma de los botones';
+
+  @override
+  String get layoutCircle => 'Círculo';
+
+  @override
+  String get layoutRoundedSquare => 'Cuadrado redondeado';
+
+  @override
+  String get layoutRectangle => 'Rectángulo';
+
+  @override
+  String get layoutReflowHint =>
+      'Cambiar las columnas reorganiza la cuadrícula. En pantallas estrechas, desliza lateralmente para mantener los botones fáciles de pulsar.';
+
+  @override
+  String get layoutUpdated => 'Diseño actualizado';
+
+  @override
+  String get layoutArrange => 'Organizar diseño';
+
+  @override
+  String get layoutAddRow => 'Añadir fila vacía';
+
+  @override
+  String get layoutArrangeHint =>
+      'Arrastra un botón o púlsalo y luego pulsa su destino. Las celdas ocupadas se intercambian.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Pulsa una celda vacía para añadir un botón. Mantén pulsado un botón para ver más opciones.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Fila $row, columna $column';
+  }
 }

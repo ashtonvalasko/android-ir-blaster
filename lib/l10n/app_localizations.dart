@@ -8959,6 +8959,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Device controls, Quick Settings, GitHub Store and universal power'**
   String get settingsToolsSubtitle;
+
+  /// No description provided for @layoutCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get layoutCustom;
+
+  /// No description provided for @layoutCustomDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose columns, shapes and empty spaces'**
+  String get layoutCustomDescription;
+
+  /// No description provided for @layoutColumns.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttons per row'**
+  String get layoutColumns;
+
+  /// No description provided for @layoutShape.
+  ///
+  /// In en, this message translates to:
+  /// **'Button shape'**
+  String get layoutShape;
+
+  /// No description provided for @layoutCircle.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle'**
+  String get layoutCircle;
+
+  /// No description provided for @layoutRoundedSquare.
+  ///
+  /// In en, this message translates to:
+  /// **'Rounded square'**
+  String get layoutRoundedSquare;
+
+  /// No description provided for @layoutRectangle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rectangle'**
+  String get layoutRectangle;
+
+  /// No description provided for @layoutReflowHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Changing columns reflows the grid. On narrow screens, swipe sideways to keep buttons easy to tap.'**
+  String get layoutReflowHint;
+
+  /// No description provided for @layoutUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout updated'**
+  String get layoutUpdated;
+
+  /// No description provided for @layoutArrange.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrange layout'**
+  String get layoutArrange;
+
+  /// No description provided for @layoutAddRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Add empty row'**
+  String get layoutAddRow;
+
+  /// No description provided for @layoutArrangeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag a button, or tap it then tap a destination. Occupied cells swap.'**
+  String get layoutArrangeHint;
+
+  /// No description provided for @layoutEmptyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap an empty cell to add a button. Long-press a button for more options.'**
+  String get layoutEmptyHint;
+
+  /// No description provided for @layoutCell.
+  ///
+  /// In en, this message translates to:
+  /// **'Row {row}, column {column}'**
+  String layoutCell(int row, int column);
 }
 
 class _AppLocalizationsDelegate

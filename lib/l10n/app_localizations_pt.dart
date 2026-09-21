@@ -4975,6 +4975,54 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Controlos de dispositivos, definições rápidas, loja GitHub e ligar/desligar universal';
+
+  @override
+  String get layoutCustom => 'Personalizado';
+
+  @override
+  String get layoutCustomDescription =>
+      'Escolher colunas, formas e espaços vazios';
+
+  @override
+  String get layoutColumns => 'Botões por linha';
+
+  @override
+  String get layoutShape => 'Forma dos botões';
+
+  @override
+  String get layoutCircle => 'Círculo';
+
+  @override
+  String get layoutRoundedSquare => 'Quadrado arredondado';
+
+  @override
+  String get layoutRectangle => 'Retângulo';
+
+  @override
+  String get layoutReflowHint =>
+      'Alterar as colunas reorganiza a grelha. Em ecrãs estreitos, deslize lateralmente para manter os botões fáceis de tocar.';
+
+  @override
+  String get layoutUpdated => 'Disposição atualizada';
+
+  @override
+  String get layoutArrange => 'Organizar disposição';
+
+  @override
+  String get layoutAddRow => 'Adicionar linha vazia';
+
+  @override
+  String get layoutArrangeHint =>
+      'Arraste um botão ou toque nele e depois no destino. As células ocupadas trocam de lugar.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Toque numa célula vazia para adicionar um botão. Mantenha um botão premido para mais opções.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Linha $row, coluna $column';
+  }
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -9952,4 +10000,52 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get settingsToolsSubtitle =>
       'Controles de dispositivos, configurações rápidas, loja GitHub e ligar/desligar universal';
+
+  @override
+  String get layoutCustom => 'Personalizado';
+
+  @override
+  String get layoutCustomDescription =>
+      'Escolha colunas, formas e espaços vazios';
+
+  @override
+  String get layoutColumns => 'Botões por linha';
+
+  @override
+  String get layoutShape => 'Formato dos botões';
+
+  @override
+  String get layoutCircle => 'Círculo';
+
+  @override
+  String get layoutRoundedSquare => 'Quadrado arredondado';
+
+  @override
+  String get layoutRectangle => 'Retângulo';
+
+  @override
+  String get layoutReflowHint =>
+      'Alterar as colunas reorganiza a grade. Em telas estreitas, deslize para os lados para manter os botões fáceis de tocar.';
+
+  @override
+  String get layoutUpdated => 'Layout atualizado';
+
+  @override
+  String get layoutArrange => 'Organizar layout';
+
+  @override
+  String get layoutAddRow => 'Adicionar linha vazia';
+
+  @override
+  String get layoutArrangeHint =>
+      'Arraste um botão ou toque nele e depois no destino. As células ocupadas trocam de lugar.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Toque em uma célula vazia para adicionar um botão. Mantenha um botão pressionado para mais opções.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Linha $row, coluna $column';
+  }
 }

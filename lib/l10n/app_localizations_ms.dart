@@ -4942,4 +4942,51 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Kawalan peranti, tetapan pantas, GitHub Store dan kuasa universal';
+
+  @override
+  String get layoutCustom => 'Tersuai';
+
+  @override
+  String get layoutCustomDescription => 'Pilih lajur, bentuk dan ruang kosong';
+
+  @override
+  String get layoutColumns => 'Butang setiap baris';
+
+  @override
+  String get layoutShape => 'Bentuk butang';
+
+  @override
+  String get layoutCircle => 'Bulatan';
+
+  @override
+  String get layoutRoundedSquare => 'Segi empat sama berbucu bulat';
+
+  @override
+  String get layoutRectangle => 'Segi empat tepat';
+
+  @override
+  String get layoutReflowHint =>
+      'Menukar lajur menyusun semula grid. Pada skrin sempit, leret ke sisi supaya butang kekal mudah disentuh.';
+
+  @override
+  String get layoutUpdated => 'Susun atur dikemas kini';
+
+  @override
+  String get layoutArrange => 'Atur susun atur';
+
+  @override
+  String get layoutAddRow => 'Tambah baris kosong';
+
+  @override
+  String get layoutArrangeHint =>
+      'Seret butang, atau ketik butang kemudian ketik destinasinya. Sel yang berisi akan bertukar tempat.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Ketik sel kosong untuk menambah butang. Tekan lama butang untuk lebih banyak pilihan.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Baris $row, lajur $column';
+  }
 }

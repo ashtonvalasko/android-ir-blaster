@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Tema, warna dan bahasa aplikasi",
   "settingsInteractionSubtitle": "Permulaan, getaran, paparan alat kawalan jauh dan automasi",
   "settingsToolsTitle": "Alat dan pintasan",
-  "settingsToolsSubtitle": "Kawalan peranti, tetapan pantas, GitHub Store dan kuasa universal"
+  "settingsToolsSubtitle": "Kawalan peranti, tetapan pantas, GitHub Store dan kuasa universal",
+  "layoutCustom": "Tersuai",
+  "layoutCustomDescription": "Pilih lajur, bentuk dan ruang kosong",
+  "layoutColumns": "Butang setiap baris",
+  "layoutShape": "Bentuk butang",
+  "layoutCircle": "Bulatan",
+  "layoutRoundedSquare": "Segi empat sama berbucu bulat",
+  "layoutRectangle": "Segi empat tepat",
+  "layoutReflowHint": "Menukar lajur menyusun semula grid. Pada skrin sempit, leret ke sisi supaya butang kekal mudah disentuh.",
+  "layoutUpdated": "Susun atur dikemas kini",
+  "layoutArrange": "Atur susun atur",
+  "layoutAddRow": "Tambah baris kosong",
+  "layoutArrangeHint": "Seret butang, atau ketik butang kemudian ketik destinasinya. Sel yang berisi akan bertukar tempat.",
+  "layoutEmptyHint": "Ketik sel kosong untuk menambah butang. Tekan lama butang untuk lebih banyak pilihan.",
+  "layoutCell": "Baris {row}, lajur {column}"
 }

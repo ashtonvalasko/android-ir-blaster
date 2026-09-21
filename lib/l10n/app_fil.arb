@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Tema, mga kulay at wika ng app",
   "settingsInteractionSubtitle": "Pagsisimula, pag-vibrate, pagpapakita ng remote at automation",
   "settingsToolsTitle": "Mga tool at shortcut",
-  "settingsToolsSubtitle": "Mga kontrol ng device, mabilisang setting, GitHub Store at unibersal na power"
+  "settingsToolsSubtitle": "Mga kontrol ng device, mabilisang setting, GitHub Store at unibersal na power",
+  "layoutCustom": "Pasadya",
+  "layoutCustomDescription": "Pumili ng mga column, hugis at bakanteng espasyo",
+  "layoutColumns": "Mga button bawat hanay",
+  "layoutShape": "Hugis ng button",
+  "layoutCircle": "Bilog",
+  "layoutRoundedSquare": "Parisukat na bilugan ang mga sulok",
+  "layoutRectangle": "Parihaba",
+  "layoutReflowHint": "Inaayos muli ang grid kapag binago ang mga column. Sa makitid na screen, mag-swipe patagilid para manatiling madaling pindutin ang mga button.",
+  "layoutUpdated": "Na-update ang layout",
+  "layoutArrange": "Ayusin ang layout",
+  "layoutAddRow": "Magdagdag ng bakanteng hanay",
+  "layoutArrangeHint": "I-drag ang button, o i-tap ito at pagkatapos ay ang destinasyon. Magpapalitan ang mga puwestong may laman.",
+  "layoutEmptyHint": "I-tap ang bakanteng puwesto para magdagdag ng button. Pindutin nang matagal ang button para sa iba pang opsyon.",
+  "layoutCell": "Hanay {row}, column {column}"
 }

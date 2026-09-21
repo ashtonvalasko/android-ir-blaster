@@ -4943,4 +4943,51 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Kontrol perangkat, setelan cepat, GitHub Store, dan daya universal';
+
+  @override
+  String get layoutCustom => 'Kustom';
+
+  @override
+  String get layoutCustomDescription => 'Pilih kolom, bentuk, dan ruang kosong';
+
+  @override
+  String get layoutColumns => 'Tombol per baris';
+
+  @override
+  String get layoutShape => 'Bentuk tombol';
+
+  @override
+  String get layoutCircle => 'Lingkaran';
+
+  @override
+  String get layoutRoundedSquare => 'Persegi bersudut membulat';
+
+  @override
+  String get layoutRectangle => 'Persegi panjang';
+
+  @override
+  String get layoutReflowHint =>
+      'Mengubah kolom akan menata ulang kisi. Pada layar sempit, geser ke samping agar tombol tetap mudah diketuk.';
+
+  @override
+  String get layoutUpdated => 'Tata letak diperbarui';
+
+  @override
+  String get layoutArrange => 'Atur tata letak';
+
+  @override
+  String get layoutAddRow => 'Tambah baris kosong';
+
+  @override
+  String get layoutArrangeHint =>
+      'Seret tombol, atau ketuk tombol lalu ketuk tujuannya. Sel yang terisi akan bertukar tempat.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Ketuk sel kosong untuk menambahkan tombol. Tekan lama tombol untuk opsi lainnya.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Baris $row, kolom $column';
+  }
 }

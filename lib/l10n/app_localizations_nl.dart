@@ -4978,4 +4978,51 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Apparaatbediening, snelle instellingen, GitHub Store en universele aan/uit-knop';
+
+  @override
+  String get layoutCustom => 'Aangepast';
+
+  @override
+  String get layoutCustomDescription => 'Kies kolommen, vormen en lege ruimtes';
+
+  @override
+  String get layoutColumns => 'Knoppen per rij';
+
+  @override
+  String get layoutShape => 'Knopvorm';
+
+  @override
+  String get layoutCircle => 'Cirkel';
+
+  @override
+  String get layoutRoundedSquare => 'Afgerond vierkant';
+
+  @override
+  String get layoutRectangle => 'Rechthoek';
+
+  @override
+  String get layoutReflowHint =>
+      'Een ander aantal kolommen deelt het raster opnieuw in. Veeg op smalle schermen zijwaarts zodat de knoppen makkelijk te bedienen blijven.';
+
+  @override
+  String get layoutUpdated => 'Indeling bijgewerkt';
+
+  @override
+  String get layoutArrange => 'Indeling aanpassen';
+
+  @override
+  String get layoutAddRow => 'Lege rij toevoegen';
+
+  @override
+  String get layoutArrangeHint =>
+      'Sleep een knop of tik erop en tik daarna op de bestemming. Bezette vakken wisselen van plaats.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Tik op een leeg vak om een knop toe te voegen. Houd een knop ingedrukt voor meer opties.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Rij $row, kolom $column';
+  }
 }

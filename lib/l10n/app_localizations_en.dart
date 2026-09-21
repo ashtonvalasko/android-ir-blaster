@@ -4984,4 +4984,52 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Device controls, Quick Settings, GitHub Store and universal power';
+
+  @override
+  String get layoutCustom => 'Custom';
+
+  @override
+  String get layoutCustomDescription =>
+      'Choose columns, shapes and empty spaces';
+
+  @override
+  String get layoutColumns => 'Buttons per row';
+
+  @override
+  String get layoutShape => 'Button shape';
+
+  @override
+  String get layoutCircle => 'Circle';
+
+  @override
+  String get layoutRoundedSquare => 'Rounded square';
+
+  @override
+  String get layoutRectangle => 'Rectangle';
+
+  @override
+  String get layoutReflowHint =>
+      'Changing columns reflows the grid. On narrow screens, swipe sideways to keep buttons easy to tap.';
+
+  @override
+  String get layoutUpdated => 'Layout updated';
+
+  @override
+  String get layoutArrange => 'Arrange layout';
+
+  @override
+  String get layoutAddRow => 'Add empty row';
+
+  @override
+  String get layoutArrangeHint =>
+      'Drag a button, or tap it then tap a destination. Occupied cells swap.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Tap an empty cell to add a button. Long-press a button for more options.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Row $row, column $column';
+  }
 }

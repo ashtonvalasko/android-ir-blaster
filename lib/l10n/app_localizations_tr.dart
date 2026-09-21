@@ -4938,4 +4938,52 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Cihaz kontrolleri, hızlı ayarlar, GitHub Mağazası ve evrensel güç';
+
+  @override
+  String get layoutCustom => 'Özel';
+
+  @override
+  String get layoutCustomDescription =>
+      'Sütunları, şekilleri ve boş alanları seçin';
+
+  @override
+  String get layoutColumns => 'Satır başına düğme';
+
+  @override
+  String get layoutShape => 'Düğme şekli';
+
+  @override
+  String get layoutCircle => 'Daire';
+
+  @override
+  String get layoutRoundedSquare => 'Yuvarlatılmış kare';
+
+  @override
+  String get layoutRectangle => 'Dikdörtgen';
+
+  @override
+  String get layoutReflowHint =>
+      'Sütunları değiştirmek ızgarayı yeniden düzenler. Dar ekranlarda düğmelerin kolayca dokunulabilir kalması için yana kaydırın.';
+
+  @override
+  String get layoutUpdated => 'Düzen güncellendi';
+
+  @override
+  String get layoutArrange => 'Düzeni ayarla';
+
+  @override
+  String get layoutAddRow => 'Boş satır ekle';
+
+  @override
+  String get layoutArrangeHint =>
+      'Bir düğmeyi sürükleyin veya önce düğmeye, sonra hedefe dokunun. Dolu hücreler yer değiştirir.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Düğme eklemek için boş bir hücreye dokunun. Daha fazla seçenek için bir düğmeye uzun basın.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Satır $row, sütun $column';
+  }
 }

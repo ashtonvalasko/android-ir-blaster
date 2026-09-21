@@ -475,7 +475,9 @@ class _RemoteListState extends State<RemoteList> {
                               Text(
                                 context.l10n.remoteLayoutSummary(
                                   remote.buttons.length,
-                                  remote.useNewStyle
+                                  remote.gridLayout != null
+                                      ? context.l10n.layoutCustom
+                                      : remote.useNewStyle
                                       ? context.l10n.layoutComfort
                                       : context.l10n.layoutCompact,
                                 ),
@@ -1214,7 +1216,7 @@ class RemoteSearchDelegate extends SearchDelegate {
               overflow: TextOverflow.ellipsis,
             ),
             subtitle: Text(
-              '${remote.buttons.length} button(s) · ${remote.useNewStyle ? 'Comfort' : 'Compact'}',
+              '${remote.buttons.length} button(s) · ${remote.gridLayout != null ? context.l10n.layoutCustom : remote.useNewStyle ? 'Comfort' : 'Compact'}',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: cs.onSurface.withValues(alpha: 0.7),
                 fontWeight: FontWeight.w600,

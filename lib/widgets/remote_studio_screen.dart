@@ -9,6 +9,9 @@ import 'package:irblaster_controller/utils/button_color_accessibility.dart';
 import 'package:irblaster_controller/utils/button_label.dart';
 import 'package:irblaster_controller/utils/ir.dart';
 import 'package:irblaster_controller/utils/remote.dart';
+import 'package:irblaster_controller/utils/remote_grid_layout.dart';
+import 'package:irblaster_controller/widgets/remote_editor/remote_custom_grid.dart';
+import 'package:irblaster_controller/widgets/remote_editor/remote_grid_button.dart';
 import 'package:irblaster_controller/widgets/remote_editor/add_button_sheet.dart';
 import 'package:irblaster_controller/widgets/remote_editor/remote_editor_actions.dart';
 import 'package:irblaster_controller/widgets/remote_editor/remote_editor_draft.dart';
@@ -28,6 +31,8 @@ class RemoteStudioScreen extends StatefulWidget {
 
 class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
   late final RemoteEditorDraft _draft;
+  bool _arranging = false;
+  int? _selectedCell;
 
   @override
   void initState() {
@@ -77,11 +82,14 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
     Navigator.of(context).pop(_draft.toRemote());
   }
 
-  Future<void> _addButton() async {
+  Future<void> _addButton({int? cell}) async {
     final wasEmpty = _draft.buttonCount == 0;
     final button = await RemoteEditorActions.addButton(context);
     if (button == null || !mounted) return;
-    setState(() => _draft.addButton(button));
+    setState(() {
+      if (cell != null) _draft.gridLayout = _grid;
+      _draft.addButton(button, cell: cell);
+    });
     if (wasEmpty) {
       _showSnack(context.l10n.firstButtonAdded);
     }
@@ -119,7 +127,8 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
       context: context,
       useSafeArea: true,
       showDragHandle: true,
-      builder: (_) => const AddButtonSheet(),
+      isScrollControlled: true,
+      builder: (_) => const SingleChildScrollView(child: AddButtonSheet()),
     );
     if (!mounted || action == null) return;
     switch (action) {
@@ -152,7 +161,8 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
       context: context,
       useSafeArea: true,
       showDragHandle: true,
-      builder: (sheetContext) => Padding(
+      isScrollControlled: true,
+      builder: (sheetContext) => SingleChildScrollView(child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -166,20 +176,20 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
                 _editButtonAt(index);
               },
             ),
-              ListTile(
-                leading: const Icon(Icons.copy_all_outlined),
-                title: Text(context.l10n.duplicate),
-                subtitle: Text(context.l10n.createButtonCopySubtitle),
-                onTap: () {
-                  Navigator.of(sheetContext).pop();
-                  setState(() {
-                    _draft.insertButton(
-                      index + 1,
-                      RemoteEditorActions.duplicateButton(button),
-                    );
-                  });
-                  _showSnack(context.l10n.buttonDuplicated);
-                },
+            ListTile(
+              leading: const Icon(Icons.copy_all_outlined),
+              title: Text(context.l10n.duplicate),
+              subtitle: Text(context.l10n.createButtonCopySubtitle),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                setState(() {
+                  _draft.insertButton(
+                    index + 1,
+                    RemoteEditorActions.duplicateButton(button),
+                  );
+                });
+                _showSnack(context.l10n.buttonDuplicated);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.copy_rounded),
@@ -200,7 +210,8 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.delete_outline, color: theme.colorScheme.error),
+              leading:
+                  Icon(Icons.delete_outline, color: theme.colorScheme.error),
               title: Text(
                 context.l10n.remove,
                 style: TextStyle(color: theme.colorScheme.error),
@@ -214,6 +225,7 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
                 );
                 if (!confirmed || !mounted) return;
                 final removedIndex = index;
+                final previousGrid = _draft.gridLayout;
                 final removedButton = _draft.removeButtonAt(index);
                 setState(() {});
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -225,8 +237,11 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
                       onPressed: () {
                         if (!mounted) return;
                         setState(() {
-                          final restoreAt = removedIndex.clamp(0, _draft.buttons.length);
+                          final restoreAt =
+                              removedIndex.clamp(0, _draft.buttons.length);
                           _draft.insertButton(restoreAt, removedButton);
+                          _draft.gridLayout = previousGrid?.reconcile(
+                              _draft.buttons.map((button) => button.id));
                         });
                       },
                     ),
@@ -236,7 +251,7 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 
@@ -249,13 +264,167 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
       builder: (_) => RemoteSettingsSheet(
         initialName: _draft.name,
         initialLayoutStyle: _draft.layoutStyle,
+        initialGridLayout: _draft.gridLayout,
       ),
     );
     if (result == null || !mounted) return;
     setState(() {
       _draft.updateName(result.name);
       _draft.updateLayoutStyle(result.layoutStyle);
+      _draft.gridLayout = result.gridLayout
+          ?.reconcile(_draft.buttons.map((button) => button.id));
+      _selectedCell = null;
+      _arranging = false;
     });
+  }
+
+  RemoteGridLayout get _grid {
+    final grid = (_draft.gridLayout ?? RemoteGridLayout(columns: 3))
+        .reconcile(_draft.buttons.map((button) => button.id))
+        .padded();
+    return grid.cells.isEmpty ? grid.addRow() : grid;
+  }
+
+  void _changeGrid(RemoteGridLayout grid) {
+    final before = _draft.gridLayout;
+    setState(() {
+      _draft.gridLayout = grid;
+      _selectedCell = null;
+    });
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(context.l10n.layoutUpdated),
+        action: SnackBarAction(
+            label: context.l10n.undo,
+            onPressed: () {
+              if (!mounted) return;
+              setState(() {
+                _draft.gridLayout = before
+                    ?.reconcile(_draft.buttons.map((button) => button.id));
+                _selectedCell = null;
+              });
+            }),
+      ));
+  }
+
+  Widget _buildCustomCanvas() {
+    final grid = _grid;
+    final buttons = {for (final button in _draft.buttons) button.id: button};
+    final cs = Theme.of(context).colorScheme;
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Wrap(spacing: 8, children: [
+            FilterChip(
+              label: Text(context.l10n.layoutArrange),
+              avatar: const Icon(Icons.open_with_rounded, size: 18),
+              selected: _arranging,
+              onSelected: (value) => setState(() {
+                _arranging = value;
+                _selectedCell = null;
+              }),
+            ),
+            ActionChip(
+              label: Text(context.l10n.layoutAddRow),
+              avatar: const Icon(Icons.add, size: 18),
+              onPressed: () => _changeGrid(grid.addRow()),
+            ),
+          ]),
+          Text(
+              _arranging
+                  ? context.l10n.layoutArrangeHint
+                  : context.l10n.layoutEmptyHint,
+              style: Theme.of(context).textTheme.bodySmall),
+        ]),
+      ),
+      Expanded(
+          child: RemoteCustomGrid(
+        layout: grid,
+        bottomPadding: 100,
+        itemBuilder: (context, index) {
+          final button = buttons[grid.cells[index]];
+          void tap() {
+            if (_arranging) {
+              if (_selectedCell != null && _selectedCell != index) {
+                _changeGrid(grid.swap(_selectedCell!, index));
+              } else {
+                setState(() => _selectedCell =
+                    _selectedCell == index || button == null ? null : index);
+              }
+            } else if (button != null) {
+              _editButtonAt(_draft.buttons.indexOf(button));
+            } else {
+              _addButton(cell: index);
+            }
+          }
+
+          Widget tile = button == null
+              ? OutlinedButton(
+                  key: ValueKey('empty-cell-$index'),
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    side: BorderSide(color: cs.outlineVariant),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                  ),
+                  onPressed: tap,
+                  child: Icon(_arranging ? Icons.crop_free : Icons.add,
+                      color: cs.onSurfaceVariant),
+                )
+              : RemoteGridButton(
+                  key: ValueKey(button.id),
+                  button: button,
+                  shape: grid.shape,
+                  selected: _selectedCell == index,
+                  onTap: tap,
+                  onLongPress: _arranging
+                      ? null
+                      : () =>
+                          _openButtonActions(_draft.buttons.indexOf(button)),
+                );
+          tile = Semantics(
+            label: context.l10n.layoutCell(
+                index ~/ grid.columns + 1, index % grid.columns + 1),
+            child: tile,
+          );
+          if (!_arranging) return tile;
+          return DragTarget<int>(
+            onWillAcceptWithDetails: (details) => details.data != index,
+            onAcceptWithDetails: (details) =>
+                _changeGrid(grid.swap(details.data, index)),
+            builder: (context, candidates, rejected) => DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                border: candidates.isEmpty
+                    ? null
+                    : Border.all(color: cs.tertiary, width: 3),
+              ),
+              child: button == null
+                  ? tile
+                  : LayoutBuilder(
+                      builder: (context, size) => LongPressDraggable<int>(
+                            data: index,
+                            maxSimultaneousDrags: 1,
+                            feedback: SizedBox(
+                                width: size.maxWidth,
+                                height: size.maxHeight,
+                                child: RemoteGridButton(
+                                    button: button,
+                                    shape: grid.shape,
+                                    selected: true,
+                                    onTap: () {})),
+                            childWhenDragging:
+                                Opacity(opacity: 0.3, child: tile),
+                            child: tile,
+                          )),
+            ),
+          );
+        },
+      )),
+    ]);
   }
 
   Future<void> _renameRemoteInline() async {
@@ -638,9 +807,11 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
                     Text(
                       context.l10n.remoteLayoutSummary(
                         _draft.buttonCount,
-                        _draft.useNewStyle
-                            ? context.l10n.layoutWide
-                            : context.l10n.layoutCompact,
+                        _draft.layoutStyle == RemoteLayoutStyle.custom
+                            ? context.l10n.layoutCustom
+                            : _draft.useNewStyle
+                                ? context.l10n.layoutWide
+                                : context.l10n.layoutCompact,
                       ),
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
@@ -700,25 +871,27 @@ class _RemoteStudioScreenState extends State<RemoteStudioScreen> {
           ],
         ),
         body: SafeArea(
-          child: _draft.buttons.isEmpty
-              ? _buildEmptyState(context)
-              : GridView.builder(
-                  padding: EdgeInsets.fromLTRB(
-                    12,
-                    compactPhone ? 10 : 16,
-                    12,
-                    compactPhone ? 84 : 96,
-                  ),
-                  itemCount: _draft.buttons.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: _draft.useNewStyle ? 2 : 4,
-                    childAspectRatio: _draft.useNewStyle ? 2.2 : 1.0,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                  ),
-                  itemBuilder: (context, index) =>
-                      _buildButtonTile(_draft.buttons[index], index),
-                ),
+          child: _draft.layoutStyle == RemoteLayoutStyle.custom
+              ? _buildCustomCanvas()
+              : _draft.buttons.isEmpty
+                  ? _buildEmptyState(context)
+                  : GridView.builder(
+                      padding: EdgeInsets.fromLTRB(
+                        12,
+                        compactPhone ? 10 : 16,
+                        12,
+                        compactPhone ? 84 : 96,
+                      ),
+                      itemCount: _draft.buttons.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: _draft.useNewStyle ? 2 : 4,
+                        childAspectRatio: _draft.useNewStyle ? 2.2 : 1.0,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                      ),
+                      itemBuilder: (context, index) =>
+                          _buildButtonTile(_draft.buttons[index], index),
+                    ),
         ),
       ),
     );

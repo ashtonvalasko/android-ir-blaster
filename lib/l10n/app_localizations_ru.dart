@@ -4945,4 +4945,52 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Управление устройствами, быстрые настройки, магазин GitHub и универсальное питание';
+
+  @override
+  String get layoutCustom => 'Свой макет';
+
+  @override
+  String get layoutCustomDescription =>
+      'Выберите столбцы, формы и пустые ячейки';
+
+  @override
+  String get layoutColumns => 'Кнопок в строке';
+
+  @override
+  String get layoutShape => 'Форма кнопок';
+
+  @override
+  String get layoutCircle => 'Круг';
+
+  @override
+  String get layoutRoundedSquare => 'Скруглённый квадрат';
+
+  @override
+  String get layoutRectangle => 'Прямоугольник';
+
+  @override
+  String get layoutReflowHint =>
+      'Изменение числа столбцов перестраивает сетку. На узких экранах прокручивайте вбок, чтобы кнопки оставались удобными для нажатия.';
+
+  @override
+  String get layoutUpdated => 'Макет обновлён';
+
+  @override
+  String get layoutArrange => 'Настроить расположение';
+
+  @override
+  String get layoutAddRow => 'Добавить пустую строку';
+
+  @override
+  String get layoutArrangeHint =>
+      'Перетащите кнопку или нажмите на неё, а затем на нужную ячейку. Занятые ячейки поменяются местами.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Нажмите на пустую ячейку, чтобы добавить кнопку. Удерживайте кнопку для дополнительных действий.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Строка $row, столбец $column';
+  }
 }

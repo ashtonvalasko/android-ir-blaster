@@ -2326,5 +2326,19 @@
   "settingsAppearanceSubtitle": "Giao diện, màu sắc và ngôn ngữ ứng dụng",
   "settingsInteractionSubtitle": "Khởi động, rung, hiển thị điều khiển và tự động hóa",
   "settingsToolsTitle": "Công cụ và lối tắt",
-  "settingsToolsSubtitle": "Điều khiển thiết bị, cài đặt nhanh, kho GitHub và nguồn đa năng"
+  "settingsToolsSubtitle": "Điều khiển thiết bị, cài đặt nhanh, kho GitHub và nguồn đa năng",
+  "layoutCustom": "Tùy chỉnh",
+  "layoutCustomDescription": "Chọn số cột, hình dạng và khoảng trống",
+  "layoutColumns": "Số nút mỗi hàng",
+  "layoutShape": "Hình dạng nút",
+  "layoutCircle": "Hình tròn",
+  "layoutRoundedSquare": "Hình vuông bo góc",
+  "layoutRectangle": "Hình chữ nhật",
+  "layoutReflowHint": "Thay đổi số cột sẽ sắp xếp lại lưới. Trên màn hình hẹp, hãy vuốt ngang để giữ các nút ở kích thước dễ chạm.",
+  "layoutUpdated": "Đã cập nhật bố cục",
+  "layoutArrange": "Sắp xếp bố cục",
+  "layoutAddRow": "Thêm hàng trống",
+  "layoutArrangeHint": "Kéo nút hoặc chạm vào nút rồi chạm vào vị trí đích. Các ô đã có nút sẽ đổi chỗ cho nhau.",
+  "layoutEmptyHint": "Chạm vào ô trống để thêm nút. Nhấn giữ nút để xem thêm tùy chọn.",
+  "layoutCell": "Hàng {row}, cột {column}"
 }

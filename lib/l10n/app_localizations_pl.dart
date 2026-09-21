@@ -5034,4 +5034,52 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get settingsToolsSubtitle =>
       'Sterowanie urządzeniami, szybkie ustawienia, sklep GitHub i uniwersalne zasilanie';
+
+  @override
+  String get layoutCustom => 'Własny';
+
+  @override
+  String get layoutCustomDescription =>
+      'Wybierz kolumny, kształty i puste miejsca';
+
+  @override
+  String get layoutColumns => 'Przyciski w wierszu';
+
+  @override
+  String get layoutShape => 'Kształt przycisków';
+
+  @override
+  String get layoutCircle => 'Koło';
+
+  @override
+  String get layoutRoundedSquare => 'Zaokrąglony kwadrat';
+
+  @override
+  String get layoutRectangle => 'Prostokąt';
+
+  @override
+  String get layoutReflowHint =>
+      'Zmiana liczby kolumn zmienia układ siatki. Na wąskich ekranach przesuwaj w bok, aby przyciski pozostały łatwe do dotknięcia.';
+
+  @override
+  String get layoutUpdated => 'Układ zaktualizowany';
+
+  @override
+  String get layoutArrange => 'Rozmieść przyciski';
+
+  @override
+  String get layoutAddRow => 'Dodaj pusty wiersz';
+
+  @override
+  String get layoutArrangeHint =>
+      'Przeciągnij przycisk lub dotknij go, a następnie miejsca docelowego. Zajęte pola zamienią się miejscami.';
+
+  @override
+  String get layoutEmptyHint =>
+      'Dotknij pustego pola, aby dodać przycisk. Przytrzymaj przycisk, aby zobaczyć więcej opcji.';
+
+  @override
+  String layoutCell(int row, int column) {
+    return 'Wiersz $row, kolumna $column';
+  }
 }
