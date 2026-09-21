@@ -4993,4 +4993,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Строка $row, столбец $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Сначала выберите марку, например Sony или TCL, затем модель устройства или пульта.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Найдите модель, указанную на устройстве или пульте. Пробелы и дефисы могут отличаться.';
 }

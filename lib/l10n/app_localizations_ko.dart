@@ -4871,4 +4871,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String layoutCell(int row, int column) {
     return '$row행, $column열';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      '먼저 Sony나 TCL 같은 브랜드를 선택한 다음 기기 또는 리모컨 모델을 선택하세요.';
+
+  @override
+  String get dbModelSearchHelp =>
+      '기기나 리모컨에 표시된 모델명을 검색하세요. 공백과 하이픈은 일치하지 않아도 됩니다.';
 }

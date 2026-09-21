@@ -2340,5 +2340,7 @@
   "layoutAddRow": "空の行を追加",
   "layoutArrangeHint": "ボタンをドラッグするか、ボタンをタップしてから移動先をタップします。移動先にボタンがある場合は入れ替わります。",
   "layoutEmptyHint": "空のマスをタップするとボタンを追加できます。ボタンを長押しするとその他の操作を表示します。",
-  "layoutCell": "{row}行、{column}列"
+  "layoutCell": "{row}行、{column}列",
+  "dbBrandSearchHelp": "まず Sony や TCL などのメーカーを選び、次に機器やリモコンの型番を選んでください。",
+  "dbModelSearchHelp": "機器やリモコンに記載された型番で検索できます。スペースやハイフンの有無は問いません。"
 }

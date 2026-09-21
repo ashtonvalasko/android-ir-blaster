@@ -7,6 +7,7 @@ import 'package:irblaster_controller/ir_finder/irblaster_db.dart';
 import 'package:irblaster_controller/l10n/l10n.dart';
 import 'package:irblaster_controller/utils/db_button_import.dart';
 import 'package:irblaster_controller/utils/remote.dart';
+import 'package:irblaster_controller/widgets/db_catalog_picker.dart';
 
 enum _DbPreset { all, power, volume, channel, navigation }
 
@@ -252,6 +253,7 @@ class _DbBulkImportSheetState extends State<DbBulkImportSheet> {
       _dbPreset = _DbPreset.all;
     });
     _setFiltersExpanded(true);
+    await _dbSelectModel();
   }
 
   Future<void> _dbSelectModel() async {
@@ -310,343 +312,11 @@ class _DbBulkImportSheetState extends State<DbBulkImportSheet> {
     await _dbReloadKeys(reset: true);
   }
 
-  Future<String?> _pickBrand(BuildContext context) async {
-    await IrBlasterDb.instance.ensureInitialized();
-    if (!context.mounted) return null;
+  Future<String?> _pickBrand(BuildContext context) =>
+      showDbCatalogPicker(context);
 
-    String? selected;
-    int offset = 0;
-    final items = <String>[];
-    bool alive = true;
-    final ctl = TextEditingController();
-    final scrollCtl = ScrollController();
-    Timer? searchDebounce;
-    bool attachedScrollListener = false;
-    bool loading = false;
-    bool exhausted = false;
-    int generation = 0;
-
-    Future<void> load(StateSetter setModal, {required bool reset}) async {
-      if (!alive) return;
-      if (!reset && loading) return;
-
-      final requestGeneration = reset ? ++generation : generation;
-      setModal(() => loading = true);
-
-      try {
-        if (reset) {
-          offset = 0;
-          exhausted = false;
-          items.clear();
-          if (scrollCtl.hasClients) scrollCtl.jumpTo(0);
-        }
-
-        final next = await IrBlasterDb.instance.listBrands(
-          search: ctl.text.trim(),
-          limit: 60,
-          offset: offset,
-        );
-
-        if (!alive || requestGeneration != generation) return;
-
-        items.addAll(next);
-        offset += next.length;
-        if (next.isEmpty) exhausted = true;
-
-        setModal(() {});
-      } finally {
-        if (alive && requestGeneration == generation) {
-          setModal(() => loading = false);
-        }
-      }
-    }
-
-    void queueSearch(StateSetter setModal) {
-      searchDebounce?.cancel();
-      searchDebounce = Timer(const Duration(milliseconds: 220), () {
-        if (!alive) return;
-        load(setModal, reset: true);
-      });
-    }
-
-    try {
-      await showModalBottomSheet<void>(
-        context: context,
-        isScrollControlled: true,
-        showDragHandle: true,
-        builder: (ctx) {
-          void onScroll(StateSetter setModal) {
-            if (loading || exhausted) return;
-            if (scrollCtl.position.pixels >=
-                scrollCtl.position.maxScrollExtent - 240) {
-              load(setModal, reset: false);
-            }
-          }
-
-          return StatefulBuilder(
-            builder: (ctx2, setModal) {
-              if (!attachedScrollListener) {
-                attachedScrollListener = true;
-                scrollCtl.addListener(() => onScroll(setModal));
-                load(setModal, reset: true);
-              }
-
-              return SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              context.l10n.selectBrand,
-                              style: Theme.of(ctx2).textTheme.titleLarge,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              alive = false;
-                              Navigator.of(ctx2).pop();
-                            },
-                            icon: const Icon(Icons.close_rounded),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      TextField(
-                        controller: ctl,
-                        decoration: InputDecoration(
-                          hintText: context.l10n.searchBrand,
-                          prefixIcon: const Icon(Icons.search_rounded),
-                          border: const OutlineInputBorder(),
-                        ),
-                        textInputAction: TextInputAction.search,
-                        onChanged: (_) => queueSearch(setModal),
-                        onSubmitted: (_) {
-                          searchDebounce?.cancel();
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          load(setModal, reset: true);
-                        },
-                        onTapOutside: (_) =>
-                            FocusManager.instance.primaryFocus?.unfocus(),
-                      ),
-                      const SizedBox(height: 8),
-                      Expanded(
-                        child: ListView.separated(
-                          controller: scrollCtl,
-                          itemCount: items.length + (loading ? 1 : 0),
-                          separatorBuilder: (_, __) => const Divider(height: 0),
-                          itemBuilder: (ctx3, i) {
-                            if (i >= items.length) {
-                              return const Padding(
-                                padding: EdgeInsets.all(14),
-                                child: Center(
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                  ),
-                                ),
-                              );
-                            }
-                            final b = items[i];
-                            return ListTile(
-                              title: Text(b),
-                              onTap: () {
-                                selected = b;
-                                alive = false;
-                                Navigator.of(ctx2).pop();
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        },
-      );
-    } finally {
-      alive = false;
-      searchDebounce?.cancel();
-      ctl.dispose();
-      scrollCtl.dispose();
-    }
-    return selected;
-  }
-
-  Future<String?> _pickModel(BuildContext context,
-      {required String brand}) async {
-    await IrBlasterDb.instance.ensureInitialized();
-    if (!context.mounted) return null;
-
-    String? selected;
-    int offset = 0;
-    final items = <String>[];
-    bool alive = true;
-    final ctl = TextEditingController();
-    final scrollCtl = ScrollController();
-    Timer? searchDebounce;
-    bool attachedScrollListener = false;
-    bool loading = false;
-    bool exhausted = false;
-    int generation = 0;
-
-    Future<void> load(StateSetter setModal, {required bool reset}) async {
-      if (!alive) return;
-      if (!reset && loading) return;
-
-      final requestGeneration = reset ? ++generation : generation;
-      setModal(() => loading = true);
-
-      try {
-        if (reset) {
-          offset = 0;
-          exhausted = false;
-          items.clear();
-          if (scrollCtl.hasClients) scrollCtl.jumpTo(0);
-        }
-
-        final next = await IrBlasterDb.instance.listModelsDistinct(
-          brand: brand,
-          search: ctl.text.trim(),
-          limit: 60,
-          offset: offset,
-        );
-
-        if (!alive || requestGeneration != generation) return;
-
-        items.addAll(next);
-        offset += next.length;
-        if (next.isEmpty) exhausted = true;
-
-        setModal(() {});
-      } finally {
-        if (alive && requestGeneration == generation) {
-          setModal(() => loading = false);
-        }
-      }
-    }
-
-    void queueSearch(StateSetter setModal) {
-      searchDebounce?.cancel();
-      searchDebounce = Timer(const Duration(milliseconds: 220), () {
-        if (!alive) return;
-        load(setModal, reset: true);
-      });
-    }
-
-    try {
-      await showModalBottomSheet<void>(
-        context: context,
-        isScrollControlled: true,
-        showDragHandle: true,
-        builder: (ctx) {
-          void onScroll(StateSetter setModal) {
-            if (loading || exhausted) return;
-            if (scrollCtl.position.pixels >=
-                scrollCtl.position.maxScrollExtent - 240) {
-              load(setModal, reset: false);
-            }
-          }
-
-          return StatefulBuilder(
-            builder: (ctx2, setModal) {
-              if (!attachedScrollListener) {
-                attachedScrollListener = true;
-                scrollCtl.addListener(() => onScroll(setModal));
-                load(setModal, reset: true);
-              }
-
-              return SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              context.l10n.selectModel,
-                              style: Theme.of(ctx2).textTheme.titleLarge,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              alive = false;
-                              Navigator.of(ctx2).pop();
-                            },
-                            icon: const Icon(Icons.close_rounded),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      TextField(
-                        controller: ctl,
-                        decoration: InputDecoration(
-                          hintText: context.l10n.searchModel,
-                          prefixIcon: const Icon(Icons.search_rounded),
-                          border: const OutlineInputBorder(),
-                        ),
-                        textInputAction: TextInputAction.search,
-                        onChanged: (_) => queueSearch(setModal),
-                        onSubmitted: (_) {
-                          searchDebounce?.cancel();
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          load(setModal, reset: true);
-                        },
-                        onTapOutside: (_) =>
-                            FocusManager.instance.primaryFocus?.unfocus(),
-                      ),
-                      const SizedBox(height: 8),
-                      Expanded(
-                        child: ListView.separated(
-                          controller: scrollCtl,
-                          itemCount: items.length + (loading ? 1 : 0),
-                          separatorBuilder: (_, __) => const Divider(height: 0),
-                          itemBuilder: (ctx3, i) {
-                            if (i >= items.length) {
-                              return const Padding(
-                                padding: EdgeInsets.all(14),
-                                child: Center(
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                  ),
-                                ),
-                              );
-                            }
-                            final m = items[i];
-                            return ListTile(
-                              title: Text(m),
-                              onTap: () {
-                                selected = m;
-                                alive = false;
-                                Navigator.of(ctx2).pop();
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        },
-      );
-    } finally {
-      alive = false;
-      searchDebounce?.cancel();
-      ctl.dispose();
-      scrollCtl.dispose();
-    }
-    return selected;
-  }
+  Future<String?> _pickModel(BuildContext context, {required String brand}) =>
+      showDbCatalogPicker(context, brand: brand);
 
   String _rowKey(IrDbKeyCandidate r) {
     final label = (r.label ?? '').trim().toLowerCase();
@@ -1058,23 +728,22 @@ class _DbBulkImportSheetState extends State<DbBulkImportSheet> {
                     ),
                 ],
               ),
+              subtitle: canBrowseKeys
+                  ? Text('$_dbBrand · $_dbModel',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis)
+                  : null,
               trailing: canBrowseKeys
-                  ? FilledButton.tonalIcon(
+                  ? IconButton(
                       onPressed: _toggleFiltersExpanded,
                       icon: Icon(
                         _filtersExpanded
                             ? Icons.keyboard_arrow_up_rounded
                             : Icons.keyboard_arrow_down_rounded,
                       ),
-                      label: Text(
-                        _filtersExpanded
-                            ? context.l10n.hideFilters
-                            : context.l10n.showFilters,
-                      ),
-                      style: FilledButton.styleFrom(
-                        visualDensity: VisualDensity.compact,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
+                      tooltip: _filtersExpanded
+                          ? context.l10n.hideFilters
+                          : context.l10n.showFilters,
                     )
                   : null,
               childrenPadding: const EdgeInsets.only(bottom: 8),
@@ -1267,21 +936,21 @@ class _DbBulkImportSheetState extends State<DbBulkImportSheet> {
               ),
             ),
             const SizedBox(height: 6),
-            Row(
+            Wrap(
+              spacing: 8,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 Text(
                   context.l10n.selectedCount(_selectedKeys.length),
                   style: theme.textTheme.bodyMedium
                       ?.copyWith(fontWeight: FontWeight.w700),
                 ),
-                const Spacer(),
                 TextButton(
                   onPressed: _dbRows.isEmpty
                       ? null
                       : () => setState(() => _selectedKeys.clear()),
                   child: Text(context.l10n.clearAction),
                 ),
-                const SizedBox(width: 8),
                 TextButton(
                   onPressed: _dbRows.isEmpty
                       ? null

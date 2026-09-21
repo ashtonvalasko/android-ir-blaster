@@ -4977,4 +4977,12 @@ class AppLocalizationsVi extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Hàng $row, cột $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Bắt đầu với thương hiệu, như Sony hoặc TCL. Sau đó chọn mẫu thiết bị hoặc điều khiển.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Tìm mã mẫu in trên thiết bị hoặc điều khiển. Khoảng trắng và dấu gạch nối không cần trùng khớp.';
 }

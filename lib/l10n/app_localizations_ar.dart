@@ -4958,6 +4958,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'الصف $row، العمود $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'ابدأ بالعلامة التجارية، مثل Sony أو TCL. ثم اختر طراز الجهاز أو جهاز التحكم عن بُعد.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'ابحث عن الطراز المطبوع على الجهاز أو جهاز التحكم عن بُعد. لا يلزم تطابق المسافات والشرطات.';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -9914,4 +9922,12 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   String layoutCell(int row, int column) {
     return 'الصف $row، العمود $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'ابدأ بالماركة، زي Sony أو TCL. بعد كده اختار موديل الجهاز أو الريموت.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'ابحث عن الموديل المكتوب على الجهاز أو الريموت. مش لازم المسافات والشرطات تكون متطابقة.';
 }

@@ -4856,4 +4856,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String layoutCell(int row, int column) {
     return '$row行、$column列';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'まず Sony や TCL などのメーカーを選び、次に機器やリモコンの型番を選んでください。';
+
+  @override
+  String get dbModelSearchHelp => '機器やリモコンに記載された型番で検索できます。スペースやハイフンの有無は問いません。';
 }

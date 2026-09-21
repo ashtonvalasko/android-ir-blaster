@@ -250,9 +250,13 @@ class IrBlasterDb {
     final where = <String>[];
     final args = <Object?>[];
 
+    final codeWhere = <String>['k.id = m.id'];
     if (pf != null) {
-      _appendProtocolWhere(where: where, args: args, column: 'k.protocol', filter: pf);
+      _appendProtocolWhere(where: codeWhere, args: args, column: 'k.protocol', filter: pf);
     }
+    // A model may contain hundreds of keys. Check existence instead of
+    // expanding every key only to discard those duplicates with DISTINCT.
+    where.add('EXISTS (SELECT 1 FROM keys k WHERE ${codeWhere.join(' AND ')})');
 
     if (q != null) {
       where.add('m.brand LIKE ? ESCAPE \'\\\'');
@@ -265,7 +269,6 @@ class IrBlasterDb {
     final sql = '''
       SELECT DISTINCT m.brand AS name
       FROM models m
-      JOIN keys k ON k.id = m.id
       $whereSql
       ORDER BY name COLLATE NOCASE ASC
       LIMIT ? OFFSET ?

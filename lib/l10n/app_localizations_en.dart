@@ -5032,4 +5032,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Row $row, column $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Start with the brand, such as Sony or TCL. Then choose a device or remote model.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Search the model printed on your device or remote. Spaces and hyphens do not need to match.';
 }

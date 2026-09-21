@@ -2340,5 +2340,7 @@
   "layoutAddRow": "빈 행 추가",
   "layoutArrangeHint": "버튼을 드래그하거나 버튼을 탭한 다음 목적지를 탭하세요. 이미 버튼이 있는 칸은 서로 위치가 바뀝니다.",
   "layoutEmptyHint": "빈칸을 탭하여 버튼을 추가하세요. 버튼을 길게 누르면 더 많은 옵션이 표시됩니다.",
-  "layoutCell": "{row}행, {column}열"
+  "layoutCell": "{row}행, {column}열",
+  "dbBrandSearchHelp": "먼저 Sony나 TCL 같은 브랜드를 선택한 다음 기기 또는 리모컨 모델을 선택하세요.",
+  "dbModelSearchHelp": "기기나 리모컨에 표시된 모델명을 검색하세요. 공백과 하이픈은 일치하지 않아도 됩니다."
 }

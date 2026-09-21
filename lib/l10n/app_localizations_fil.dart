@@ -5005,4 +5005,12 @@ class AppLocalizationsFil extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Hanay $row, column $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Magsimula sa brand, gaya ng Sony o TCL. Pagkatapos, pumili ng modelo ng device o remote.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Hanapin ang modelong nakasulat sa device o remote. Hindi kailangang magkatugma ang mga espasyo at gitling.';
 }

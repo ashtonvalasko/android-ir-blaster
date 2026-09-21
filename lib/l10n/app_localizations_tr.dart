@@ -4986,4 +4986,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Satır $row, sütun $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Önce Sony veya TCL gibi bir marka seçin. Ardından cihaz veya kumanda modelini seçin.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Cihazınızın veya kumandanızın üzerinde yazan modeli arayın. Boşlukların ve kısa çizgilerin eşleşmesi gerekmez.';
 }

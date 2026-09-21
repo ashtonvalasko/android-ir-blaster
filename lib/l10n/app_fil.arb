@@ -2340,5 +2340,7 @@
   "layoutAddRow": "Magdagdag ng bakanteng hanay",
   "layoutArrangeHint": "I-drag ang button, o i-tap ito at pagkatapos ay ang destinasyon. Magpapalitan ang mga puwestong may laman.",
   "layoutEmptyHint": "I-tap ang bakanteng puwesto para magdagdag ng button. Pindutin nang matagal ang button para sa iba pang opsyon.",
-  "layoutCell": "Hanay {row}, column {column}"
+  "layoutCell": "Hanay {row}, column {column}",
+  "dbBrandSearchHelp": "Magsimula sa brand, gaya ng Sony o TCL. Pagkatapos, pumili ng modelo ng device o remote.",
+  "dbModelSearchHelp": "Hanapin ang modelong nakasulat sa device o remote. Hindi kailangang magkatugma ang mga espasyo at gitling."
 }

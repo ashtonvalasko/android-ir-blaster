@@ -2340,5 +2340,7 @@
   "layoutAddRow": "Thêm hàng trống",
   "layoutArrangeHint": "Kéo nút hoặc chạm vào nút rồi chạm vào vị trí đích. Các ô đã có nút sẽ đổi chỗ cho nhau.",
   "layoutEmptyHint": "Chạm vào ô trống để thêm nút. Nhấn giữ nút để xem thêm tùy chọn.",
-  "layoutCell": "Hàng {row}, cột {column}"
+  "layoutCell": "Hàng {row}, cột {column}",
+  "dbBrandSearchHelp": "Bắt đầu với thương hiệu, như Sony hoặc TCL. Sau đó chọn mẫu thiết bị hoặc điều khiển.",
+  "dbModelSearchHelp": "Tìm mã mẫu in trên thiết bị hoặc điều khiển. Khoảng trắng và dấu gạch nối không cần trùng khớp."
 }

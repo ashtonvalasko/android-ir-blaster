@@ -2340,5 +2340,7 @@
   "layoutAddRow": "Tambah baris kosong",
   "layoutArrangeHint": "Seret butang, atau ketik butang kemudian ketik destinasinya. Sel yang berisi akan bertukar tempat.",
   "layoutEmptyHint": "Ketik sel kosong untuk menambah butang. Tekan lama butang untuk lebih banyak pilihan.",
-  "layoutCell": "Baris {row}, lajur {column}"
+  "layoutCell": "Baris {row}, lajur {column}",
+  "dbBrandSearchHelp": "Mulakan dengan jenama, seperti Sony atau TCL. Kemudian pilih model peranti atau alat kawalan jauh.",
+  "dbModelSearchHelp": "Cari model yang tertera pada peranti atau alat kawalan jauh. Ruang dan tanda sempang tidak perlu sepadan."
 }

@@ -4797,4 +4797,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String layoutCell(int row, int column) {
     return '第 $row 行，第 $column 列';
   }
+
+  @override
+  String get dbBrandSearchHelp => '先选择品牌，例如 Sony 或 TCL，然后选择设备或遥控器型号。';
+
+  @override
+  String get dbModelSearchHelp => '搜索设备或遥控器上标注的型号。空格和连字符无需完全一致。';
 }

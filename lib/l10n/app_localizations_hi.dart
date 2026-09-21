@@ -4983,4 +4983,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'पंक्ति $row, कॉलम $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'पहले Sony या TCL जैसे ब्रांड को चुनें। फिर डिवाइस या रिमोट का मॉडल चुनें।';
+
+  @override
+  String get dbModelSearchHelp =>
+      'अपने डिवाइस या रिमोट पर लिखा मॉडल खोजें। खाली जगहों और हाइफ़न का मेल खाना ज़रूरी नहीं है।';
 }

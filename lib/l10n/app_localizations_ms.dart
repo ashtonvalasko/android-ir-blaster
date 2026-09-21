@@ -4989,4 +4989,12 @@ class AppLocalizationsMs extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Baris $row, lajur $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Mulakan dengan jenama, seperti Sony atau TCL. Kemudian pilih model peranti atau alat kawalan jauh.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Cari model yang tertera pada peranti atau alat kawalan jauh. Ruang dan tanda sempang tidak perlu sepadan.';
 }

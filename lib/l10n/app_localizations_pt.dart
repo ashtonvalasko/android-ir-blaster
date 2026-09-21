@@ -5023,6 +5023,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Linha $row, coluna $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Comece pela marca, como Sony ou TCL. Depois escolha um modelo de dispositivo ou comando.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Procure o modelo indicado no dispositivo ou comando. Os espaços e hífenes não precisam de corresponder.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -10048,4 +10056,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String layoutCell(int row, int column) {
     return 'Linha $row, coluna $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Comece pela marca, como Sony ou TCL. Depois escolha um modelo de aparelho ou controle remoto.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Busque o modelo indicado no aparelho ou controle remoto. Espaços e hífens não precisam ser iguais.';
 }

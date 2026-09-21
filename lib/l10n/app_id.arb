@@ -2340,5 +2340,7 @@
   "layoutAddRow": "Tambah baris kosong",
   "layoutArrangeHint": "Seret tombol, atau ketuk tombol lalu ketuk tujuannya. Sel yang terisi akan bertukar tempat.",
   "layoutEmptyHint": "Ketuk sel kosong untuk menambahkan tombol. Tekan lama tombol untuk opsi lainnya.",
-  "layoutCell": "Baris {row}, kolom {column}"
+  "layoutCell": "Baris {row}, kolom {column}",
+  "dbBrandSearchHelp": "Mulai dengan merek, seperti Sony atau TCL. Lalu pilih model perangkat atau remote.",
+  "dbModelSearchHelp": "Cari model yang tercetak pada perangkat atau remote. Spasi dan tanda hubung tidak harus sama."
 }

@@ -4990,4 +4990,12 @@ class AppLocalizationsId extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Baris $row, kolom $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Mulai dengan merek, seperti Sony atau TCL. Lalu pilih model perangkat atau remote.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Cari model yang tercetak pada perangkat atau remote. Spasi dan tanda hubung tidak harus sama.';
 }

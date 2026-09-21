@@ -5036,4 +5036,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Ligne $row, colonne $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Commencez par la marque, comme Sony ou TCL. Choisissez ensuite un modèle d’appareil ou de télécommande.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Recherchez le modèle indiqué sur votre appareil ou télécommande. Les espaces et les traits d’union peuvent être différents.';
 }

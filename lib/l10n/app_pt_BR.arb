@@ -2340,5 +2340,7 @@
   "layoutAddRow": "Adicionar linha vazia",
   "layoutArrangeHint": "Arraste um botão ou toque nele e depois no destino. As células ocupadas trocam de lugar.",
   "layoutEmptyHint": "Toque em uma célula vazia para adicionar um botão. Mantenha um botão pressionado para mais opções.",
-  "layoutCell": "Linha {row}, coluna {column}"
+  "layoutCell": "Linha {row}, coluna {column}",
+  "dbBrandSearchHelp": "Comece pela marca, como Sony ou TCL. Depois escolha um modelo de aparelho ou controle remoto.",
+  "dbModelSearchHelp": "Busque o modelo indicado no aparelho ou controle remoto. Espaços e hífens não precisam ser iguais."
 }

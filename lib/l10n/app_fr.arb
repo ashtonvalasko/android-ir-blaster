@@ -2340,5 +2340,7 @@
   "layoutAddRow": "Ajouter une ligne vide",
   "layoutArrangeHint": "Faites glisser un bouton, ou touchez-le puis touchez sa destination. Les cellules occupées sont échangées.",
   "layoutEmptyHint": "Touchez une cellule vide pour ajouter un bouton. Appuyez longuement sur un bouton pour plus d’options.",
-  "layoutCell": "Ligne {row}, colonne {column}"
+  "layoutCell": "Ligne {row}, colonne {column}",
+  "dbBrandSearchHelp": "Commencez par la marque, comme Sony ou TCL. Choisissez ensuite un modèle d’appareil ou de télécommande.",
+  "dbModelSearchHelp": "Recherchez le modèle indiqué sur votre appareil ou télécommande. Les espaces et les traits d’union peuvent être différents."
 }

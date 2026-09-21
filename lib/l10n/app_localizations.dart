@@ -9043,6 +9043,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Row {row}, column {column}'**
   String layoutCell(int row, int column);
+
+  /// No description provided for @dbBrandSearchHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with the brand, such as Sony or TCL. Then choose a device or remote model.'**
+  String get dbBrandSearchHelp;
+
+  /// No description provided for @dbModelSearchHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Search the model printed on your device or remote. Spaces and hyphens do not need to match.'**
+  String get dbModelSearchHelp;
 }
 
 class _AppLocalizationsDelegate

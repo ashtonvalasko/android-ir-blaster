@@ -2326,5 +2326,7 @@
   "layoutAddRow": "Leere Zeile hinzufügen",
   "layoutArrangeHint": "Eine Taste ziehen oder erst die Taste und dann das Ziel antippen. Belegte Felder werden getauscht.",
   "layoutEmptyHint": "Ein leeres Feld antippen, um eine Taste hinzuzufügen. Eine Taste für weitere Optionen gedrückt halten.",
-  "layoutCell": "Zeile {row}, Spalte {column}"
+  "layoutCell": "Zeile {row}, Spalte {column}",
+  "dbBrandSearchHelp": "Wähle zuerst die Marke, etwa Sony oder TCL. Wähle dann ein Geräte- oder Fernbedienungsmodell.",
+  "dbModelSearchHelp": "Suche nach der Modellnummer auf deinem Gerät oder deiner Fernbedienung. Leerzeichen und Bindestriche müssen nicht übereinstimmen."
 }

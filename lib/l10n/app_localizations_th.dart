@@ -4958,4 +4958,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'แถว $row คอลัมน์ $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'เริ่มจากเลือกยี่ห้อ เช่น Sony หรือ TCL แล้วเลือกรุ่นของอุปกรณ์หรือรีโมต';
+
+  @override
+  String get dbModelSearchHelp =>
+      'ค้นหาชื่อรุ่นที่พิมพ์ไว้บนอุปกรณ์หรือรีโมต โดยเว้นวรรคและขีดกลางไม่จำเป็นต้องตรงกัน';
 }

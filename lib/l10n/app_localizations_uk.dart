@@ -5101,4 +5101,12 @@ class AppLocalizationsUk extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Рядок $row, стовпець $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Спочатку виберіть марку, наприклад Sony або TCL, а потім модель пристрою чи пульта.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Шукайте модель, зазначену на пристрої чи пульті. Пробіли та дефіси можуть відрізнятися.';
 }

@@ -2498,5 +2498,7 @@
   "layoutArrangeHint": "Drag a button, or tap it then tap a destination. Occupied cells swap.",
   "layoutEmptyHint": "Tap an empty cell to add a button. Long-press a button for more options.",
   "layoutCell": "Row {row}, column {column}",
-  "@layoutCell": {"placeholders":{"row":{"type":"int"},"column":{"type":"int"}}}
+  "@layoutCell": {"placeholders":{"row":{"type":"int"},"column":{"type":"int"}}},
+  "dbBrandSearchHelp": "Start with the brand, such as Sony or TCL. Then choose a device or remote model.",
+  "dbModelSearchHelp": "Search the model printed on your device or remote. Spaces and hyphens do not need to match."
 }

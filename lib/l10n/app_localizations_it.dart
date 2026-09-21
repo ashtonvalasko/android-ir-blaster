@@ -5020,4 +5020,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Riga $row, colonna $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Inizia dalla marca, ad esempio Sony o TCL. Poi scegli un modello di dispositivo o telecomando.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Cerca il modello indicato sul dispositivo o sul telecomando. Spazi e trattini non devono necessariamente corrispondere.';
 }

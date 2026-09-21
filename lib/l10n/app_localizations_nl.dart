@@ -5025,4 +5025,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String layoutCell(int row, int column) {
     return 'Rij $row, kolom $column';
   }
+
+  @override
+  String get dbBrandSearchHelp =>
+      'Begin met het merk, zoals Sony of TCL. Kies daarna een apparaat- of afstandsbedieningsmodel.';
+
+  @override
+  String get dbModelSearchHelp =>
+      'Zoek het model dat op je apparaat of afstandsbediening staat. Spaties en koppeltekens hoeven niet overeen te komen.';
 }
